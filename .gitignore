@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtuell miljö
+.venv/
+
+# Byggfiler
+dist/
+build/
+*.egg-info/
+
+# Databaser / lokala saves
+*.db
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
