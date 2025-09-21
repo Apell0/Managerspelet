@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import random
 from dataclasses import dataclass
 from typing import Dict, List, Tuple
 
@@ -74,37 +75,90 @@ def sort_table(table: Dict[str, TableRow]) -> List[TableRow]:
 
 
 def _rating_from_events(
-    events: List[PlayerEvent], player: Player, team_won: bool, draw: bool
+    events: List[PlayerEvent],
+    player: Player,
+    *,
+    team_goals_for: int,
+    team_goals_against: int,
+    team_won: bool,
+    draw: bool,
+    minutes: int = 90,
 ) -> float:
-    score = 0.0
-    for ev in events:
-        if ev.player is player:
-            if ev.event is EventType.GOAL:
-                score += 3.0
-            elif ev.event is EventType.YELLOW:
-                score -= 1.0
-            elif ev.event is EventType.RED:
-                score -= 3.0
-    for ev in events:
-        if ev.event is EventType.GOAL and ev.assist_by is player:
-            score += 2.0
+    """
+    Beräkna ett enkelt matchbetyg (0–10-ish) av:
+    - Basrating från speltid (minuter)
+    - Viktning med spelarens skicklighet (1–30)
+    - Händelser (mål/assist/kort)
+    - Liten bonus för vinst / oavgjort
+    - Positionsbonus (clean sheet för GK/DF, insläppta många mål drar ner GK/DF)
+    - Liten slumpvariation (dagsform)
+    """
 
-    if team_won:
-        score += 0.5
-    elif draw:
-        score += 0.2
+    # 1) Bas från speltid (6.0 vid 90 min, lite lägre vid färre)
+    played = max(0, min(90, minutes))
+    base = 6.0 * (played / 90.0) ** 0.7
 
-    if player.position is Position.GK:
-        score += 0.3
+    # 2) Skicklighet väger (kring ±0.4 på basen)
+    #   5 ≈ normal i din generator → ~1.0, 30 → +0.4, 1 → ca -0.06
+    skill_norm = (player.skill_open - 5) / 25.0
+    base *= 1.0 + 0.4 * skill_norm
+
+    rating = base
+
+    # 3) Händelser
+    #   Målbonus beroende på position (FW mest, sedan MF/DF/GK)
+    goals = sum(
+        1 for ev in events if ev.event is EventType.GOAL and ev.player is player
+    )
+    if player.position is Position.FW:
+        rating += 1.0 * goals
+    elif player.position is Position.MF:
+        rating += 0.9 * goals
     elif player.position is Position.DF:
-        score += 0.2
+        rating += 0.7 * goals
+    else:  # GK
+        rating += 0.6 * goals
 
-    return score
+    # Assist
+    assists = sum(
+        1 for ev in events if ev.event is EventType.GOAL and ev.assist_by is player
+    )
+    rating += 0.6 * assists
+
+    # Kort
+    yellows = sum(
+        1 for ev in events if ev.event is EventType.YELLOW and ev.player is player
+    )
+    reds = sum(1 for ev in events if ev.event is EventType.RED and ev.player is player)
+    rating += -0.4 * yellows + -2.0 * reds
+
+    # 4) Lagresultat
+    if team_won:
+        rating += 0.3
+    elif draw:
+        rating += 0.1
+
+    # 5) Positionsberoende försvarsbonus / avdrag
+    if player.position in (Position.GK, Position.DF):
+        if team_goals_against == 0:
+            rating += 0.5
+        elif team_goals_against >= 3:
+            rating -= 0.5
+
+    # 6) Dagsform (liten)
+    rating += random.gauss(0.0, 0.4)
+
+    # Klipp rimligt intervall
+    return max(3.0, min(10.0, rating))
 
 
 def best_xi_442(
     results: List[MatchResult],
 ) -> Dict[Position, List[Tuple[Player, float]]]:
+    """
+    Väljer 1–4–4–2 baserat på matchrating enligt _rating_from_events.
+    All speltid antas vara 90 minuter i nuläget (vi inför minuter per spelare i senare steg).
+    """
     candidates: Dict[Position, List[Tuple[Player, float]]] = {
         Position.GK: [],
         Position.DF: [],
@@ -113,17 +167,37 @@ def best_xi_442(
     }
 
     for res in results:
+        # Hemma
         home_won = res.home_stats.goals > res.away_stats.goals
         away_won = res.away_stats.goals > res.home_stats.goals
         draw = res.home_stats.goals == res.away_stats.goals
 
         for p in res.home.players:
-            r = _rating_from_events(res.events, p, team_won=home_won, draw=draw)
-            candidates[p.position].append((p, r))
-        for p in res.away.players:
-            r = _rating_from_events(res.events, p, team_won=away_won, draw=draw)
+            r = _rating_from_events(
+                res.events,
+                p,
+                team_goals_for=res.home_stats.goals,
+                team_goals_against=res.away_stats.goals,
+                team_won=home_won,
+                draw=draw,
+                minutes=90,
+            )
             candidates[p.position].append((p, r))
 
+        # Borta
+        for p in res.away.players:
+            r = _rating_from_events(
+                res.events,
+                p,
+                team_goals_for=res.away_stats.goals,
+                team_goals_against=res.home_stats.goals,
+                team_won=away_won,
+                draw=draw,
+                minutes=90,
+            )
+            candidates[p.position].append((p, r))
+
+    # Plocka topp N per position
     def top_n(pos: Position, n: int) -> List[Tuple[Player, float]]:
         pool = sorted(
             candidates[pos], key=lambda t: (t[1], t[0].skill_open), reverse=True
