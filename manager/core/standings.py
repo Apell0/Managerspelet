@@ -7,6 +7,7 @@ from typing import Dict, List, Tuple
 from .club import Club
 from .match import EventType, MatchResult, PlayerEvent
 from .player import Player, Position
+from .ratings import player_match_rating
 
 # ---------- LIGATABELL ----------
 
@@ -156,8 +157,8 @@ def best_xi_442(
     results: List[MatchResult],
 ) -> Dict[Position, List[Tuple[Player, float]]]:
     """
-    Väljer 1–4–4–2 baserat på matchrating enligt _rating_from_events.
-    All speltid antas vara 90 minuter i nuläget (vi inför minuter per spelare i senare steg).
+    Väljer 1–4–4–2 baserat på samma rating som används i matchresultaten.
+    Använder res.ratings när de finns; annars beräknas on-the-fly.
     """
     candidates: Dict[Position, List[Tuple[Player, float]]] = {
         Position.GK: [],
@@ -167,37 +168,18 @@ def best_xi_442(
     }
 
     for res in results:
-        # Hemma
-        home_won = res.home_stats.goals > res.away_stats.goals
-        away_won = res.away_stats.goals > res.home_stats.goals
-        draw = res.home_stats.goals == res.away_stats.goals
+        # Om simuleringen redan räknat ut betyg: använd dem
+        if res.ratings:
+            for p in res.home.players:
+                candidates[p.position].append((p, res.ratings.get(p.id, 6.0)))
+            for p in res.away.players:
+                candidates[p.position].append((p, res.ratings.get(p.id, 6.0)))
+        else:
+            # fallback – beräkna direkt (90 min antas)
+            for p in res.home.players + res.away.players:
+                r = player_match_rating(res, p, minutes=90)
+                candidates[p.position].append((p, r))
 
-        for p in res.home.players:
-            r = _rating_from_events(
-                res.events,
-                p,
-                team_goals_for=res.home_stats.goals,
-                team_goals_against=res.away_stats.goals,
-                team_won=home_won,
-                draw=draw,
-                minutes=90,
-            )
-            candidates[p.position].append((p, r))
-
-        # Borta
-        for p in res.away.players:
-            r = _rating_from_events(
-                res.events,
-                p,
-                team_goals_for=res.away_stats.goals,
-                team_goals_against=res.home_stats.goals,
-                team_won=away_won,
-                draw=draw,
-                minutes=90,
-            )
-            candidates[p.position].append((p, r))
-
-    # Plocka topp N per position
     def top_n(pos: Position, n: int) -> List[Tuple[Player, float]]:
         pool = sorted(
             candidates[pos], key=lambda t: (t[1], t[0].skill_open), reverse=True

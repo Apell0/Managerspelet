@@ -3,7 +3,7 @@ from __future__ import annotations
 import random
 from dataclasses import dataclass, field
 from enum import Enum, auto
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 from .club import Club
 from .player import Player, Position
@@ -48,6 +48,7 @@ class MatchResult:
     home_stats: TeamStats
     away_stats: TeamStats
     events: List[PlayerEvent] = field(default_factory=list)
+    ratings: Dict[int, float] = field(default_factory=dict)  # player.id -> rating
 
     @property
     def scoreline(self) -> str:
@@ -202,6 +203,11 @@ def simulate_match(
             stats.red_cards += 1
         else:
             stats.yellow_cards += 1
+
+    # Beräkna individuella spelarbetyg med samma logik som Best XI
+    from .ratings import compute_ratings_for_match  # lokal import för att undvika cykel
+
+    res.ratings = compute_ratings_for_match(res, default_minutes=90)
 
     res.events.sort(key=lambda e: e.minute)
     return res
