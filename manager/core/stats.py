@@ -17,8 +17,14 @@ class PlayerSeasonStats:
     minutes: int = 0
     goals: int = 0
     assists: int = 0
+    shots: int = 0
+    shots_on: int = 0
+    offsides: int = 0
     yellows: int = 0
     reds: int = 0
+    penalties_scored: int = 0
+    penalties_missed: int = 0
+    injuries: int = 0
     rating_sum: float = 0.0
     rating_count: int = 0
 
@@ -39,6 +45,13 @@ class ClubSeasonStats:
     clean_sheets: int = 0
     yellows: int = 0
     reds: int = 0
+    # extra lagvärden
+    shots: int = 0
+    shots_on: int = 0
+    corners: int = 0
+    offsides: int = 0
+    fouls: int = 0
+    saves: int = 0
 
     @property
     def points(self) -> int:
@@ -52,7 +65,7 @@ class ClubSeasonStats:
 class MatchRecord:
     competition: str  # "league" | "cup"
     round: int  # ligaomgång eller cuprunda-index (1..)
-    home: str  # klubbnamn
+    home: str
     away: str
     home_goals: int
     away_goals: int
@@ -81,16 +94,17 @@ def _count_events(events: List[PlayerEvent], pred) -> int:
     return sum(1 for ev in events if pred(ev))
 
 
+# -------- Uppdatera stats från en match --------
+
+
 def update_stats_from_result(
     result: MatchResult,
     *,
     competition: str,  # "league" | "cup"
     round_no: int,
-    # ackumulerade säsongsstats att uppdatera:
     player_stats: Dict[int, PlayerSeasonStats],
     club_stats: Dict[str, ClubSeasonStats],
 ) -> MatchRecord:
-    """Uppdaterar stat-ackumulatorer och returnerar en serialiserbar MatchRecord."""
     hname = result.home.name
     aname = result.away.name
 
@@ -105,6 +119,7 @@ def update_stats_from_result(
     acs.goals_for += result.away_stats.goals
     acs.goals_against += result.home_stats.goals
 
+    # seger/oavgjort/förlust
     if result.home_stats.goals > result.away_stats.goals:
         hcs.wins += 1
         acs.losses += 1
@@ -115,34 +130,20 @@ def update_stats_from_result(
         hcs.draws += 1
         acs.draws += 1
 
-    # Clean sheets + kort
+    # lagaggregat från matchstats
+    for cs, ts in ((hcs, result.home_stats), (acs, result.away_stats)):
+        cs.shots += ts.shots
+        cs.shots_on += ts.shots_on
+        cs.corners += ts.corners
+        cs.offsides += ts.offsides
+        cs.fouls += ts.fouls
+        cs.saves += ts.saves
     if result.away_stats.goals == 0:
         hcs.clean_sheets += 1
     if result.home_stats.goals == 0:
         acs.clean_sheets += 1
 
-    h_yellows = _count_events(
-        result.events,
-        lambda e: e.event is EventType.YELLOW and e.player in result.home.players,
-    )
-    a_yellows = _count_events(
-        result.events,
-        lambda e: e.event is EventType.YELLOW and e.player in result.away.players,
-    )
-    h_reds = _count_events(
-        result.events,
-        lambda e: e.event is EventType.RED and e.player in result.home.players,
-    )
-    a_reds = _count_events(
-        result.events,
-        lambda e: e.event is EventType.RED and e.player in result.away.players,
-    )
-    hcs.yellows += h_yellows
-    acs.yellows += a_yellows
-    hcs.reds += h_reds
-    acs.reds += a_reds
-
-    # Spelarstatistik (vi antar 90 minuter tills byten finns)
+    # spelare: 90 min / appearance
     for p in result.home.players:
         ps = _ensure_ps(player_stats, p, hname)
         ps.appearances += 1
@@ -152,28 +153,49 @@ def update_stats_from_result(
         ps.appearances += 1
         ps.minutes += 90
 
+    # Hjälpare för klubbnamn utifrån elvorna i resultatet
+    def _club_of(player: Player) -> str:
+        return hname if player in result.home.players else aname
+
+    # spelarevents
     for ev in result.events:
-        if ev.event is EventType.GOAL and ev.player is not None:
-            _ensure_ps(player_stats, ev.player, ev.player.club.name).goals += 1
+        p = ev.player
+        if ev.event is EventType.GOAL and p is not None:
+            _ensure_ps(player_stats, p, _club_of(p)).goals += 1
             if ev.assist_by is not None:
                 _ensure_ps(
-                    player_stats, ev.assist_by, ev.assist_by.club.name
+                    player_stats, ev.assist_by, _club_of(ev.assist_by)
                 ).assists += 1
-        elif ev.event is EventType.YELLOW and ev.player is not None:
-            _ensure_ps(player_stats, ev.player, ev.player.club.name).yellows += 1
-        elif ev.event is EventType.RED and ev.player is not None:
-            _ensure_ps(player_stats, ev.player, ev.player.club.name).reds += 1
+        elif ev.event is EventType.SHOT_ON and p is not None:
+            s = _ensure_ps(player_stats, p, _club_of(p))
+            s.shots += 1
+            s.shots_on += 1
+        elif ev.event is EventType.SHOT_OFF and p is not None:
+            s = _ensure_ps(player_stats, p, _club_of(p))
+            s.shots += 1
+        elif ev.event is EventType.PENALTY_SCORED and p is not None:
+            _ensure_ps(player_stats, p, _club_of(p)).penalties_scored += 1
+        elif ev.event is EventType.PENALTY_MISSED and p is not None:
+            _ensure_ps(player_stats, p, _club_of(p)).penalties_missed += 1
+        elif ev.event is EventType.OFFSIDE and p is not None:
+            _ensure_ps(player_stats, p, _club_of(p)).offsides += 1
+        elif ev.event is EventType.YELLOW and p is not None:
+            _ensure_ps(player_stats, p, _club_of(p)).yellows += 1
+        elif ev.event is EventType.RED and p is not None:
+            _ensure_ps(player_stats, p, _club_of(p)).reds += 1
+        elif ev.event is EventType.INJURY and p is not None:
+            _ensure_ps(player_stats, p, _club_of(p)).injuries += 1
 
-    # Betyg
+    # betyg → summera
     for p in result.home.players + result.away.players:
         r = result.ratings.get(p.id, 0.0)
-        ps = _ensure_ps(player_stats, p, p.club.name)
         if r > 0:
+            ps = _ensure_ps(player_stats, p, _club_of(p))
             ps.rating_sum += r
             ps.rating_count += 1
 
     # MatchRecord (serialiserbar)
-    rec_events = []
+    rec_events: List[dict] = []
     for ev in result.events:
         rec_events.append(
             {

@@ -1,0 +1,3595 @@
+{
+  "season": 4,
+  "league": {
+    "name": "NyLiga",
+    "rules": {
+      "format": "rak",
+      "teams_per_div": 8,
+      "levels": 1,
+      "double_round": true
+    },
+    "divisions": [
+      {
+        "name": "Division 1",
+        "level": 1,
+        "clubs": [
+          {
+            "name": "Björkhagens IF",
+            "cash_sek": 0,
+            "players": [
+              {
+                "id": 1,
+                "first_name": "Aron",
+                "last_name": "Van Basten",
+                "position": "GK",
+                "traits": [
+                  "SKADEBENAGEN"
+                ],
+                "skill_open": 3,
+                "skill_hidden": 50,
+                "age": 31,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              },
+              {
+                "id": 2,
+                "first_name": "Vincent",
+                "last_name": "Forlan",
+                "position": "GK",
+                "traits": [
+                  "OJAMN",
+                  "AGGRESSIV"
+                ],
+                "skill_open": 2,
+                "skill_hidden": 50,
+                "age": 23,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 3,
+                "first_name": "Tomas",
+                "last_name": "Müller",
+                "position": "DF",
+                "traits": [],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 24,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              },
+              {
+                "id": 4,
+                "first_name": "Mason",
+                "last_name": "Cannavaro",
+                "position": "DF",
+                "traits": [],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 18,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 5,
+                "first_name": "Zakaria",
+                "last_name": "Riquelme",
+                "position": "DF",
+                "traits": [
+                  "AGGRESSIV",
+                  "TRANINGSVILLIG"
+                ],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 22,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              },
+              {
+                "id": 6,
+                "first_name": "Hugo",
+                "last_name": "Khedira",
+                "position": "DF",
+                "traits": [
+                  "OJAMN",
+                  "STRAFFSPECIALIST"
+                ],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 25,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              },
+              {
+                "id": 7,
+                "first_name": "Pedro",
+                "last_name": "Augustinsson",
+                "position": "DF",
+                "traits": [],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 39,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              },
+              {
+                "id": 8,
+                "first_name": "Sandro",
+                "last_name": "Riquelme",
+                "position": "DF",
+                "traits": [
+                  "TRANINGSVILLIG"
+                ],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 39,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 9,
+                "first_name": "Sebastian",
+                "last_name": "Hamsik",
+                "position": "DF",
+                "traits": [
+                  "SKADEBENAGEN"
+                ],
+                "skill_open": 3,
+                "skill_hidden": 50,
+                "age": 40,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 10,
+                "first_name": "Valentin",
+                "last_name": "Redondo",
+                "position": "MF",
+                "traits": [
+                  "LEDARE",
+                  "SKADEBENAGEN"
+                ],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 25,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              },
+              {
+                "id": 11,
+                "first_name": "Benjamin",
+                "last_name": "Adebayor",
+                "position": "MF",
+                "traits": [
+                  "SKADEBENAGEN",
+                  "LEDARE"
+                ],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 18,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 12,
+                "first_name": "Kai",
+                "last_name": "Pjanic",
+                "position": "MF",
+                "traits": [],
+                "skill_open": 2,
+                "skill_hidden": 50,
+                "age": 18,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              },
+              {
+                "id": 13,
+                "first_name": "Sven",
+                "last_name": "Pettersson",
+                "position": "MF",
+                "traits": [],
+                "skill_open": 2,
+                "skill_hidden": 50,
+                "age": 19,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 14,
+                "first_name": "Yasin",
+                "last_name": "Totti",
+                "position": "MF",
+                "traits": [
+                  "OJAMN",
+                  "TRANINGSVILLIG"
+                ],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 17,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 15,
+                "first_name": "Nikola",
+                "last_name": "Adebayor",
+                "position": "MF",
+                "traits": [],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 33,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 16,
+                "first_name": "Jakob",
+                "last_name": "Brehme",
+                "position": "MF",
+                "traits": [],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 23,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              },
+              {
+                "id": 17,
+                "first_name": "Hanna",
+                "last_name": "Kompany",
+                "position": "FW",
+                "traits": [
+                  "INTELLIGENT",
+                  "TRANINGSVILLIG"
+                ],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 27,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              },
+              {
+                "id": 18,
+                "first_name": "Kyle",
+                "last_name": "Parejo",
+                "position": "FW",
+                "traits": [
+                  "INTELLIGENT"
+                ],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 24,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 19,
+                "first_name": "Lucas",
+                "last_name": "Vucinic",
+                "position": "FW",
+                "traits": [],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 24,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 20,
+                "first_name": "Youssef",
+                "last_name": "Hamsik",
+                "position": "FW",
+                "traits": [],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 23,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 21,
+                "first_name": "Anthony",
+                "last_name": "Maldini",
+                "position": "FW",
+                "traits": [],
+                "skill_open": 7,
+                "skill_hidden": 50,
+                "age": 31,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              }
+            ],
+            "tactic": {
+              "attacking": false,
+              "defending": false,
+              "offside_trap": false,
+              "tempo": 1.0
+            },
+            "aggressiveness": {
+              "name": "Medel"
+            }
+          },
+          {
+            "name": "Solna SK",
+            "cash_sek": 0,
+            "players": [
+              {
+                "id": 1,
+                "first_name": "Åke",
+                "last_name": "Quaresma",
+                "position": "GK",
+                "traits": [
+                  "SNABB"
+                ],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 22,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 2,
+                "first_name": "Anders",
+                "last_name": "Hagi",
+                "position": "GK",
+                "traits": [],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 26,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 3,
+                "first_name": "Georg",
+                "last_name": "Busquets",
+                "position": "DF",
+                "traits": [
+                  "FRISPARKSSPECIALIST",
+                  "SNABB"
+                ],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 38,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 4,
+                "first_name": "Mohamed",
+                "last_name": "Vlahovic",
+                "position": "DF",
+                "traits": [],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 23,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 5,
+                "first_name": "Fabian",
+                "last_name": "Salomonsson",
+                "position": "DF",
+                "traits": [
+                  "STRAFFSPECIALIST"
+                ],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 18,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              },
+              {
+                "id": 6,
+                "first_name": "Moa",
+                "last_name": "Buffon",
+                "position": "DF",
+                "traits": [
+                  "AGGRESSIV",
+                  "FRISPARKSSPECIALIST"
+                ],
+                "skill_open": 7,
+                "skill_hidden": 50,
+                "age": 26,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              },
+              {
+                "id": 7,
+                "first_name": "Scott",
+                "last_name": "Andersson",
+                "position": "DF",
+                "traits": [
+                  "AGGRESSIV"
+                ],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 22,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 8,
+                "first_name": "Hans",
+                "last_name": "Falcao",
+                "position": "DF",
+                "traits": [
+                  "SKADEBENAGEN"
+                ],
+                "skill_open": 7,
+                "skill_hidden": 50,
+                "age": 30,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 9,
+                "first_name": "Edgar",
+                "last_name": "Viduka",
+                "position": "DF",
+                "traits": [],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 20,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              },
+              {
+                "id": 10,
+                "first_name": "Mattias",
+                "last_name": "Crespo",
+                "position": "MF",
+                "traits": [],
+                "skill_open": 2,
+                "skill_hidden": 50,
+                "age": 26,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 11,
+                "first_name": "Alvin",
+                "last_name": "Kaká",
+                "position": "MF",
+                "traits": [
+                  "KORTBENAGEN"
+                ],
+                "skill_open": 3,
+                "skill_hidden": 50,
+                "age": 19,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 12,
+                "first_name": "Roy",
+                "last_name": "Öberg",
+                "position": "MF",
+                "traits": [
+                  "FRISPARKSSPECIALIST",
+                  "KORTBENAGEN",
+                  "INTELLIGENT"
+                ],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 32,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              },
+              {
+                "id": 13,
+                "first_name": "Greta",
+                "last_name": "Kolarov",
+                "position": "MF",
+                "traits": [
+                  "TRANINGSVILLIG"
+                ],
+                "skill_open": 8,
+                "skill_hidden": 50,
+                "age": 28,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 14,
+                "first_name": "Mario",
+                "last_name": "Luis",
+                "position": "MF",
+                "traits": [
+                  "INTELLIGENT"
+                ],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 36,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 15,
+                "first_name": "Jack",
+                "last_name": "Gundogan",
+                "position": "MF",
+                "traits": [
+                  "FRISPARKSSPECIALIST",
+                  "STRAFFSPECIALIST"
+                ],
+                "skill_open": 7,
+                "skill_hidden": 50,
+                "age": 26,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 16,
+                "first_name": "Miguel",
+                "last_name": "Apell",
+                "position": "MF",
+                "traits": [],
+                "skill_open": 3,
+                "skill_hidden": 50,
+                "age": 27,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 17,
+                "first_name": "Emilio",
+                "last_name": "Higuain",
+                "position": "FW",
+                "traits": [
+                  "TRANINGSVILLIG",
+                  "LEDARE"
+                ],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 21,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 18,
+                "first_name": "Nuno",
+                "last_name": "Lloris",
+                "position": "FW",
+                "traits": [
+                  "STRAFFSPECIALIST",
+                  "INTELLIGENT"
+                ],
+                "skill_open": 7,
+                "skill_hidden": 50,
+                "age": 24,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 19,
+                "first_name": "Paulo",
+                "last_name": "Giggs",
+                "position": "FW",
+                "traits": [
+                  "SKADEBENAGEN",
+                  "FRISPARKSSPECIALIST"
+                ],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 40,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 20,
+                "first_name": "Yasin",
+                "last_name": "Gonzalez",
+                "position": "FW",
+                "traits": [
+                  "SKADEBENAGEN"
+                ],
+                "skill_open": 7,
+                "skill_hidden": 50,
+                "age": 19,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 21,
+                "first_name": "Kai",
+                "last_name": "Paredes",
+                "position": "FW",
+                "traits": [],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 25,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              }
+            ],
+            "tactic": {
+              "attacking": false,
+              "defending": false,
+              "offside_trap": false,
+              "tempo": 1.0
+            },
+            "aggressiveness": {
+              "name": "Medel"
+            }
+          },
+          {
+            "name": "Hammarby Heights",
+            "cash_sek": 0,
+            "players": [
+              {
+                "id": 1,
+                "first_name": "Michael",
+                "last_name": "Cannavaro",
+                "position": "GK",
+                "traits": [
+                  "UTHALLIG"
+                ],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 19,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              },
+              {
+                "id": 2,
+                "first_name": "Gert",
+                "last_name": "Apell",
+                "position": "GK",
+                "traits": [],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 38,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 3,
+                "first_name": "Kjell",
+                "last_name": "Vieira",
+                "position": "DF",
+                "traits": [],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 37,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              },
+              {
+                "id": 4,
+                "first_name": "Andre",
+                "last_name": "Elmander",
+                "position": "DF",
+                "traits": [],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 38,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              },
+              {
+                "id": 5,
+                "first_name": "Viktor",
+                "last_name": "Boateng",
+                "position": "DF",
+                "traits": [
+                  "STRAFFSPECIALIST",
+                  "KORTBENAGEN"
+                ],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 33,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 6,
+                "first_name": "Carlos",
+                "last_name": "Viduka",
+                "position": "DF",
+                "traits": [],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 18,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              },
+              {
+                "id": 7,
+                "first_name": "Fabian",
+                "last_name": "Tamás",
+                "position": "DF",
+                "traits": [],
+                "skill_open": 7,
+                "skill_hidden": 50,
+                "age": 35,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 8,
+                "first_name": "Danilo",
+                "last_name": "Villa",
+                "position": "DF",
+                "traits": [],
+                "skill_open": 7,
+                "skill_hidden": 50,
+                "age": 24,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 9,
+                "first_name": "Anna",
+                "last_name": "Jensen",
+                "position": "DF",
+                "traits": [],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 28,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              },
+              {
+                "id": 10,
+                "first_name": "Ola",
+                "last_name": "Xabi",
+                "position": "MF",
+                "traits": [
+                  "KORTBENAGEN"
+                ],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 28,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 11,
+                "first_name": "Claude",
+                "last_name": "Hamsik",
+                "position": "MF",
+                "traits": [
+                  "OJAMN",
+                  "SKADEBENAGEN"
+                ],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 20,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              },
+              {
+                "id": 12,
+                "first_name": "Mats",
+                "last_name": "Simeone",
+                "position": "MF",
+                "traits": [],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 23,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              },
+              {
+                "id": 13,
+                "first_name": "Pablo",
+                "last_name": "Drogba",
+                "position": "MF",
+                "traits": [
+                  "INTELLIGENT"
+                ],
+                "skill_open": 3,
+                "skill_hidden": 50,
+                "age": 20,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 14,
+                "first_name": "Benjamin",
+                "last_name": "Adebayor",
+                "position": "MF",
+                "traits": [
+                  "LEDARE",
+                  "SKADEBENAGEN"
+                ],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 39,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              },
+              {
+                "id": 15,
+                "first_name": "Tobias",
+                "last_name": "Ravelli",
+                "position": "MF",
+                "traits": [
+                  "SKADEBENAGEN"
+                ],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 20,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 16,
+                "first_name": "Östen",
+                "last_name": "Gullit",
+                "position": "MF",
+                "traits": [
+                  "SKADEBENAGEN"
+                ],
+                "skill_open": 7,
+                "skill_hidden": 50,
+                "age": 16,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 17,
+                "first_name": "Gonzalo",
+                "last_name": "Schweinsteiger",
+                "position": "FW",
+                "traits": [],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 18,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              },
+              {
+                "id": 18,
+                "first_name": "Paulo",
+                "last_name": "Son",
+                "position": "FW",
+                "traits": [
+                  "STRAFFSPECIALIST"
+                ],
+                "skill_open": 3,
+                "skill_hidden": 50,
+                "age": 24,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 19,
+                "first_name": "Mason",
+                "last_name": "Cassano",
+                "position": "FW",
+                "traits": [
+                  "STRAFFSPECIALIST"
+                ],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 28,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              },
+              {
+                "id": 20,
+                "first_name": "Åke",
+                "last_name": "Stenman",
+                "position": "FW",
+                "traits": [
+                  "FRISPARKSSPECIALIST",
+                  "SNABB"
+                ],
+                "skill_open": 7,
+                "skill_hidden": 50,
+                "age": 18,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 21,
+                "first_name": "Lionel",
+                "last_name": "Carvajal",
+                "position": "FW",
+                "traits": [],
+                "skill_open": 8,
+                "skill_hidden": 50,
+                "age": 22,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              }
+            ],
+            "tactic": {
+              "attacking": false,
+              "defending": false,
+              "offside_trap": false,
+              "tempo": 1.0
+            },
+            "aggressiveness": {
+              "name": "Medel"
+            }
+          },
+          {
+            "name": "Göta BK",
+            "cash_sek": 0,
+            "players": [
+              {
+                "id": 1,
+                "first_name": "Kenneth",
+                "last_name": "Schweinsteiger",
+                "position": "GK",
+                "traits": [
+                  "KORTBENAGEN"
+                ],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 20,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 2,
+                "first_name": "Fernando",
+                "last_name": "Kulusevski",
+                "position": "GK",
+                "traits": [
+                  "KORTBENAGEN"
+                ],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 21,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 3,
+                "first_name": "Stefan",
+                "last_name": "Luiz",
+                "position": "DF",
+                "traits": [],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 26,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              },
+              {
+                "id": 4,
+                "first_name": "Osman",
+                "last_name": "Rydström",
+                "position": "DF",
+                "traits": [
+                  "FRISPARKSSPECIALIST",
+                  "OJAMN"
+                ],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 37,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 5,
+                "first_name": "Sandro",
+                "last_name": "Cocu",
+                "position": "DF",
+                "traits": [
+                  "KORTBENAGEN"
+                ],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 28,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              },
+              {
+                "id": 6,
+                "first_name": "Wilma",
+                "last_name": "Di Maria",
+                "position": "DF",
+                "traits": [
+                  "UTHALLIG",
+                  "INTELLIGENT",
+                  "SNABB"
+                ],
+                "skill_open": 2,
+                "skill_hidden": 50,
+                "age": 24,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 7,
+                "first_name": "Mustafa",
+                "last_name": "Veratti",
+                "position": "DF",
+                "traits": [],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 29,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              },
+              {
+                "id": 8,
+                "first_name": "Malik",
+                "last_name": "Karlsson",
+                "position": "DF",
+                "traits": [],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 19,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 9,
+                "first_name": "Xavi",
+                "last_name": "Hart",
+                "position": "DF",
+                "traits": [],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 26,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 10,
+                "first_name": "Oliver",
+                "last_name": "Hazard",
+                "position": "MF",
+                "traits": [
+                  "STRAFFSPECIALIST"
+                ],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 26,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              },
+              {
+                "id": 11,
+                "first_name": "Fred",
+                "last_name": "Henry",
+                "position": "MF",
+                "traits": [
+                  "AGGRESSIV",
+                  "FRISPARKSSPECIALIST"
+                ],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 24,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 12,
+                "first_name": "Luis",
+                "last_name": "Batistuta",
+                "position": "MF",
+                "traits": [
+                  "STRAFFSPECIALIST",
+                  "UTHALLIG"
+                ],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 22,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 13,
+                "first_name": "Jacob",
+                "last_name": "Insigne",
+                "position": "MF",
+                "traits": [
+                  "FRISPARKSSPECIALIST",
+                  "SNABB"
+                ],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 22,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 14,
+                "first_name": "Wilma",
+                "last_name": "Maldini",
+                "position": "MF",
+                "traits": [],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 23,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 15,
+                "first_name": "Curtis",
+                "last_name": "Kjær",
+                "position": "MF",
+                "traits": [],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 19,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 16,
+                "first_name": "Mohammed",
+                "last_name": "Schmeichel",
+                "position": "MF",
+                "traits": [
+                  "STRAFFSPECIALIST"
+                ],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 29,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              },
+              {
+                "id": 17,
+                "first_name": "Elijah",
+                "last_name": "Tello",
+                "position": "FW",
+                "traits": [
+                  "STRAFFSPECIALIST"
+                ],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 30,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              },
+              {
+                "id": 18,
+                "first_name": "Ethan",
+                "last_name": "Nedved",
+                "position": "FW",
+                "traits": [],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 20,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 19,
+                "first_name": "Manuel",
+                "last_name": "Zlatanovic",
+                "position": "FW",
+                "traits": [],
+                "skill_open": 2,
+                "skill_hidden": 50,
+                "age": 25,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 20,
+                "first_name": "Lovisa",
+                "last_name": "Schweinsteiger",
+                "position": "FW",
+                "traits": [
+                  "SNABB"
+                ],
+                "skill_open": 7,
+                "skill_hidden": 50,
+                "age": 30,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 21,
+                "first_name": "Per",
+                "last_name": "Ibrahimovic",
+                "position": "FW",
+                "traits": [
+                  "SKADEBENAGEN"
+                ],
+                "skill_open": 7,
+                "skill_hidden": 50,
+                "age": 18,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              }
+            ],
+            "tactic": {
+              "attacking": false,
+              "defending": false,
+              "offside_trap": false,
+              "tempo": 1.0
+            },
+            "aggressiveness": {
+              "name": "Medel"
+            }
+          },
+          {
+            "name": "Skogås United",
+            "cash_sek": 0,
+            "players": [
+              {
+                "id": 1,
+                "first_name": "Mark",
+                "last_name": "Rooney",
+                "position": "GK",
+                "traits": [
+                  "STRAFFSPECIALIST",
+                  "FRISPARKSSPECIALIST"
+                ],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 25,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 2,
+                "first_name": "Oleg",
+                "last_name": "Nakajima",
+                "position": "GK",
+                "traits": [
+                  "UTHALLIG",
+                  "LEDARE"
+                ],
+                "skill_open": 7,
+                "skill_hidden": 50,
+                "age": 20,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 3,
+                "first_name": "Marc",
+                "last_name": "Chiesa",
+                "position": "DF",
+                "traits": [
+                  "SKADEBENAGEN"
+                ],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 38,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              },
+              {
+                "id": 4,
+                "first_name": "Sandro",
+                "last_name": "Florenzi",
+                "position": "DF",
+                "traits": [
+                  "TRANINGSVILLIG"
+                ],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 16,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 5,
+                "first_name": "Charlie",
+                "last_name": "Rui Costa",
+                "position": "DF",
+                "traits": [
+                  "KORTBENAGEN",
+                  "SKADEBENAGEN",
+                  "INTELLIGENT"
+                ],
+                "skill_open": 2,
+                "skill_hidden": 50,
+                "age": 18,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 6,
+                "first_name": "Nathan",
+                "last_name": "Isaksson",
+                "position": "DF",
+                "traits": [
+                  "STRAFFSPECIALIST",
+                  "FRISPARKSSPECIALIST"
+                ],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 24,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              },
+              {
+                "id": 7,
+                "first_name": "Isac",
+                "last_name": "Cocu",
+                "position": "DF",
+                "traits": [
+                  "INTELLIGENT"
+                ],
+                "skill_open": 8,
+                "skill_hidden": 50,
+                "age": 30,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              },
+              {
+                "id": 8,
+                "first_name": "Zakaria",
+                "last_name": "Augustinsson",
+                "position": "DF",
+                "traits": [
+                  "TRANINGSVILLIG"
+                ],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 25,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 9,
+                "first_name": "Wilma",
+                "last_name": "Tardelli",
+                "position": "DF",
+                "traits": [
+                  "TRANINGSVILLIG",
+                  "STRAFFSPECIALIST"
+                ],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 22,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              },
+              {
+                "id": 10,
+                "first_name": "Valentin",
+                "last_name": "Gyokeres",
+                "position": "MF",
+                "traits": [
+                  "OJAMN"
+                ],
+                "skill_open": 3,
+                "skill_hidden": 50,
+                "age": 21,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 11,
+                "first_name": "Axel",
+                "last_name": "Johansson",
+                "position": "MF",
+                "traits": [],
+                "skill_open": 3,
+                "skill_hidden": 50,
+                "age": 22,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 12,
+                "first_name": "Kevin",
+                "last_name": "Lampard",
+                "position": "MF",
+                "traits": [
+                  "UTHALLIG",
+                  "SNABB",
+                  "STRAFFSPECIALIST"
+                ],
+                "skill_open": 3,
+                "skill_hidden": 50,
+                "age": 19,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 13,
+                "first_name": "Jakob",
+                "last_name": "Beckham",
+                "position": "MF",
+                "traits": [],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 27,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 14,
+                "first_name": "Frida",
+                "last_name": "Bergqvist",
+                "position": "MF",
+                "traits": [],
+                "skill_open": 3,
+                "skill_hidden": 50,
+                "age": 19,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 15,
+                "first_name": "Beatrice",
+                "last_name": "Giroud",
+                "position": "MF",
+                "traits": [
+                  "SNABB",
+                  "TRANINGSVILLIG"
+                ],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 26,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 16,
+                "first_name": "William",
+                "last_name": "Gonzalez",
+                "position": "MF",
+                "traits": [],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 16,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 17,
+                "first_name": "Nuno",
+                "last_name": "Pallotta",
+                "position": "FW",
+                "traits": [],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 36,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 18,
+                "first_name": "Julia",
+                "last_name": "Rooney",
+                "position": "FW",
+                "traits": [
+                  "SKADEBENAGEN",
+                  "AGGRESSIV"
+                ],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 27,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 19,
+                "first_name": "Ella",
+                "last_name": "Terry",
+                "position": "FW",
+                "traits": [
+                  "AGGRESSIV",
+                  "TRANINGSVILLIG"
+                ],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 26,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 20,
+                "first_name": "Omar",
+                "last_name": "Umtiti",
+                "position": "FW",
+                "traits": [
+                  "OJAMN"
+                ],
+                "skill_open": 3,
+                "skill_hidden": 50,
+                "age": 25,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              },
+              {
+                "id": 21,
+                "first_name": "Rune",
+                "last_name": "Higuain",
+                "position": "FW",
+                "traits": [],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 27,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              }
+            ],
+            "tactic": {
+              "attacking": false,
+              "defending": false,
+              "offside_trap": false,
+              "tempo": 1.0
+            },
+            "aggressiveness": {
+              "name": "Medel"
+            }
+          },
+          {
+            "name": "Södermalm City",
+            "cash_sek": 0,
+            "players": [
+              {
+                "id": 1,
+                "first_name": "Johanna",
+                "last_name": "Mahrez",
+                "position": "GK",
+                "traits": [
+                  "AGGRESSIV"
+                ],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 25,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 2,
+                "first_name": "Rolf",
+                "last_name": "Jensen",
+                "position": "GK",
+                "traits": [
+                  "AGGRESSIV",
+                  "SKADEBENAGEN",
+                  "TRANINGSVILLIG"
+                ],
+                "skill_open": 2,
+                "skill_hidden": 50,
+                "age": 24,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 3,
+                "first_name": "Georg",
+                "last_name": "Pepe",
+                "position": "DF",
+                "traits": [
+                  "INTELLIGENT"
+                ],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 19,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 4,
+                "first_name": "Juan",
+                "last_name": "Seedorf",
+                "position": "DF",
+                "traits": [],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 18,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 5,
+                "first_name": "Jonas",
+                "last_name": "Lewandowski",
+                "position": "DF",
+                "traits": [],
+                "skill_open": 8,
+                "skill_hidden": 50,
+                "age": 19,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 6,
+                "first_name": "Axel",
+                "last_name": "Nani",
+                "position": "DF",
+                "traits": [
+                  "LEDARE"
+                ],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 19,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              },
+              {
+                "id": 7,
+                "first_name": "Mathias",
+                "last_name": "Farfan",
+                "position": "DF",
+                "traits": [
+                  "INTELLIGENT",
+                  "SKADEBENAGEN",
+                  "AGGRESSIV"
+                ],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 27,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 8,
+                "first_name": "Sofia",
+                "last_name": "Gago",
+                "position": "DF",
+                "traits": [
+                  "TRANINGSVILLIG"
+                ],
+                "skill_open": 3,
+                "skill_hidden": 50,
+                "age": 24,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 9,
+                "first_name": "Patrik",
+                "last_name": "Alaba",
+                "position": "DF",
+                "traits": [],
+                "skill_open": 7,
+                "skill_hidden": 50,
+                "age": 25,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 10,
+                "first_name": "Luke",
+                "last_name": "Bonucci",
+                "position": "MF",
+                "traits": [],
+                "skill_open": 8,
+                "skill_hidden": 50,
+                "age": 16,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 11,
+                "first_name": "Cornelia",
+                "last_name": "Modric",
+                "position": "MF",
+                "traits": [
+                  "AGGRESSIV"
+                ],
+                "skill_open": 1,
+                "skill_hidden": 50,
+                "age": 22,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 12,
+                "first_name": "Levi",
+                "last_name": "Brolin",
+                "position": "MF",
+                "traits": [],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 19,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 13,
+                "first_name": "George",
+                "last_name": "Elmander",
+                "position": "MF",
+                "traits": [
+                  "AGGRESSIV"
+                ],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 24,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              },
+              {
+                "id": 14,
+                "first_name": "Stefan",
+                "last_name": "Van Basten",
+                "position": "MF",
+                "traits": [
+                  "FRISPARKSSPECIALIST",
+                  "KORTBENAGEN"
+                ],
+                "skill_open": 7,
+                "skill_hidden": 50,
+                "age": 26,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 15,
+                "first_name": "Håkan",
+                "last_name": "Lustig",
+                "position": "MF",
+                "traits": [
+                  "STRAFFSPECIALIST"
+                ],
+                "skill_open": 9,
+                "skill_hidden": 50,
+                "age": 17,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              },
+              {
+                "id": 16,
+                "first_name": "Cecilia",
+                "last_name": "Koke",
+                "position": "MF",
+                "traits": [
+                  "AGGRESSIV",
+                  "UTHALLIG"
+                ],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 23,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 17,
+                "first_name": "Ludvig",
+                "last_name": "Buffon",
+                "position": "FW",
+                "traits": [
+                  "LEDARE"
+                ],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 19,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 18,
+                "first_name": "Roger",
+                "last_name": "Parejo",
+                "position": "FW",
+                "traits": [
+                  "STRAFFSPECIALIST"
+                ],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 34,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 19,
+                "first_name": "Romeo",
+                "last_name": "Fernandinho",
+                "position": "FW",
+                "traits": [
+                  "KORTBENAGEN"
+                ],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 23,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 20,
+                "first_name": "Tove",
+                "last_name": "Kjær",
+                "position": "FW",
+                "traits": [],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 20,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 21,
+                "first_name": "Karl",
+                "last_name": "Abraham",
+                "position": "FW",
+                "traits": [],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 20,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              }
+            ],
+            "tactic": {
+              "attacking": false,
+              "defending": false,
+              "offside_trap": false,
+              "tempo": 1.0
+            },
+            "aggressiveness": {
+              "name": "Medel"
+            }
+          },
+          {
+            "name": "Västerås FC",
+            "cash_sek": 0,
+            "players": [
+              {
+                "id": 1,
+                "first_name": "Frida",
+                "last_name": "Bendtner",
+                "position": "GK",
+                "traits": [
+                  "LEDARE"
+                ],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 28,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              },
+              {
+                "id": 2,
+                "first_name": "Danilo",
+                "last_name": "Vieira",
+                "position": "GK",
+                "traits": [],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 23,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 3,
+                "first_name": "Lionel",
+                "last_name": "Boateng",
+                "position": "DF",
+                "traits": [],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 27,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              },
+              {
+                "id": 4,
+                "first_name": "Leo",
+                "last_name": "Gundogan",
+                "position": "DF",
+                "traits": [
+                  "SNABB"
+                ],
+                "skill_open": 8,
+                "skill_hidden": 50,
+                "age": 31,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              },
+              {
+                "id": 5,
+                "first_name": "Melker",
+                "last_name": "Lloris",
+                "position": "DF",
+                "traits": [
+                  "SKADEBENAGEN"
+                ],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 25,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 6,
+                "first_name": "Martin",
+                "last_name": "Xavi",
+                "position": "DF",
+                "traits": [],
+                "skill_open": 2,
+                "skill_hidden": 50,
+                "age": 24,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              },
+              {
+                "id": 7,
+                "first_name": "Jamal",
+                "last_name": "Guardiola",
+                "position": "DF",
+                "traits": [
+                  "STRAFFSPECIALIST"
+                ],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 22,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 8,
+                "first_name": "Mustafa",
+                "last_name": "Lukaku",
+                "position": "DF",
+                "traits": [
+                  "OJAMN"
+                ],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 19,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              },
+              {
+                "id": 9,
+                "first_name": "Hugo",
+                "last_name": "Xavi",
+                "position": "DF",
+                "traits": [],
+                "skill_open": 8,
+                "skill_hidden": 50,
+                "age": 22,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 10,
+                "first_name": "Mikael",
+                "last_name": "Capdevila",
+                "position": "MF",
+                "traits": [
+                  "FRISPARKSSPECIALIST"
+                ],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 25,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 11,
+                "first_name": "Paul",
+                "last_name": "Maradona",
+                "position": "MF",
+                "traits": [],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 26,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 12,
+                "first_name": "Elin",
+                "last_name": "Müller",
+                "position": "MF",
+                "traits": [],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 20,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 13,
+                "first_name": "Linus",
+                "last_name": "Batistuta",
+                "position": "MF",
+                "traits": [
+                  "KORTBENAGEN"
+                ],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 23,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 14,
+                "first_name": "Alvin",
+                "last_name": "Redondo",
+                "position": "MF",
+                "traits": [
+                  "SNABB",
+                  "LEDARE"
+                ],
+                "skill_open": 7,
+                "skill_hidden": 50,
+                "age": 17,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 15,
+                "first_name": "Elsa",
+                "last_name": "Lehmann",
+                "position": "MF",
+                "traits": [],
+                "skill_open": 7,
+                "skill_hidden": 50,
+                "age": 21,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              },
+              {
+                "id": 16,
+                "first_name": "Linus",
+                "last_name": "Kroos",
+                "position": "MF",
+                "traits": [],
+                "skill_open": 10,
+                "skill_hidden": 50,
+                "age": 26,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              },
+              {
+                "id": 17,
+                "first_name": "Barry",
+                "last_name": "Giggs",
+                "position": "FW",
+                "traits": [
+                  "TRANINGSVILLIG"
+                ],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 28,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              },
+              {
+                "id": 18,
+                "first_name": "Fred",
+                "last_name": "Sjölund",
+                "position": "FW",
+                "traits": [
+                  "UTHALLIG"
+                ],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 22,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 19,
+                "first_name": "Filip",
+                "last_name": "Nielsen",
+                "position": "FW",
+                "traits": [
+                  "FRISPARKSSPECIALIST"
+                ],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 26,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              },
+              {
+                "id": 20,
+                "first_name": "Carlos",
+                "last_name": "Zidane",
+                "position": "FW",
+                "traits": [
+                  "OJAMN"
+                ],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 36,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 21,
+                "first_name": "Marc",
+                "last_name": "Guardiola",
+                "position": "FW",
+                "traits": [],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 24,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              }
+            ],
+            "tactic": {
+              "attacking": false,
+              "defending": false,
+              "offside_trap": false,
+              "tempo": 1.0
+            },
+            "aggressiveness": {
+              "name": "Medel"
+            }
+          },
+          {
+            "name": "Uppsala Rangers",
+            "cash_sek": 0,
+            "players": [
+              {
+                "id": 1,
+                "first_name": "Caleb",
+                "last_name": "Ramos",
+                "position": "GK",
+                "traits": [
+                  "AGGRESSIV",
+                  "SKADEBENAGEN",
+                  "INTELLIGENT"
+                ],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 20,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 2,
+                "first_name": "Andreas",
+                "last_name": "Cassano",
+                "position": "GK",
+                "traits": [],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 28,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 3,
+                "first_name": "Nora",
+                "last_name": "Enrique",
+                "position": "DF",
+                "traits": [
+                  "KORTBENAGEN",
+                  "AGGRESSIV"
+                ],
+                "skill_open": 2,
+                "skill_hidden": 50,
+                "age": 23,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              },
+              {
+                "id": 4,
+                "first_name": "Robert",
+                "last_name": "Montero",
+                "position": "DF",
+                "traits": [],
+                "skill_open": 7,
+                "skill_hidden": 50,
+                "age": 22,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              },
+              {
+                "id": 5,
+                "first_name": "Ola",
+                "last_name": "Cuadrado",
+                "position": "DF",
+                "traits": [],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 26,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 6,
+                "first_name": "Emil",
+                "last_name": "Pepe",
+                "position": "DF",
+                "traits": [
+                  "FRISPARKSSPECIALIST",
+                  "KORTBENAGEN"
+                ],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 30,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              },
+              {
+                "id": 7,
+                "first_name": "Casper",
+                "last_name": "Apell",
+                "position": "DF",
+                "traits": [],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 37,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 8,
+                "first_name": "Daniel",
+                "last_name": "Palmieri",
+                "position": "DF",
+                "traits": [],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 17,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 9,
+                "first_name": "Vidar",
+                "last_name": "Skoglund",
+                "position": "DF",
+                "traits": [],
+                "skill_open": 1,
+                "skill_hidden": 50,
+                "age": 25,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              },
+              {
+                "id": 10,
+                "first_name": "Oleg",
+                "last_name": "Donnarumma",
+                "position": "MF",
+                "traits": [
+                  "AGGRESSIV",
+                  "LEDARE"
+                ],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 25,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 11,
+                "first_name": "Bo",
+                "last_name": "Butragueno",
+                "position": "MF",
+                "traits": [
+                  "LEDARE",
+                  "OJAMN"
+                ],
+                "skill_open": 7,
+                "skill_hidden": 50,
+                "age": 28,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 8,
+                "form_season": 10
+              },
+              {
+                "id": 12,
+                "first_name": "Kai",
+                "last_name": "Jansson",
+                "position": "MF",
+                "traits": [],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 23,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 13,
+                "first_name": "Isak",
+                "last_name": "Sundberg",
+                "position": "MF",
+                "traits": [],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 24,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              },
+              {
+                "id": 14,
+                "first_name": "Henrik",
+                "last_name": "Courtois",
+                "position": "MF",
+                "traits": [
+                  "INTELLIGENT",
+                  "UTHALLIG",
+                  "FRISPARKSSPECIALIST"
+                ],
+                "skill_open": 6,
+                "skill_hidden": 50,
+                "age": 27,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 15,
+                "first_name": "Kyle",
+                "last_name": "Müller",
+                "position": "MF",
+                "traits": [],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 18,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              },
+              {
+                "id": 16,
+                "first_name": "Sofia",
+                "last_name": "Quaresma",
+                "position": "MF",
+                "traits": [],
+                "skill_open": 2,
+                "skill_hidden": 50,
+                "age": 20,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              },
+              {
+                "id": 17,
+                "first_name": "Clara",
+                "last_name": "Abraham",
+                "position": "FW",
+                "traits": [
+                  "FRISPARKSSPECIALIST",
+                  "SNABB"
+                ],
+                "skill_open": 8,
+                "skill_hidden": 50,
+                "age": 25,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 11,
+                "form_season": 10
+              },
+              {
+                "id": 18,
+                "first_name": "Emma",
+                "last_name": "Neuer",
+                "position": "FW",
+                "traits": [],
+                "skill_open": 2,
+                "skill_hidden": 50,
+                "age": 24,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 19,
+                "first_name": "Åke",
+                "last_name": "Vinicius",
+                "position": "FW",
+                "traits": [
+                  "STRAFFSPECIALIST"
+                ],
+                "skill_open": 4,
+                "skill_hidden": 50,
+                "age": 34,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 10,
+                "form_season": 10
+              },
+              {
+                "id": 20,
+                "first_name": "Dylan",
+                "last_name": "Totti",
+                "position": "FW",
+                "traits": [],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 18,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 12,
+                "form_season": 10
+              },
+              {
+                "id": 21,
+                "first_name": "Alfie",
+                "last_name": "Viduka",
+                "position": "FW",
+                "traits": [],
+                "skill_open": 5,
+                "skill_hidden": 50,
+                "age": 33,
+                "number": 0,
+                "jersey_number": 0,
+                "value_sek": 0,
+                "form_now": 9,
+                "form_season": 10
+              }
+            ],
+            "tactic": {
+              "attacking": false,
+              "defending": false,
+              "offside_trap": false,
+              "tempo": 1.0
+            },
+            "aggressiveness": {
+              "name": "Medel"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "fixtures_by_division": {
+    "Division 1": [
+      {
+        "home": "Björkhagens IF",
+        "away": "Uppsala Rangers",
+        "round": 1
+      },
+      {
+        "home": "Solna SK",
+        "away": "Västerås FC",
+        "round": 1
+      },
+      {
+        "home": "Hammarby Heights",
+        "away": "Södermalm City",
+        "round": 1
+      },
+      {
+        "home": "Göta BK",
+        "away": "Skogås United",
+        "round": 1
+      },
+      {
+        "home": "Björkhagens IF",
+        "away": "Västerås FC",
+        "round": 2
+      },
+      {
+        "home": "Uppsala Rangers",
+        "away": "Södermalm City",
+        "round": 2
+      },
+      {
+        "home": "Solna SK",
+        "away": "Skogås United",
+        "round": 2
+      },
+      {
+        "home": "Hammarby Heights",
+        "away": "Göta BK",
+        "round": 2
+      },
+      {
+        "home": "Björkhagens IF",
+        "away": "Södermalm City",
+        "round": 3
+      },
+      {
+        "home": "Västerås FC",
+        "away": "Skogås United",
+        "round": 3
+      },
+      {
+        "home": "Uppsala Rangers",
+        "away": "Göta BK",
+        "round": 3
+      },
+      {
+        "home": "Solna SK",
+        "away": "Hammarby Heights",
+        "round": 3
+      },
+      {
+        "home": "Björkhagens IF",
+        "away": "Skogås United",
+        "round": 4
+      },
+      {
+        "home": "Södermalm City",
+        "away": "Göta BK",
+        "round": 4
+      },
+      {
+        "home": "Västerås FC",
+        "away": "Hammarby Heights",
+        "round": 4
+      },
+      {
+        "home": "Uppsala Rangers",
+        "away": "Solna SK",
+        "round": 4
+      },
+      {
+        "home": "Björkhagens IF",
+        "away": "Göta BK",
+        "round": 5
+      },
+      {
+        "home": "Skogås United",
+        "away": "Hammarby Heights",
+        "round": 5
+      },
+      {
+        "home": "Södermalm City",
+        "away": "Solna SK",
+        "round": 5
+      },
+      {
+        "home": "Västerås FC",
+        "away": "Uppsala Rangers",
+        "round": 5
+      },
+      {
+        "home": "Björkhagens IF",
+        "away": "Hammarby Heights",
+        "round": 6
+      },
+      {
+        "home": "Göta BK",
+        "away": "Solna SK",
+        "round": 6
+      },
+      {
+        "home": "Skogås United",
+        "away": "Uppsala Rangers",
+        "round": 6
+      },
+      {
+        "home": "Södermalm City",
+        "away": "Västerås FC",
+        "round": 6
+      },
+      {
+        "home": "Björkhagens IF",
+        "away": "Solna SK",
+        "round": 7
+      },
+      {
+        "home": "Hammarby Heights",
+        "away": "Uppsala Rangers",
+        "round": 7
+      },
+      {
+        "home": "Göta BK",
+        "away": "Västerås FC",
+        "round": 7
+      },
+      {
+        "home": "Skogås United",
+        "away": "Södermalm City",
+        "round": 7
+      },
+      {
+        "home": "Uppsala Rangers",
+        "away": "Björkhagens IF",
+        "round": 8
+      },
+      {
+        "home": "Västerås FC",
+        "away": "Solna SK",
+        "round": 8
+      },
+      {
+        "home": "Södermalm City",
+        "away": "Hammarby Heights",
+        "round": 8
+      },
+      {
+        "home": "Skogås United",
+        "away": "Göta BK",
+        "round": 8
+      },
+      {
+        "home": "Västerås FC",
+        "away": "Björkhagens IF",
+        "round": 9
+      },
+      {
+        "home": "Södermalm City",
+        "away": "Uppsala Rangers",
+        "round": 9
+      },
+      {
+        "home": "Skogås United",
+        "away": "Solna SK",
+        "round": 9
+      },
+      {
+        "home": "Göta BK",
+        "away": "Hammarby Heights",
+        "round": 9
+      },
+      {
+        "home": "Södermalm City",
+        "away": "Björkhagens IF",
+        "round": 10
+      },
+      {
+        "home": "Skogås United",
+        "away": "Västerås FC",
+        "round": 10
+      },
+      {
+        "home": "Göta BK",
+        "away": "Uppsala Rangers",
+        "round": 10
+      },
+      {
+        "home": "Hammarby Heights",
+        "away": "Solna SK",
+        "round": 10
+      },
+      {
+        "home": "Skogås United",
+        "away": "Björkhagens IF",
+        "round": 11
+      },
+      {
+        "home": "Göta BK",
+        "away": "Södermalm City",
+        "round": 11
+      },
+      {
+        "home": "Hammarby Heights",
+        "away": "Västerås FC",
+        "round": 11
+      },
+      {
+        "home": "Solna SK",
+        "away": "Uppsala Rangers",
+        "round": 11
+      },
+      {
+        "home": "Göta BK",
+        "away": "Björkhagens IF",
+        "round": 12
+      },
+      {
+        "home": "Hammarby Heights",
+        "away": "Skogås United",
+        "round": 12
+      },
+      {
+        "home": "Solna SK",
+        "away": "Södermalm City",
+        "round": 12
+      },
+      {
+        "home": "Uppsala Rangers",
+        "away": "Västerås FC",
+        "round": 12
+      },
+      {
+        "home": "Hammarby Heights",
+        "away": "Björkhagens IF",
+        "round": 13
+      },
+      {
+        "home": "Solna SK",
+        "away": "Göta BK",
+        "round": 13
+      },
+      {
+        "home": "Uppsala Rangers",
+        "away": "Skogås United",
+        "round": 13
+      },
+      {
+        "home": "Västerås FC",
+        "away": "Södermalm City",
+        "round": 13
+      },
+      {
+        "home": "Solna SK",
+        "away": "Björkhagens IF",
+        "round": 14
+      },
+      {
+        "home": "Uppsala Rangers",
+        "away": "Hammarby Heights",
+        "round": 14
+      },
+      {
+        "home": "Västerås FC",
+        "away": "Göta BK",
+        "round": 14
+      },
+      {
+        "home": "Södermalm City",
+        "away": "Skogås United",
+        "round": 14
+      }
+    ]
+  },
+  "current_round": 1,
+  "cup_state": null,
+  "table_snapshot": {},
+  "player_stats": {
+    "1": {
+      "player_id": "1",
+      "club_name": "",
+      "appearances": 0,
+      "minutes": 0,
+      "goals": 0,
+      "assists": 0,
+      "yellows": 0,
+      "reds": 0,
+      "rating_sum": 0.0,
+      "rating_avg": 0.0
+    },
+    "2": {
+      "player_id": "2",
+      "club_name": "",
+      "appearances": 0,
+      "minutes": 0,
+      "goals": 0,
+      "assists": 0,
+      "yellows": 0,
+      "reds": 0,
+      "rating_sum": 0.0,
+      "rating_avg": 0.0
+    },
+    "3": {
+      "player_id": "3",
+      "club_name": "",
+      "appearances": 0,
+      "minutes": 0,
+      "goals": 0,
+      "assists": 0,
+      "yellows": 0,
+      "reds": 0,
+      "rating_sum": 0.0,
+      "rating_avg": 0.0
+    },
+    "4": {
+      "player_id": "4",
+      "club_name": "",
+      "appearances": 0,
+      "minutes": 0,
+      "goals": 0,
+      "assists": 0,
+      "yellows": 0,
+      "reds": 0,
+      "rating_sum": 0.0,
+      "rating_avg": 0.0
+    },
+    "5": {
+      "player_id": "5",
+      "club_name": "",
+      "appearances": 0,
+      "minutes": 0,
+      "goals": 0,
+      "assists": 0,
+      "yellows": 0,
+      "reds": 0,
+      "rating_sum": 0.0,
+      "rating_avg": 0.0
+    },
+    "6": {
+      "player_id": "6",
+      "club_name": "",
+      "appearances": 0,
+      "minutes": 0,
+      "goals": 0,
+      "assists": 0,
+      "yellows": 0,
+      "reds": 0,
+      "rating_sum": 0.0,
+      "rating_avg": 0.0
+    },
+    "7": {
+      "player_id": "7",
+      "club_name": "",
+      "appearances": 0,
+      "minutes": 0,
+      "goals": 0,
+      "assists": 0,
+      "yellows": 0,
+      "reds": 0,
+      "rating_sum": 0.0,
+      "rating_avg": 0.0
+    },
+    "8": {
+      "player_id": "8",
+      "club_name": "",
+      "appearances": 0,
+      "minutes": 0,
+      "goals": 0,
+      "assists": 0,
+      "yellows": 0,
+      "reds": 0,
+      "rating_sum": 0.0,
+      "rating_avg": 0.0
+    },
+    "9": {
+      "player_id": "9",
+      "club_name": "",
+      "appearances": 0,
+      "minutes": 0,
+      "goals": 0,
+      "assists": 0,
+      "yellows": 0,
+      "reds": 0,
+      "rating_sum": 0.0,
+      "rating_avg": 0.0
+    },
+    "10": {
+      "player_id": "10",
+      "club_name": "",
+      "appearances": 0,
+      "minutes": 0,
+      "goals": 0,
+      "assists": 0,
+      "yellows": 0,
+      "reds": 0,
+      "rating_sum": 0.0,
+      "rating_avg": 0.0
+    },
+    "11": {
+      "player_id": "11",
+      "club_name": "",
+      "appearances": 0,
+      "minutes": 0,
+      "goals": 0,
+      "assists": 0,
+      "yellows": 0,
+      "reds": 0,
+      "rating_sum": 0.0,
+      "rating_avg": 0.0
+    },
+    "12": {
+      "player_id": "12",
+      "club_name": "",
+      "appearances": 0,
+      "minutes": 0,
+      "goals": 0,
+      "assists": 0,
+      "yellows": 0,
+      "reds": 0,
+      "rating_sum": 0.0,
+      "rating_avg": 0.0
+    },
+    "13": {
+      "player_id": "13",
+      "club_name": "",
+      "appearances": 0,
+      "minutes": 0,
+      "goals": 0,
+      "assists": 0,
+      "yellows": 0,
+      "reds": 0,
+      "rating_sum": 0.0,
+      "rating_avg": 0.0
+    },
+    "14": {
+      "player_id": "14",
+      "club_name": "",
+      "appearances": 0,
+      "minutes": 0,
+      "goals": 0,
+      "assists": 0,
+      "yellows": 0,
+      "reds": 0,
+      "rating_sum": 0.0,
+      "rating_avg": 0.0
+    },
+    "15": {
+      "player_id": "15",
+      "club_name": "",
+      "appearances": 0,
+      "minutes": 0,
+      "goals": 0,
+      "assists": 0,
+      "yellows": 0,
+      "reds": 0,
+      "rating_sum": 0.0,
+      "rating_avg": 0.0
+    },
+    "16": {
+      "player_id": "16",
+      "club_name": "",
+      "appearances": 0,
+      "minutes": 0,
+      "goals": 0,
+      "assists": 0,
+      "yellows": 0,
+      "reds": 0,
+      "rating_sum": 0.0,
+      "rating_avg": 0.0
+    },
+    "17": {
+      "player_id": "17",
+      "club_name": "",
+      "appearances": 0,
+      "minutes": 0,
+      "goals": 0,
+      "assists": 0,
+      "yellows": 0,
+      "reds": 0,
+      "rating_sum": 0.0,
+      "rating_avg": 0.0
+    },
+    "18": {
+      "player_id": "18",
+      "club_name": "",
+      "appearances": 0,
+      "minutes": 0,
+      "goals": 0,
+      "assists": 0,
+      "yellows": 0,
+      "reds": 0,
+      "rating_sum": 0.0,
+      "rating_avg": 0.0
+    },
+    "19": {
+      "player_id": "19",
+      "club_name": "",
+      "appearances": 0,
+      "minutes": 0,
+      "goals": 0,
+      "assists": 0,
+      "yellows": 0,
+      "reds": 0,
+      "rating_sum": 0.0,
+      "rating_avg": 0.0
+    },
+    "20": {
+      "player_id": "20",
+      "club_name": "",
+      "appearances": 0,
+      "minutes": 0,
+      "goals": 0,
+      "assists": 0,
+      "yellows": 0,
+      "reds": 0,
+      "rating_sum": 0.0,
+      "rating_avg": 0.0
+    },
+    "21": {
+      "player_id": "21",
+      "club_name": "",
+      "appearances": 0,
+      "minutes": 0,
+      "goals": 0,
+      "assists": 0,
+      "yellows": 0,
+      "reds": 0,
+      "rating_sum": 0.0,
+      "rating_avg": 0.0
+    }
+  },
+  "club_stats": {
+    "Björkhagens IF": {
+      "club_name": "Björkhagens IF",
+      "played": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0,
+      "goals_for": 0,
+      "goals_against": 0,
+      "clean_sheets": 0,
+      "yellows": 0,
+      "reds": 0,
+      "points": 0
+    },
+    "Uppsala Rangers": {
+      "club_name": "Uppsala Rangers",
+      "played": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0,
+      "goals_for": 0,
+      "goals_against": 0,
+      "clean_sheets": 0,
+      "yellows": 0,
+      "reds": 0,
+      "points": 0
+    },
+    "Solna SK": {
+      "club_name": "Solna SK",
+      "played": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0,
+      "goals_for": 0,
+      "goals_against": 0,
+      "clean_sheets": 0,
+      "yellows": 0,
+      "reds": 0,
+      "points": 0
+    },
+    "Västerås FC": {
+      "club_name": "Västerås FC",
+      "played": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0,
+      "goals_for": 0,
+      "goals_against": 0,
+      "clean_sheets": 0,
+      "yellows": 0,
+      "reds": 0,
+      "points": 0
+    },
+    "Hammarby Heights": {
+      "club_name": "Hammarby Heights",
+      "played": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0,
+      "goals_for": 0,
+      "goals_against": 0,
+      "clean_sheets": 0,
+      "yellows": 0,
+      "reds": 0,
+      "points": 0
+    },
+    "Södermalm City": {
+      "club_name": "Södermalm City",
+      "played": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0,
+      "goals_for": 0,
+      "goals_against": 0,
+      "clean_sheets": 0,
+      "yellows": 0,
+      "reds": 0,
+      "points": 0
+    },
+    "Göta BK": {
+      "club_name": "Göta BK",
+      "played": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0,
+      "goals_for": 0,
+      "goals_against": 0,
+      "clean_sheets": 0,
+      "yellows": 0,
+      "reds": 0,
+      "points": 0
+    },
+    "Skogås United": {
+      "club_name": "Skogås United",
+      "played": 0,
+      "wins": 0,
+      "draws": 0,
+      "losses": 0,
+      "goals_for": 0,
+      "goals_against": 0,
+      "clean_sheets": 0,
+      "yellows": 0,
+      "reds": 0,
+      "points": 0
+    }
+  },
+  "match_log": [
+    {
+      "competition": "league",
+      "round": 0,
+      "home": "",
+      "away": "",
+      "home_goals": 0,
+      "away_goals": 0
+    },
+    {
+      "competition": "league",
+      "round": 0,
+      "home": "",
+      "away": "",
+      "home_goals": 0,
+      "away_goals": 0
+    },
+    {
+      "competition": "league",
+      "round": 0,
+      "home": "",
+      "away": "",
+      "home_goals": 0,
+      "away_goals": 0
+    },
+    {
+      "competition": "league",
+      "round": 0,
+      "home": "",
+      "away": "",
+      "home_goals": 0,
+      "away_goals": 0
+    }
+  ],
+  "training_orders": [],
+  "history": {
+    "_store": {}
+  }
+}

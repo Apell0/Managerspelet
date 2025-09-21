@@ -1,0 +1,2275 @@
+{
+  "season": 1,
+  "league": {
+    "name": "SaveGameLiga",
+    "rules": {
+      "format": "rak",
+      "teams_per_div": 8,
+      "levels": 1,
+      "double_round": true
+    },
+    "divisions": [
+      {
+        "name": "Division 1",
+        "level": 1,
+        "clubs": [
+          {
+            "name": "Björkhagens IF",
+            "cash_sek": 0,
+            "players": [
+              {
+                "id": 1,
+                "first_name": "Jack",
+                "last_name": "Maradona",
+                "position": "GK",
+                "age": 28,
+                "number": 71,
+                "skill_open": 6,
+                "traits": [
+                  "INTELLIGENT"
+                ]
+              },
+              {
+                "id": 2,
+                "first_name": "Anton",
+                "last_name": "Herrera",
+                "position": "GK",
+                "age": 18,
+                "number": 74,
+                "skill_open": 8,
+                "traits": [
+                  "UTHALLIG"
+                ]
+              },
+              {
+                "id": 3,
+                "first_name": "Maximilian",
+                "last_name": "Roberto",
+                "position": "DF",
+                "age": 22,
+                "number": 87,
+                "skill_open": 4,
+                "traits": []
+              },
+              {
+                "id": 4,
+                "first_name": "Colin",
+                "last_name": "Khedira",
+                "position": "DF",
+                "age": 23,
+                "number": 53,
+                "skill_open": 7,
+                "traits": []
+              },
+              {
+                "id": 5,
+                "first_name": "Malin",
+                "last_name": "Pettersson",
+                "position": "DF",
+                "age": 26,
+                "number": 63,
+                "skill_open": 4,
+                "traits": [
+                  "TRANINGSVILLIG"
+                ]
+              },
+              {
+                "id": 6,
+                "first_name": "Ylva",
+                "last_name": "Gago",
+                "position": "DF",
+                "age": 18,
+                "number": 19,
+                "skill_open": 4,
+                "traits": [
+                  "TRANINGSVILLIG",
+                  "SKADEBENAGEN"
+                ]
+              },
+              {
+                "id": 7,
+                "first_name": "Claude",
+                "last_name": "Podolski",
+                "position": "DF",
+                "age": 28,
+                "number": 72,
+                "skill_open": 6,
+                "traits": []
+              },
+              {
+                "id": 8,
+                "first_name": "Tove",
+                "last_name": "Enrique",
+                "position": "DF",
+                "age": 22,
+                "number": 50,
+                "skill_open": 6,
+                "traits": [
+                  "STRAFFSPECIALIST"
+                ]
+              },
+              {
+                "id": 9,
+                "first_name": "Joshua",
+                "last_name": "Falcao",
+                "position": "DF",
+                "age": 27,
+                "number": 45,
+                "skill_open": 6,
+                "traits": [
+                  "AGGRESSIV"
+                ]
+              },
+              {
+                "id": 10,
+                "first_name": "Wilhelm",
+                "last_name": "Villa",
+                "position": "MF",
+                "age": 21,
+                "number": 68,
+                "skill_open": 3,
+                "traits": []
+              },
+              {
+                "id": 11,
+                "first_name": "Paulo",
+                "last_name": "Brozovic",
+                "position": "MF",
+                "age": 18,
+                "number": 25,
+                "skill_open": 4,
+                "traits": [
+                  "TRANINGSVILLIG"
+                ]
+              },
+              {
+                "id": 12,
+                "first_name": "Ella",
+                "last_name": "Gago",
+                "position": "MF",
+                "age": 26,
+                "number": 15,
+                "skill_open": 4,
+                "traits": []
+              },
+              {
+                "id": 13,
+                "first_name": "Ibai",
+                "last_name": "Jarstein",
+                "position": "MF",
+                "age": 25,
+                "number": 46,
+                "skill_open": 4,
+                "traits": []
+              },
+              {
+                "id": 14,
+                "first_name": "Karim",
+                "last_name": "Walker",
+                "position": "MF",
+                "age": 22,
+                "number": 99,
+                "skill_open": 5,
+                "traits": []
+              },
+              {
+                "id": 15,
+                "first_name": "Raul",
+                "last_name": "Deschamps",
+                "position": "MF",
+                "age": 22,
+                "number": 95,
+                "skill_open": 4,
+                "traits": []
+              },
+              {
+                "id": 16,
+                "first_name": "Gonzalo",
+                "last_name": "Pacheco",
+                "position": "MF",
+                "age": 19,
+                "number": 57,
+                "skill_open": 3,
+                "traits": []
+              },
+              {
+                "id": 17,
+                "first_name": "Elias",
+                "last_name": "Morata",
+                "position": "FW",
+                "age": 24,
+                "number": 7,
+                "skill_open": 6,
+                "traits": [
+                  "STRAFFSPECIALIST"
+                ]
+              },
+              {
+                "id": 18,
+                "first_name": "Jonathan",
+                "last_name": "Capdevila",
+                "position": "FW",
+                "age": 23,
+                "number": 8,
+                "skill_open": 6,
+                "traits": []
+              },
+              {
+                "id": 19,
+                "first_name": "Eric",
+                "last_name": "Rashford",
+                "position": "FW",
+                "age": 28,
+                "number": 9,
+                "skill_open": 4,
+                "traits": [
+                  "LEDARE"
+                ]
+              },
+              {
+                "id": 20,
+                "first_name": "Claude",
+                "last_name": "Kallstrom",
+                "position": "FW",
+                "age": 37,
+                "number": 12,
+                "skill_open": 2,
+                "traits": [
+                  "SNABB"
+                ]
+              },
+              {
+                "id": 21,
+                "first_name": "Julian",
+                "last_name": "Savicevic",
+                "position": "FW",
+                "age": 25,
+                "number": 10,
+                "skill_open": 4,
+                "traits": [
+                  "SKADEBENAGEN",
+                  "KORTBENAGEN"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Solna SK",
+            "cash_sek": 0,
+            "players": [
+              {
+                "id": 1,
+                "first_name": "Niklas",
+                "last_name": "Giggs",
+                "position": "GK",
+                "age": 19,
+                "number": 89,
+                "skill_open": 2,
+                "traits": [
+                  "KORTBENAGEN"
+                ]
+              },
+              {
+                "id": 2,
+                "first_name": "Francis",
+                "last_name": "Walcott",
+                "position": "GK",
+                "age": 38,
+                "number": 7,
+                "skill_open": 8,
+                "traits": []
+              },
+              {
+                "id": 3,
+                "first_name": "Amir",
+                "last_name": "Nedved",
+                "position": "DF",
+                "age": 19,
+                "number": 1,
+                "skill_open": 5,
+                "traits": [
+                  "OJAMN"
+                ]
+              },
+              {
+                "id": 4,
+                "first_name": "Erling",
+                "last_name": "Iniesta",
+                "position": "DF",
+                "age": 20,
+                "number": 79,
+                "skill_open": 4,
+                "traits": [
+                  "TRANINGSVILLIG"
+                ]
+              },
+              {
+                "id": 5,
+                "first_name": "Beatrice",
+                "last_name": "Kulusevski",
+                "position": "DF",
+                "age": 26,
+                "number": 74,
+                "skill_open": 3,
+                "traits": [
+                  "KORTBENAGEN",
+                  "OJAMN"
+                ]
+              },
+              {
+                "id": 6,
+                "first_name": "Axel",
+                "last_name": "Tamudo",
+                "position": "DF",
+                "age": 23,
+                "number": 25,
+                "skill_open": 1,
+                "traits": [
+                  "KORTBENAGEN",
+                  "TRANINGSVILLIG"
+                ]
+              },
+              {
+                "id": 7,
+                "first_name": "Östen",
+                "last_name": "Tello",
+                "position": "DF",
+                "age": 23,
+                "number": 98,
+                "skill_open": 5,
+                "traits": []
+              },
+              {
+                "id": 8,
+                "first_name": "Bruno",
+                "last_name": "Balotelli",
+                "position": "DF",
+                "age": 30,
+                "number": 51,
+                "skill_open": 4,
+                "traits": [
+                  "SNABB",
+                  "OJAMN"
+                ]
+              },
+              {
+                "id": 9,
+                "first_name": "Edgar",
+                "last_name": "Fernandes",
+                "position": "DF",
+                "age": 21,
+                "number": 52,
+                "skill_open": 6,
+                "traits": [
+                  "INTELLIGENT",
+                  "STRAFFSPECIALIST"
+                ]
+              },
+              {
+                "id": 10,
+                "first_name": "Julius",
+                "last_name": "Viduka",
+                "position": "MF",
+                "age": 23,
+                "number": 21,
+                "skill_open": 4,
+                "traits": []
+              },
+              {
+                "id": 11,
+                "first_name": "Elias",
+                "last_name": "Ivanovic",
+                "position": "MF",
+                "age": 21,
+                "number": 33,
+                "skill_open": 7,
+                "traits": []
+              },
+              {
+                "id": 12,
+                "first_name": "Nathan",
+                "last_name": "Junuzovic",
+                "position": "MF",
+                "age": 26,
+                "number": 86,
+                "skill_open": 6,
+                "traits": [
+                  "STRAFFSPECIALIST",
+                  "SKADEBENAGEN"
+                ]
+              },
+              {
+                "id": 13,
+                "first_name": "Sandro",
+                "last_name": "Cocu",
+                "position": "MF",
+                "age": 28,
+                "number": 26,
+                "skill_open": 2,
+                "traits": [
+                  "TRANINGSVILLIG",
+                  "OJAMN"
+                ]
+              },
+              {
+                "id": 14,
+                "first_name": "Marcel",
+                "last_name": "Simeone",
+                "position": "MF",
+                "age": 27,
+                "number": 39,
+                "skill_open": 3,
+                "traits": [
+                  "STRAFFSPECIALIST",
+                  "SKADEBENAGEN"
+                ]
+              },
+              {
+                "id": 15,
+                "first_name": "Andre",
+                "last_name": "Wernbloom",
+                "position": "MF",
+                "age": 20,
+                "number": 11,
+                "skill_open": 6,
+                "traits": []
+              },
+              {
+                "id": 16,
+                "first_name": "Cristian",
+                "last_name": "Walker",
+                "position": "MF",
+                "age": 24,
+                "number": 68,
+                "skill_open": 5,
+                "traits": [
+                  "SNABB"
+                ]
+              },
+              {
+                "id": 17,
+                "first_name": "Lionel",
+                "last_name": "Stoichkov",
+                "position": "FW",
+                "age": 26,
+                "number": 23,
+                "skill_open": 6,
+                "traits": []
+              },
+              {
+                "id": 18,
+                "first_name": "Carl",
+                "last_name": "Pepe",
+                "position": "FW",
+                "age": 23,
+                "number": 14,
+                "skill_open": 6,
+                "traits": []
+              },
+              {
+                "id": 19,
+                "first_name": "Beatrice",
+                "last_name": "Kaká",
+                "position": "FW",
+                "age": 24,
+                "number": 8,
+                "skill_open": 7,
+                "traits": [
+                  "FRISPARKSSPECIALIST",
+                  "INTELLIGENT",
+                  "SKADEBENAGEN"
+                ]
+              },
+              {
+                "id": 20,
+                "first_name": "Ebbe",
+                "last_name": "Camoranesi",
+                "position": "FW",
+                "age": 37,
+                "number": 9,
+                "skill_open": 4,
+                "traits": [
+                  "AGGRESSIV"
+                ]
+              },
+              {
+                "id": 21,
+                "first_name": "Benjamin",
+                "last_name": "Forlan",
+                "position": "FW",
+                "age": 31,
+                "number": 10,
+                "skill_open": 5,
+                "traits": []
+              }
+            ]
+          },
+          {
+            "name": "Hammarby Heights",
+            "cash_sek": 0,
+            "players": [
+              {
+                "id": 1,
+                "first_name": "Astrid",
+                "last_name": "Trimmel",
+                "position": "GK",
+                "age": 23,
+                "number": 94,
+                "skill_open": 5,
+                "traits": []
+              },
+              {
+                "id": 2,
+                "first_name": "Ibai",
+                "last_name": "Casillas",
+                "position": "GK",
+                "age": 27,
+                "number": 48,
+                "skill_open": 8,
+                "traits": []
+              },
+              {
+                "id": 3,
+                "first_name": "Nikola",
+                "last_name": "Kaká",
+                "position": "DF",
+                "age": 23,
+                "number": 68,
+                "skill_open": 5,
+                "traits": []
+              },
+              {
+                "id": 4,
+                "first_name": "Tove",
+                "last_name": "Gomes",
+                "position": "DF",
+                "age": 20,
+                "number": 99,
+                "skill_open": 4,
+                "traits": [
+                  "OJAMN",
+                  "UTHALLIG"
+                ]
+              },
+              {
+                "id": 5,
+                "first_name": "Leandro",
+                "last_name": "Bonucci",
+                "position": "DF",
+                "age": 18,
+                "number": 33,
+                "skill_open": 5,
+                "traits": [
+                  "SKADEBENAGEN",
+                  "TRANINGSVILLIG"
+                ]
+              },
+              {
+                "id": 6,
+                "first_name": "Francis",
+                "last_name": "Giggs",
+                "position": "DF",
+                "age": 28,
+                "number": 97,
+                "skill_open": 10,
+                "traits": []
+              },
+              {
+                "id": 7,
+                "first_name": "Miguel",
+                "last_name": "Gago",
+                "position": "DF",
+                "age": 27,
+                "number": 19,
+                "skill_open": 5,
+                "traits": []
+              },
+              {
+                "id": 8,
+                "first_name": "Mateo",
+                "last_name": "Mandzukic",
+                "position": "DF",
+                "age": 24,
+                "number": 76,
+                "skill_open": 3,
+                "traits": []
+              },
+              {
+                "id": 9,
+                "first_name": "Pablo",
+                "last_name": "Karlsson",
+                "position": "DF",
+                "age": 26,
+                "number": 21,
+                "skill_open": 7,
+                "traits": []
+              },
+              {
+                "id": 10,
+                "first_name": "Paulo",
+                "last_name": "Milito",
+                "position": "MF",
+                "age": 19,
+                "number": 96,
+                "skill_open": 7,
+                "traits": [
+                  "INTELLIGENT",
+                  "TRANINGSVILLIG"
+                ]
+              },
+              {
+                "id": 11,
+                "first_name": "Stefan",
+                "last_name": "De Rossi",
+                "position": "MF",
+                "age": 35,
+                "number": 92,
+                "skill_open": 3,
+                "traits": [
+                  "LEDARE"
+                ]
+              },
+              {
+                "id": 12,
+                "first_name": "Kenneth",
+                "last_name": "Pogba",
+                "position": "MF",
+                "age": 24,
+                "number": 41,
+                "skill_open": 6,
+                "traits": []
+              },
+              {
+                "id": 13,
+                "first_name": "Philip",
+                "last_name": "Ravelli",
+                "position": "MF",
+                "age": 23,
+                "number": 52,
+                "skill_open": 4,
+                "traits": [
+                  "FRISPARKSSPECIALIST",
+                  "KORTBENAGEN"
+                ]
+              },
+              {
+                "id": 14,
+                "first_name": "Ibai",
+                "last_name": "Fernandes",
+                "position": "MF",
+                "age": 24,
+                "number": 6,
+                "skill_open": 6,
+                "traits": [
+                  "TRANINGSVILLIG"
+                ]
+              },
+              {
+                "id": 15,
+                "first_name": "Amir",
+                "last_name": "Vieira",
+                "position": "MF",
+                "age": 20,
+                "number": 80,
+                "skill_open": 8,
+                "traits": []
+              },
+              {
+                "id": 16,
+                "first_name": "Wilma",
+                "last_name": "Fernandinho",
+                "position": "MF",
+                "age": 20,
+                "number": 69,
+                "skill_open": 7,
+                "traits": []
+              },
+              {
+                "id": 17,
+                "first_name": "Kevin",
+                "last_name": "Mandzukic",
+                "position": "FW",
+                "age": 23,
+                "number": 37,
+                "skill_open": 6,
+                "traits": [
+                  "LEDARE"
+                ]
+              },
+              {
+                "id": 18,
+                "first_name": "Johanna",
+                "last_name": "Rydström",
+                "position": "FW",
+                "age": 20,
+                "number": 13,
+                "skill_open": 6,
+                "traits": []
+              },
+              {
+                "id": 19,
+                "first_name": "Louis",
+                "last_name": "Brozovic",
+                "position": "FW",
+                "age": 26,
+                "number": 36,
+                "skill_open": 4,
+                "traits": [
+                  "SKADEBENAGEN",
+                  "SNABB"
+                ]
+              },
+              {
+                "id": 20,
+                "first_name": "Kyle",
+                "last_name": "Kjær",
+                "position": "FW",
+                "age": 27,
+                "number": 62,
+                "skill_open": 5,
+                "traits": [
+                  "SKADEBENAGEN"
+                ]
+              },
+              {
+                "id": 21,
+                "first_name": "Elijah",
+                "last_name": "Pirlo",
+                "position": "FW",
+                "age": 31,
+                "number": 7,
+                "skill_open": 2,
+                "traits": []
+              }
+            ]
+          },
+          {
+            "name": "Göta BK",
+            "cash_sek": 0,
+            "players": [
+              {
+                "id": 1,
+                "first_name": "Kenan",
+                "last_name": "Kulusevski",
+                "position": "GK",
+                "age": 28,
+                "number": 66,
+                "skill_open": 7,
+                "traits": [
+                  "TRANINGSVILLIG"
+                ]
+              },
+              {
+                "id": 2,
+                "first_name": "Harald",
+                "last_name": "Hansson",
+                "position": "GK",
+                "age": 27,
+                "number": 21,
+                "skill_open": 6,
+                "traits": []
+              },
+              {
+                "id": 3,
+                "first_name": "Leon",
+                "last_name": "Gomes",
+                "position": "DF",
+                "age": 18,
+                "number": 34,
+                "skill_open": 2,
+                "traits": [
+                  "UTHALLIG",
+                  "SNABB"
+                ]
+              },
+              {
+                "id": 4,
+                "first_name": "Valentin",
+                "last_name": "Figo",
+                "position": "DF",
+                "age": 23,
+                "number": 67,
+                "skill_open": 9,
+                "traits": [
+                  "TRANINGSVILLIG"
+                ]
+              },
+              {
+                "id": 5,
+                "first_name": "Milton",
+                "last_name": "Koulibaly",
+                "position": "DF",
+                "age": 20,
+                "number": 58,
+                "skill_open": 7,
+                "traits": [
+                  "AGGRESSIV"
+                ]
+              },
+              {
+                "id": 6,
+                "first_name": "Mattias",
+                "last_name": "Ivanovic",
+                "position": "DF",
+                "age": 23,
+                "number": 87,
+                "skill_open": 7,
+                "traits": []
+              },
+              {
+                "id": 7,
+                "first_name": "Jacob",
+                "last_name": "Hiljemark",
+                "position": "DF",
+                "age": 23,
+                "number": 31,
+                "skill_open": 6,
+                "traits": [
+                  "KORTBENAGEN"
+                ]
+              },
+              {
+                "id": 8,
+                "first_name": "Kevin",
+                "last_name": "Dybala",
+                "position": "DF",
+                "age": 26,
+                "number": 12,
+                "skill_open": 7,
+                "traits": []
+              },
+              {
+                "id": 9,
+                "first_name": "Mats",
+                "last_name": "Nedved",
+                "position": "DF",
+                "age": 18,
+                "number": 80,
+                "skill_open": 2,
+                "traits": [
+                  "FRISPARKSSPECIALIST"
+                ]
+              },
+              {
+                "id": 10,
+                "first_name": "Bruno",
+                "last_name": "Östlund",
+                "position": "MF",
+                "age": 26,
+                "number": 24,
+                "skill_open": 2,
+                "traits": [
+                  "INTELLIGENT",
+                  "LEDARE"
+                ]
+              },
+              {
+                "id": 11,
+                "first_name": "Victor",
+                "last_name": "Hart",
+                "position": "MF",
+                "age": 40,
+                "number": 83,
+                "skill_open": 5,
+                "traits": [
+                  "STRAFFSPECIALIST"
+                ]
+              },
+              {
+                "id": 12,
+                "first_name": "Thomas",
+                "last_name": "Kovacic",
+                "position": "MF",
+                "age": 35,
+                "number": 7,
+                "skill_open": 5,
+                "traits": [
+                  "SKADEBENAGEN",
+                  "KORTBENAGEN"
+                ]
+              },
+              {
+                "id": 13,
+                "first_name": "Frida",
+                "last_name": "Giovinco",
+                "position": "MF",
+                "age": 22,
+                "number": 47,
+                "skill_open": 7,
+                "traits": [
+                  "UTHALLIG"
+                ]
+              },
+              {
+                "id": 14,
+                "first_name": "Lars",
+                "last_name": "Salinas",
+                "position": "MF",
+                "age": 30,
+                "number": 89,
+                "skill_open": 5,
+                "traits": [
+                  "SKADEBENAGEN"
+                ]
+              },
+              {
+                "id": 15,
+                "first_name": "Tilda",
+                "last_name": "Seedorf",
+                "position": "MF",
+                "age": 35,
+                "number": 41,
+                "skill_open": 5,
+                "traits": []
+              },
+              {
+                "id": 16,
+                "first_name": "Rafael",
+                "last_name": "Bernardo",
+                "position": "MF",
+                "age": 25,
+                "number": 6,
+                "skill_open": 5,
+                "traits": [
+                  "TRANINGSVILLIG"
+                ]
+              },
+              {
+                "id": 17,
+                "first_name": "Christoffer",
+                "last_name": "Rosén",
+                "position": "FW",
+                "age": 21,
+                "number": 8,
+                "skill_open": 9,
+                "traits": []
+              },
+              {
+                "id": 18,
+                "first_name": "Colin",
+                "last_name": "Stoichkov",
+                "position": "FW",
+                "age": 28,
+                "number": 9,
+                "skill_open": 4,
+                "traits": [
+                  "SKADEBENAGEN"
+                ]
+              },
+              {
+                "id": 19,
+                "first_name": "Georg",
+                "last_name": "Rydström",
+                "position": "FW",
+                "age": 26,
+                "number": 10,
+                "skill_open": 5,
+                "traits": []
+              },
+              {
+                "id": 20,
+                "first_name": "Emir",
+                "last_name": "Nakajima",
+                "position": "FW",
+                "age": 23,
+                "number": 11,
+                "skill_open": 3,
+                "traits": [
+                  "SKADEBENAGEN",
+                  "KORTBENAGEN",
+                  "LEDARE"
+                ]
+              },
+              {
+                "id": 21,
+                "first_name": "Tove",
+                "last_name": "Tamás",
+                "position": "FW",
+                "age": 27,
+                "number": 2,
+                "skill_open": 5,
+                "traits": []
+              }
+            ]
+          },
+          {
+            "name": "Skogås United",
+            "cash_sek": 0,
+            "players": [
+              {
+                "id": 1,
+                "first_name": "Albert",
+                "last_name": "Koeman",
+                "position": "GK",
+                "age": 16,
+                "number": 85,
+                "skill_open": 4,
+                "traits": [
+                  "KORTBENAGEN",
+                  "TRANINGSVILLIG"
+                ]
+              },
+              {
+                "id": 2,
+                "first_name": "Klara",
+                "last_name": "Nilsson",
+                "position": "GK",
+                "age": 22,
+                "number": 26,
+                "skill_open": 4,
+                "traits": [
+                  "FRISPARKSSPECIALIST"
+                ]
+              },
+              {
+                "id": 3,
+                "first_name": "Colin",
+                "last_name": "Ekdal",
+                "position": "DF",
+                "age": 21,
+                "number": 9,
+                "skill_open": 6,
+                "traits": [
+                  "SKADEBENAGEN",
+                  "KORTBENAGEN",
+                  "TRANINGSVILLIG"
+                ]
+              },
+              {
+                "id": 4,
+                "first_name": "Felix",
+                "last_name": "Eriksen",
+                "position": "DF",
+                "age": 18,
+                "number": 13,
+                "skill_open": 4,
+                "traits": [
+                  "STRAFFSPECIALIST"
+                ]
+              },
+              {
+                "id": 5,
+                "first_name": "Adam",
+                "last_name": "Brehme",
+                "position": "DF",
+                "age": 23,
+                "number": 78,
+                "skill_open": 6,
+                "traits": []
+              },
+              {
+                "id": 6,
+                "first_name": "Johan",
+                "last_name": "Salinas",
+                "position": "DF",
+                "age": 20,
+                "number": 83,
+                "skill_open": 3,
+                "traits": []
+              },
+              {
+                "id": 7,
+                "first_name": "Julius",
+                "last_name": "Sterling",
+                "position": "DF",
+                "age": 29,
+                "number": 90,
+                "skill_open": 5,
+                "traits": [
+                  "AGGRESSIV"
+                ]
+              },
+              {
+                "id": 8,
+                "first_name": "Aksel",
+                "last_name": "Kroos",
+                "position": "DF",
+                "age": 22,
+                "number": 88,
+                "skill_open": 5,
+                "traits": [
+                  "STRAFFSPECIALIST",
+                  "UTHALLIG"
+                ]
+              },
+              {
+                "id": 9,
+                "first_name": "Adam",
+                "last_name": "Kovacic",
+                "position": "DF",
+                "age": 25,
+                "number": 69,
+                "skill_open": 7,
+                "traits": [
+                  "UTHALLIG"
+                ]
+              },
+              {
+                "id": 10,
+                "first_name": "Anders",
+                "last_name": "Savicevic",
+                "position": "MF",
+                "age": 25,
+                "number": 54,
+                "skill_open": 1,
+                "traits": [
+                  "STRAFFSPECIALIST",
+                  "TRANINGSVILLIG",
+                  "FRISPARKSSPECIALIST"
+                ]
+              },
+              {
+                "id": 11,
+                "first_name": "Karim",
+                "last_name": "Hysén",
+                "position": "MF",
+                "age": 18,
+                "number": 40,
+                "skill_open": 5,
+                "traits": []
+              },
+              {
+                "id": 12,
+                "first_name": "Pontus",
+                "last_name": "Morata",
+                "position": "MF",
+                "age": 25,
+                "number": 35,
+                "skill_open": 3,
+                "traits": [
+                  "TRANINGSVILLIG"
+                ]
+              },
+              {
+                "id": 13,
+                "first_name": "Jens",
+                "last_name": "Casillas",
+                "position": "MF",
+                "age": 25,
+                "number": 37,
+                "skill_open": 6,
+                "traits": []
+              },
+              {
+                "id": 14,
+                "first_name": "Annika",
+                "last_name": "Wernbloom",
+                "position": "MF",
+                "age": 27,
+                "number": 33,
+                "skill_open": 2,
+                "traits": [
+                  "SKADEBENAGEN"
+                ]
+              },
+              {
+                "id": 15,
+                "first_name": "Scott",
+                "last_name": "Silva",
+                "position": "MF",
+                "age": 24,
+                "number": 12,
+                "skill_open": 5,
+                "traits": []
+              },
+              {
+                "id": 16,
+                "first_name": "Kenan",
+                "last_name": "Varela",
+                "position": "MF",
+                "age": 28,
+                "number": 7,
+                "skill_open": 4,
+                "traits": [
+                  "UTHALLIG"
+                ]
+              },
+              {
+                "id": 17,
+                "first_name": "Robin",
+                "last_name": "Hansson",
+                "position": "FW",
+                "age": 18,
+                "number": 8,
+                "skill_open": 5,
+                "traits": [
+                  "SKADEBENAGEN"
+                ]
+              },
+              {
+                "id": 18,
+                "first_name": "Oleg",
+                "last_name": "Gago",
+                "position": "FW",
+                "age": 24,
+                "number": 71,
+                "skill_open": 3,
+                "traits": [
+                  "SNABB"
+                ]
+              },
+              {
+                "id": 19,
+                "first_name": "Emelie",
+                "last_name": "Pogba",
+                "position": "FW",
+                "age": 27,
+                "number": 10,
+                "skill_open": 5,
+                "traits": [
+                  "UTHALLIG",
+                  "KORTBENAGEN"
+                ]
+              },
+              {
+                "id": 20,
+                "first_name": "Eric",
+                "last_name": "Paredes",
+                "position": "FW",
+                "age": 27,
+                "number": 11,
+                "skill_open": 3,
+                "traits": [
+                  "TRANINGSVILLIG"
+                ]
+              },
+              {
+                "id": 21,
+                "first_name": "Örjan",
+                "last_name": "Jansson",
+                "position": "FW",
+                "age": 18,
+                "number": 17,
+                "skill_open": 4,
+                "traits": []
+              }
+            ]
+          },
+          {
+            "name": "Södermalm City",
+            "cash_sek": 0,
+            "players": [
+              {
+                "id": 1,
+                "first_name": "Samuel",
+                "last_name": "Balotelli",
+                "position": "GK",
+                "age": 24,
+                "number": 37,
+                "skill_open": 5,
+                "traits": [
+                  "STRAFFSPECIALIST",
+                  "INTELLIGENT"
+                ]
+              },
+              {
+                "id": 2,
+                "first_name": "Edgar",
+                "last_name": "Nakata",
+                "position": "GK",
+                "age": 20,
+                "number": 56,
+                "skill_open": 7,
+                "traits": [
+                  "SNABB",
+                  "FRISPARKSSPECIALIST"
+                ]
+              },
+              {
+                "id": 3,
+                "first_name": "Rafael",
+                "last_name": "Taylor",
+                "position": "DF",
+                "age": 24,
+                "number": 74,
+                "skill_open": 4,
+                "traits": [
+                  "FRISPARKSSPECIALIST"
+                ]
+              },
+              {
+                "id": 4,
+                "first_name": "Emilio",
+                "last_name": "Baros",
+                "position": "DF",
+                "age": 20,
+                "number": 82,
+                "skill_open": 7,
+                "traits": []
+              },
+              {
+                "id": 5,
+                "first_name": "Arthur",
+                "last_name": "Viduka",
+                "position": "DF",
+                "age": 19,
+                "number": 18,
+                "skill_open": 6,
+                "traits": [
+                  "STRAFFSPECIALIST"
+                ]
+              },
+              {
+                "id": 6,
+                "first_name": "Pontus",
+                "last_name": "Capdevila",
+                "position": "DF",
+                "age": 24,
+                "number": 22,
+                "skill_open": 9,
+                "traits": []
+              },
+              {
+                "id": 7,
+                "first_name": "Christian",
+                "last_name": "Sundberg",
+                "position": "DF",
+                "age": 20,
+                "number": 9,
+                "skill_open": 5,
+                "traits": []
+              },
+              {
+                "id": 8,
+                "first_name": "Ronald",
+                "last_name": "Queiroz",
+                "position": "DF",
+                "age": 27,
+                "number": 89,
+                "skill_open": 2,
+                "traits": []
+              },
+              {
+                "id": 9,
+                "first_name": "Magnus",
+                "last_name": "Johansson",
+                "position": "DF",
+                "age": 26,
+                "number": 84,
+                "skill_open": 7,
+                "traits": []
+              },
+              {
+                "id": 10,
+                "first_name": "Tomas",
+                "last_name": "Johansson",
+                "position": "MF",
+                "age": 26,
+                "number": 97,
+                "skill_open": 5,
+                "traits": [
+                  "FRISPARKSSPECIALIST",
+                  "STRAFFSPECIALIST"
+                ]
+              },
+              {
+                "id": 11,
+                "first_name": "Anders",
+                "last_name": "Mahrez",
+                "position": "MF",
+                "age": 19,
+                "number": 11,
+                "skill_open": 4,
+                "traits": []
+              },
+              {
+                "id": 12,
+                "first_name": "Ryan",
+                "last_name": "Van Dijk",
+                "position": "MF",
+                "age": 23,
+                "number": 59,
+                "skill_open": 5,
+                "traits": [
+                  "UTHALLIG",
+                  "FRISPARKSSPECIALIST"
+                ]
+              },
+              {
+                "id": 13,
+                "first_name": "Nuno",
+                "last_name": "Runström",
+                "position": "MF",
+                "age": 31,
+                "number": 33,
+                "skill_open": 4,
+                "traits": [
+                  "KORTBENAGEN",
+                  "OJAMN",
+                  "INTELLIGENT"
+                ]
+              },
+              {
+                "id": 14,
+                "first_name": "Tilda",
+                "last_name": "Wilhelmsson",
+                "position": "MF",
+                "age": 33,
+                "number": 79,
+                "skill_open": 4,
+                "traits": []
+              },
+              {
+                "id": 15,
+                "first_name": "Edgar",
+                "last_name": "Blomqvist",
+                "position": "MF",
+                "age": 31,
+                "number": 19,
+                "skill_open": 5,
+                "traits": []
+              },
+              {
+                "id": 16,
+                "first_name": "Youssef",
+                "last_name": "Hansson",
+                "position": "MF",
+                "age": 28,
+                "number": 20,
+                "skill_open": 7,
+                "traits": [
+                  "OJAMN"
+                ]
+              },
+              {
+                "id": 17,
+                "first_name": "Yasin",
+                "last_name": "Perisic",
+                "position": "FW",
+                "age": 19,
+                "number": 72,
+                "skill_open": 6,
+                "traits": [
+                  "AGGRESSIV"
+                ]
+              },
+              {
+                "id": 18,
+                "first_name": "Göran",
+                "last_name": "Herrera",
+                "position": "FW",
+                "age": 18,
+                "number": 7,
+                "skill_open": 5,
+                "traits": []
+              },
+              {
+                "id": 19,
+                "first_name": "Karim",
+                "last_name": "Svensson",
+                "position": "FW",
+                "age": 22,
+                "number": 8,
+                "skill_open": 5,
+                "traits": []
+              },
+              {
+                "id": 20,
+                "first_name": "Juan",
+                "last_name": "Jensen",
+                "position": "FW",
+                "age": 20,
+                "number": 10,
+                "skill_open": 6,
+                "traits": []
+              },
+              {
+                "id": 21,
+                "first_name": "Malik",
+                "last_name": "Maradona",
+                "position": "FW",
+                "age": 24,
+                "number": 43,
+                "skill_open": 4,
+                "traits": []
+              }
+            ]
+          },
+          {
+            "name": "Västerås FC",
+            "cash_sek": 0,
+            "players": [
+              {
+                "id": 1,
+                "first_name": "Gary",
+                "last_name": "Sjölund",
+                "position": "GK",
+                "age": 26,
+                "number": 65,
+                "skill_open": 5,
+                "traits": [
+                  "OJAMN"
+                ]
+              },
+              {
+                "id": 2,
+                "first_name": "Alvin",
+                "last_name": "Morata",
+                "position": "GK",
+                "age": 25,
+                "number": 70,
+                "skill_open": 6,
+                "traits": [
+                  "LEDARE",
+                  "INTELLIGENT",
+                  "OJAMN"
+                ]
+              },
+              {
+                "id": 3,
+                "first_name": "Peter",
+                "last_name": "Alaba",
+                "position": "DF",
+                "age": 23,
+                "number": 50,
+                "skill_open": 5,
+                "traits": []
+              },
+              {
+                "id": 4,
+                "first_name": "Elsa",
+                "last_name": "Meunier",
+                "position": "DF",
+                "age": 19,
+                "number": 44,
+                "skill_open": 4,
+                "traits": []
+              },
+              {
+                "id": 5,
+                "first_name": "Kurt",
+                "last_name": "Torres",
+                "position": "DF",
+                "age": 40,
+                "number": 64,
+                "skill_open": 6,
+                "traits": []
+              },
+              {
+                "id": 6,
+                "first_name": "Ian",
+                "last_name": "Tello",
+                "position": "DF",
+                "age": 21,
+                "number": 20,
+                "skill_open": 2,
+                "traits": [
+                  "KORTBENAGEN",
+                  "FRISPARKSSPECIALIST"
+                ]
+              },
+              {
+                "id": 7,
+                "first_name": "Andreas",
+                "last_name": "Tamás",
+                "position": "DF",
+                "age": 27,
+                "number": 5,
+                "skill_open": 6,
+                "traits": [
+                  "FRISPARKSSPECIALIST"
+                ]
+              },
+              {
+                "id": 8,
+                "first_name": "Mikael",
+                "last_name": "Guardiola",
+                "position": "DF",
+                "age": 28,
+                "number": 94,
+                "skill_open": 7,
+                "traits": [
+                  "INTELLIGENT"
+                ]
+              },
+              {
+                "id": 9,
+                "first_name": "Chris",
+                "last_name": "Lampard",
+                "position": "DF",
+                "age": 28,
+                "number": 40,
+                "skill_open": 6,
+                "traits": [
+                  "FRISPARKSSPECIALIST"
+                ]
+              },
+              {
+                "id": 10,
+                "first_name": "Greta",
+                "last_name": "Pellegrini",
+                "position": "MF",
+                "age": 26,
+                "number": 12,
+                "skill_open": 6,
+                "traits": [
+                  "LEDARE"
+                ]
+              },
+              {
+                "id": 11,
+                "first_name": "Annika",
+                "last_name": "Thiago",
+                "position": "MF",
+                "age": 24,
+                "number": 25,
+                "skill_open": 4,
+                "traits": [
+                  "TRANINGSVILLIG"
+                ]
+              },
+              {
+                "id": 12,
+                "first_name": "Gerard",
+                "last_name": "Zlatanovic",
+                "position": "MF",
+                "age": 32,
+                "number": 30,
+                "skill_open": 3,
+                "traits": []
+              },
+              {
+                "id": 13,
+                "first_name": "Tony",
+                "last_name": "Hamsik",
+                "position": "MF",
+                "age": 39,
+                "number": 46,
+                "skill_open": 4,
+                "traits": []
+              },
+              {
+                "id": 14,
+                "first_name": "Mathias",
+                "last_name": "Walker",
+                "position": "MF",
+                "age": 21,
+                "number": 95,
+                "skill_open": 5,
+                "traits": []
+              },
+              {
+                "id": 15,
+                "first_name": "Rune",
+                "last_name": "Suarez",
+                "position": "MF",
+                "age": 22,
+                "number": 96,
+                "skill_open": 4,
+                "traits": [
+                  "SNABB"
+                ]
+              },
+              {
+                "id": 16,
+                "first_name": "Oleg",
+                "last_name": "Kompany",
+                "position": "MF",
+                "age": 26,
+                "number": 10,
+                "skill_open": 5,
+                "traits": [
+                  "LEDARE",
+                  "TRANINGSVILLIG"
+                ]
+              },
+              {
+                "id": 17,
+                "first_name": "Ethan",
+                "last_name": "Khedira",
+                "position": "FW",
+                "age": 26,
+                "number": 7,
+                "skill_open": 4,
+                "traits": [
+                  "INTELLIGENT"
+                ]
+              },
+              {
+                "id": 18,
+                "first_name": "Leo",
+                "last_name": "Martinez",
+                "position": "FW",
+                "age": 23,
+                "number": 8,
+                "skill_open": 5,
+                "traits": [
+                  "UTHALLIG"
+                ]
+              },
+              {
+                "id": 19,
+                "first_name": "Danilo",
+                "last_name": "Simeone",
+                "position": "FW",
+                "age": 30,
+                "number": 9,
+                "skill_open": 5,
+                "traits": [
+                  "SKADEBENAGEN"
+                ]
+              },
+              {
+                "id": 20,
+                "first_name": "Oleg",
+                "last_name": "Hamsik",
+                "position": "FW",
+                "age": 27,
+                "number": 66,
+                "skill_open": 8,
+                "traits": []
+              },
+              {
+                "id": 21,
+                "first_name": "Valentin",
+                "last_name": "Wernbloom",
+                "position": "FW",
+                "age": 19,
+                "number": 11,
+                "skill_open": 3,
+                "traits": [
+                  "OJAMN"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Uppsala Rangers",
+            "cash_sek": 0,
+            "players": [
+              {
+                "id": 1,
+                "first_name": "Thomas",
+                "last_name": "Camoranesi",
+                "position": "GK",
+                "age": 39,
+                "number": 82,
+                "skill_open": 7,
+                "traits": [
+                  "INTELLIGENT"
+                ]
+              },
+              {
+                "id": 2,
+                "first_name": "Jack",
+                "last_name": "Lindelöf",
+                "position": "GK",
+                "age": 26,
+                "number": 67,
+                "skill_open": 6,
+                "traits": [
+                  "TRANINGSVILLIG",
+                  "STRAFFSPECIALIST"
+                ]
+              },
+              {
+                "id": 3,
+                "first_name": "Samuel",
+                "last_name": "Kroos",
+                "position": "DF",
+                "age": 27,
+                "number": 14,
+                "skill_open": 4,
+                "traits": [
+                  "TRANINGSVILLIG"
+                ]
+              },
+              {
+                "id": 4,
+                "first_name": "Wilma",
+                "last_name": "Giggs",
+                "position": "DF",
+                "age": 28,
+                "number": 8,
+                "skill_open": 6,
+                "traits": []
+              },
+              {
+                "id": 5,
+                "first_name": "Arthur",
+                "last_name": "Cocu",
+                "position": "DF",
+                "age": 22,
+                "number": 33,
+                "skill_open": 4,
+                "traits": [
+                  "SKADEBENAGEN"
+                ]
+              },
+              {
+                "id": 6,
+                "first_name": "Tove",
+                "last_name": "Cahill",
+                "position": "DF",
+                "age": 19,
+                "number": 51,
+                "skill_open": 4,
+                "traits": [
+                  "TRANINGSVILLIG"
+                ]
+              },
+              {
+                "id": 7,
+                "first_name": "Amir",
+                "last_name": "Östlund",
+                "position": "DF",
+                "age": 30,
+                "number": 12,
+                "skill_open": 3,
+                "traits": [
+                  "SKADEBENAGEN",
+                  "STRAFFSPECIALIST"
+                ]
+              },
+              {
+                "id": 8,
+                "first_name": "Robert",
+                "last_name": "Xabi",
+                "position": "DF",
+                "age": 18,
+                "number": 71,
+                "skill_open": 6,
+                "traits": []
+              },
+              {
+                "id": 9,
+                "first_name": "Oskar",
+                "last_name": "Abraham",
+                "position": "DF",
+                "age": 27,
+                "number": 69,
+                "skill_open": 10,
+                "traits": [
+                  "KORTBENAGEN",
+                  "STRAFFSPECIALIST"
+                ]
+              },
+              {
+                "id": 10,
+                "first_name": "Manuel",
+                "last_name": "Lundqvist",
+                "position": "MF",
+                "age": 26,
+                "number": 42,
+                "skill_open": 6,
+                "traits": [
+                  "SKADEBENAGEN",
+                  "AGGRESSIV"
+                ]
+              },
+              {
+                "id": 11,
+                "first_name": "Colin",
+                "last_name": "Hysén",
+                "position": "MF",
+                "age": 23,
+                "number": 65,
+                "skill_open": 3,
+                "traits": [
+                  "SNABB"
+                ]
+              },
+              {
+                "id": 12,
+                "first_name": "Ali",
+                "last_name": "Dida",
+                "position": "MF",
+                "age": 16,
+                "number": 80,
+                "skill_open": 3,
+                "traits": []
+              },
+              {
+                "id": 13,
+                "first_name": "Clara",
+                "last_name": "Nakajima",
+                "position": "MF",
+                "age": 37,
+                "number": 28,
+                "skill_open": 5,
+                "traits": [
+                  "SKADEBENAGEN"
+                ]
+              },
+              {
+                "id": 14,
+                "first_name": "Albert",
+                "last_name": "Bendtner",
+                "position": "MF",
+                "age": 26,
+                "number": 77,
+                "skill_open": 6,
+                "traits": []
+              },
+              {
+                "id": 15,
+                "first_name": "Wilhelm",
+                "last_name": "Dida",
+                "position": "MF",
+                "age": 26,
+                "number": 23,
+                "skill_open": 7,
+                "traits": []
+              },
+              {
+                "id": 16,
+                "first_name": "Tilda",
+                "last_name": "Adebayor",
+                "position": "MF",
+                "age": 16,
+                "number": 31,
+                "skill_open": 4,
+                "traits": []
+              },
+              {
+                "id": 17,
+                "first_name": "Louis",
+                "last_name": "Tello",
+                "position": "FW",
+                "age": 21,
+                "number": 7,
+                "skill_open": 4,
+                "traits": [
+                  "SKADEBENAGEN"
+                ]
+              },
+              {
+                "id": 18,
+                "first_name": "Jens",
+                "last_name": "Lahm",
+                "position": "FW",
+                "age": 38,
+                "number": 10,
+                "skill_open": 5,
+                "traits": []
+              },
+              {
+                "id": 19,
+                "first_name": "Romeo",
+                "last_name": "Isco",
+                "position": "FW",
+                "age": 27,
+                "number": 9,
+                "skill_open": 3,
+                "traits": [
+                  "TRANINGSVILLIG"
+                ]
+              },
+              {
+                "id": 20,
+                "first_name": "Charlie",
+                "last_name": "Vecino",
+                "position": "FW",
+                "age": 26,
+                "number": 50,
+                "skill_open": 5,
+                "traits": [
+                  "SKADEBENAGEN"
+                ]
+              },
+              {
+                "id": 21,
+                "first_name": "Cristian",
+                "last_name": "Insigne",
+                "position": "FW",
+                "age": 31,
+                "number": 11,
+                "skill_open": 2,
+                "traits": [
+                  "SNABB",
+                  "OJAMN"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "fixtures": {
+    "Division 1": [
+      {
+        "home": "Björkhagens IF",
+        "away": "Uppsala Rangers",
+        "round": 1
+      },
+      {
+        "home": "Solna SK",
+        "away": "Västerås FC",
+        "round": 1
+      },
+      {
+        "home": "Hammarby Heights",
+        "away": "Södermalm City",
+        "round": 1
+      },
+      {
+        "home": "Göta BK",
+        "away": "Skogås United",
+        "round": 1
+      },
+      {
+        "home": "Björkhagens IF",
+        "away": "Västerås FC",
+        "round": 2
+      },
+      {
+        "home": "Uppsala Rangers",
+        "away": "Södermalm City",
+        "round": 2
+      },
+      {
+        "home": "Solna SK",
+        "away": "Skogås United",
+        "round": 2
+      },
+      {
+        "home": "Hammarby Heights",
+        "away": "Göta BK",
+        "round": 2
+      },
+      {
+        "home": "Björkhagens IF",
+        "away": "Södermalm City",
+        "round": 3
+      },
+      {
+        "home": "Västerås FC",
+        "away": "Skogås United",
+        "round": 3
+      },
+      {
+        "home": "Uppsala Rangers",
+        "away": "Göta BK",
+        "round": 3
+      },
+      {
+        "home": "Solna SK",
+        "away": "Hammarby Heights",
+        "round": 3
+      },
+      {
+        "home": "Björkhagens IF",
+        "away": "Skogås United",
+        "round": 4
+      },
+      {
+        "home": "Södermalm City",
+        "away": "Göta BK",
+        "round": 4
+      },
+      {
+        "home": "Västerås FC",
+        "away": "Hammarby Heights",
+        "round": 4
+      },
+      {
+        "home": "Uppsala Rangers",
+        "away": "Solna SK",
+        "round": 4
+      },
+      {
+        "home": "Björkhagens IF",
+        "away": "Göta BK",
+        "round": 5
+      },
+      {
+        "home": "Skogås United",
+        "away": "Hammarby Heights",
+        "round": 5
+      },
+      {
+        "home": "Södermalm City",
+        "away": "Solna SK",
+        "round": 5
+      },
+      {
+        "home": "Västerås FC",
+        "away": "Uppsala Rangers",
+        "round": 5
+      },
+      {
+        "home": "Björkhagens IF",
+        "away": "Hammarby Heights",
+        "round": 6
+      },
+      {
+        "home": "Göta BK",
+        "away": "Solna SK",
+        "round": 6
+      },
+      {
+        "home": "Skogås United",
+        "away": "Uppsala Rangers",
+        "round": 6
+      },
+      {
+        "home": "Södermalm City",
+        "away": "Västerås FC",
+        "round": 6
+      },
+      {
+        "home": "Björkhagens IF",
+        "away": "Solna SK",
+        "round": 7
+      },
+      {
+        "home": "Hammarby Heights",
+        "away": "Uppsala Rangers",
+        "round": 7
+      },
+      {
+        "home": "Göta BK",
+        "away": "Västerås FC",
+        "round": 7
+      },
+      {
+        "home": "Skogås United",
+        "away": "Södermalm City",
+        "round": 7
+      },
+      {
+        "home": "Uppsala Rangers",
+        "away": "Björkhagens IF",
+        "round": 8
+      },
+      {
+        "home": "Västerås FC",
+        "away": "Solna SK",
+        "round": 8
+      },
+      {
+        "home": "Södermalm City",
+        "away": "Hammarby Heights",
+        "round": 8
+      },
+      {
+        "home": "Skogås United",
+        "away": "Göta BK",
+        "round": 8
+      },
+      {
+        "home": "Västerås FC",
+        "away": "Björkhagens IF",
+        "round": 9
+      },
+      {
+        "home": "Södermalm City",
+        "away": "Uppsala Rangers",
+        "round": 9
+      },
+      {
+        "home": "Skogås United",
+        "away": "Solna SK",
+        "round": 9
+      },
+      {
+        "home": "Göta BK",
+        "away": "Hammarby Heights",
+        "round": 9
+      },
+      {
+        "home": "Södermalm City",
+        "away": "Björkhagens IF",
+        "round": 10
+      },
+      {
+        "home": "Skogås United",
+        "away": "Västerås FC",
+        "round": 10
+      },
+      {
+        "home": "Göta BK",
+        "away": "Uppsala Rangers",
+        "round": 10
+      },
+      {
+        "home": "Hammarby Heights",
+        "away": "Solna SK",
+        "round": 10
+      },
+      {
+        "home": "Skogås United",
+        "away": "Björkhagens IF",
+        "round": 11
+      },
+      {
+        "home": "Göta BK",
+        "away": "Södermalm City",
+        "round": 11
+      },
+      {
+        "home": "Hammarby Heights",
+        "away": "Västerås FC",
+        "round": 11
+      },
+      {
+        "home": "Solna SK",
+        "away": "Uppsala Rangers",
+        "round": 11
+      },
+      {
+        "home": "Göta BK",
+        "away": "Björkhagens IF",
+        "round": 12
+      },
+      {
+        "home": "Hammarby Heights",
+        "away": "Skogås United",
+        "round": 12
+      },
+      {
+        "home": "Solna SK",
+        "away": "Södermalm City",
+        "round": 12
+      },
+      {
+        "home": "Uppsala Rangers",
+        "away": "Västerås FC",
+        "round": 12
+      },
+      {
+        "home": "Hammarby Heights",
+        "away": "Björkhagens IF",
+        "round": 13
+      },
+      {
+        "home": "Solna SK",
+        "away": "Göta BK",
+        "round": 13
+      },
+      {
+        "home": "Uppsala Rangers",
+        "away": "Skogås United",
+        "round": 13
+      },
+      {
+        "home": "Västerås FC",
+        "away": "Södermalm City",
+        "round": 13
+      },
+      {
+        "home": "Solna SK",
+        "away": "Björkhagens IF",
+        "round": 14
+      },
+      {
+        "home": "Uppsala Rangers",
+        "away": "Hammarby Heights",
+        "round": 14
+      },
+      {
+        "home": "Västerås FC",
+        "away": "Göta BK",
+        "round": 14
+      },
+      {
+        "home": "Södermalm City",
+        "away": "Skogås United",
+        "round": 14
+      }
+    ]
+  },
+  "current_round": 3,
+  "history": {}
+}

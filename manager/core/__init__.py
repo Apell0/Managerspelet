@@ -1,10 +1,12 @@
 # Gör det lättare att importera i resten av projektet
 from .club import Club
 from .cup import Cup, CupMatch, CupRules, generate_cup_bracket
+from .cup_state import CupState, advance_cup_round, create_cup_state, finish_cup
 from .fixtures import Match, round_robin
 from .generator import generate_club, generate_league, to_preview_dict
 from .history import HistoryStore, SeasonRecord
 from .league import Division, League, LeagueRules
+from .livefeed import build_timeline, format_feed, format_match_report
 from .match import (  # <-- stubbarna
     EventType,
     MatchResult,
@@ -17,7 +19,18 @@ from .player import Player, Position, Trait
 from .ratings import compute_ratings_for_match, player_match_rating
 from .schedule import build_league_schedule
 from .season import SeasonConfig, play_cup, play_league, play_round
+from .serialize import (
+    club_from_dict,
+    club_to_dict,
+    fixtures_from_dict,
+    fixtures_to_dict,
+    league_from_dict,
+    league_to_dict,
+    player_from_dict,
+    player_to_dict,
+)
 from .standings import TableRow, apply_result_to_table, best_xi_442, sort_table
+from .state import GameState
 from .tactics import (
     TACTICS,
     Aggression,
@@ -71,4 +84,20 @@ __all__ = [
     "play_cup",
     "player_match_rating",
     "compute_ratings_for_match",
+    "player_to_dict",
+    "player_from_dict",
+    "club_to_dict",
+    "club_from_dict",
+    "league_to_dict",
+    "league_from_dict",
+    "fixtures_to_dict",
+    "fixtures_from_dict",
+    "GameState",
+    "CupState",
+    "create_cup_state",
+    "advance_cup_round",
+    "finish_cup",
+    "build_timeline",
+    "format_feed",
+    "format_match_report",
 ]
