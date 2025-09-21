@@ -14,6 +14,14 @@ from .match import (  # <-- stubbarna
 )
 from .player import Player, Position, Trait
 from .schedule import build_league_schedule
+from .tactics import (
+    TACTICS,
+    Aggression,
+    TacticName,
+    TacticProfile,
+    aggression_modifiers,
+    unit_scores,
+)
 
 __all__ = [
     "Player",
@@ -41,4 +49,10 @@ __all__ = [
     "Referee",
     "TeamStats",
     "simulate_match",
+    "Aggression",
+    "TACTICS",
+    "TacticName",
+    "TacticProfile",
+    "unit_scores",
+    "aggression_modifiers",
 ]
