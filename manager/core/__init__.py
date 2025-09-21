@@ -4,7 +4,14 @@ from .cup import Cup, CupMatch, CupRules, generate_cup_bracket
 from .fixtures import Match, round_robin
 from .generator import generate_club, generate_league, to_preview_dict
 from .league import Division, League, LeagueRules
-from .match import MatchResult, TeamStats  # <-- stubbarna
+from .match import (  # <-- stubbarna
+    EventType,
+    MatchResult,
+    PlayerEvent,
+    Referee,
+    TeamStats,
+    simulate_match,
+)
 from .player import Player, Position, Trait
 from .schedule import build_league_schedule
 
@@ -28,4 +35,10 @@ __all__ = [
     "generate_cup_bracket",
     "MatchResult",
     "TeamStats",
+    "EventType",
+    "MatchResult",
+    "PlayerEvent",
+    "Referee",
+    "TeamStats",
+    "simulate_match",
 ]
