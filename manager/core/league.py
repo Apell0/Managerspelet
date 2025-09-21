@@ -11,6 +11,7 @@ class LeagueRules:
     format: Literal["pyramid", "rak"] = "rak"
     teams_per_div: int = 16
     levels: int = 1
+    double_round: bool = True
 
 
 @dataclass(slots=True)
