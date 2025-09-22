@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from typing import Dict, List, Literal
+from dataclasses import dataclass field
+from typing import Literal
 
 from .fixtures import Match, round_robin
 from .league import Division, League
@@ -59,8 +59,9 @@ class LeagueRules:
     format: Literal["pyramid", "rak"] = "rak"
     teams_per_div: int = 16
     levels: int = 1
-    promote: int = 0  # antal som flyttas upp från varje division
-    relegate: int = 0  # antal som flyttas ner från varje division
+    double_round: bool = True  # om du har detta fält i ditt projekt
+    promote: int = 0  # <-- NYTT
+    relegate: int = 0
 
 
 # ---------------------------

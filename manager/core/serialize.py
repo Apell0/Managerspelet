@@ -148,13 +148,14 @@ def club_from_dict(d: Dict[str, Any]) -> Club:
 # -------------------------------------------------------------------
 
 
-def league_rules_to_dict(rules: LeagueRules) -> dict:
+def league_rules_to_dict(r: LeagueRules) -> dict:
     return {
-        "format": rules.format,
-        "teams_per_div": rules.teams_per_div,
-        "levels": rules.levels,
-        "promote": rules.promote,
-        "relegate": rules.relegate,
+        "format": r.format,
+        "teams_per_div": r.teams_per_div,
+        "levels": r.levels,
+        "double_round": getattr(r, "double_round", True),
+        "promote": r.promote,
+        "relegate": r.relegate,
     }
 
 
@@ -163,6 +164,7 @@ def league_rules_from_dict(d: dict) -> LeagueRules:
         format=d.get("format", "rak"),
         teams_per_div=d.get("teams_per_div", 16),
         levels=d.get("levels", 1),
+        double_round=d.get("double_round", True),
         promote=d.get("promote", 0),
         relegate=d.get("relegate", 0),
     )
