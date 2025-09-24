@@ -4,6 +4,10 @@ Den här filen beskriver hur Loveables AI ska integrera mot spelets Python-API o
 vilken prompt/dokumentation du ger modellen. Innehållet täcker **steg 3 och 4** i
 arbetsplanen.
 
+> ℹ️ **Kodbasens läge:** Alla filer och exempel som nämns här finns i
+> `work`-branchen. Säkerställ att Loveable använder den branchen (inte `main`)
+> när prompt-paketet byggs.
+
 ## Steg 3 – Integrationssätt (Desktop/TUI)
 
 Loveable ska generera en **desktop/TUI-klient** (t.ex. med [Textual](https://textual.textualize.io/),
