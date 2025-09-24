@@ -7,6 +7,17 @@ from typing import Dict, List, Tuple
 from .club import Club
 from .fixtures import Match, round_robin  # <-- använd direkt här
 from .player import Player
+from .history import HistoryStore, SeasonRecord
+from .economy import roll_new_junior_offers
+from .serialize import (
+    club_stats_from_dict_map,
+    club_stats_to_dict_map,
+    player_stats_from_dict_map,
+    player_stats_to_dict_map,
+)
+from .stats import ClubCareerStats, PlayerCareerStats
+
+RETIREMENT_AGE = 51  # spelare som fyller 51 lämnar truppen inför nästa säsong
 
 
 @dataclass(slots=True)
@@ -265,6 +276,13 @@ def _build_new_league_schedule(league) -> Dict[str, List[Match]]:
 
 def _final_table_for_div(division, table_snapshot: Dict[str, Dict[str, int]]):
     """Returnera klubbar i 'division' sorterade som slutlig tabell."""
+    rows = _division_standings(division, table_snapshot)
+    return [club for club, *_ in rows]
+
+
+def _division_standings(
+    division, table_snapshot: Dict[str, Dict[str, int]]
+) -> List[tuple]:
     rows = []
     for club in division.clubs:
         r = (table_snapshot or {}).get(
@@ -275,46 +293,119 @@ def _final_table_for_div(division, table_snapshot: Dict[str, Dict[str, int]]):
         ga = int(r.get("ga", 0))
         gd = gf - ga
         rows.append((club, pts, gd, gf))
-    # Sortera: poäng, målskillnad, gjorda mål
-    rows.sort(key=lambda x: (x[1], x[2], x[3]), reverse=True)
-    return [club for club, *_ in rows]
+    rows.sort(key=lambda x: (x[1], x[2], x[3], x[0].name), reverse=True)
+    return rows
+
+
+def _level_rankings(divisions, table_snapshot: Dict[str, Dict[str, int]]):
+    """Sammanställ ranking över alla divisioner på samma nivå (sämst först)."""
+    aggregated: List[tuple] = []
+    for div in sorted(divisions, key=lambda d: d.name):
+        for club, pts, gd, gf in _division_standings(div, table_snapshot):
+            aggregated.append((club, div, pts, gd, gf))
+    aggregated.sort(key=lambda x: (x[2], x[3], x[4], x[0].name))
+    return aggregated
+
+
+def _cup_result_labels(gs) -> Dict[str, str]:
+    """Returnera textetiketter för lagens cupresultat baserat på matchloggen."""
+    log = getattr(gs, "match_log", []) or []
+    cup_matches = [mr for mr in log if getattr(mr, "competition", "") == "cup"]
+    if not cup_matches:
+        return {}
+
+    max_round = max(int(getattr(mr, "round", 0)) for mr in cup_matches)
+    if max_round <= 0:
+        return {}
+
+    stage_names = {}
+    labels = ["Final", "Semifinal", "Kvartsfinal", "Åttondelsfinal"]
+    for offset, label in enumerate(labels):
+        stage = max_round - offset
+        if stage > 0:
+            stage_names[stage] = label
+
+    progress: Dict[str, int] = {}
+    for mr in cup_matches:
+        round_no = int(getattr(mr, "round", 0))
+        if round_no <= 0:
+            continue
+        for name in (getattr(mr, "home", None), getattr(mr, "away", None)):
+            if not name:
+                continue
+            progress[name] = max(progress.get(name, 0), round_no)
+
+    winner = None
+    if getattr(gs, "cup_state", None) and getattr(gs.cup_state, "finished", False):
+        winner = getattr(getattr(gs.cup_state, "winner", None), "name", None)
+    elif cup_matches:
+        # om sparfilen laddades efter cupen avslutats men innan winner hann skrivas
+        finals = [mr for mr in cup_matches if int(getattr(mr, "round", 0)) == max_round]
+        if finals:
+            final = finals[-1]
+            if final.home_goals != final.away_goals:
+                winner = (
+                    final.home
+                    if final.home_goals > final.away_goals
+                    else final.away
+                )
+
+    labels_by_club: Dict[str, str] = {}
+    for club_name, stage in progress.items():
+        if winner and club_name == winner:
+            labels_by_club[club_name] = "Vinnare"
+            continue
+        label = stage_names.get(stage)
+        if not label:
+            label = f"Runda {stage}"
+        labels_by_club[club_name] = label
+    return labels_by_club
 
 
 def _apply_promotion_relegation(league, table_snapshot, rules):
     """Flytta lag mellan intilliggande divisioner enligt rules.promote/relegate."""
-    if rules.promote <= 0 and rules.relegate <= 0:
-        return
-    if len(league.divisions) < 2:
+    if max(rules.promote, rules.relegate) <= 0:
         return
 
-    # Vi går uppifrån och parar varje division med den under
-    for i in range(len(league.divisions) - 1):
-        upper = league.divisions[i]
-        lower = league.divisions[i + 1]
+    divisions_by_level: Dict[int, List] = {}
+    for div in league.divisions:
+        divisions_by_level.setdefault(int(getattr(div, "level", 1)), []).append(div)
 
-        upper_sorted = _final_table_for_div(upper, table_snapshot)
-        lower_sorted = _final_table_for_div(lower, table_snapshot)
+    if len(divisions_by_level) < 2:
+        return
 
-        n_up = min(rules.promote, len(lower_sorted))
-        n_down = min(rules.relegate, len(upper_sorted))
-
-        if n_up == 0 and n_down == 0:
+    max_level = max(divisions_by_level)
+    for level in range(1, max_level):
+        upper_divs = divisions_by_level.get(level) or []
+        lower_divs = divisions_by_level.get(level + 1) or []
+        if not upper_divs or not lower_divs:
             continue
 
-        up_candidates = lower_sorted[:n_up]  # bästa i lägre division
-        down_candidates = (
-            upper_sorted[-n_down:] if n_down > 0 else []
-        )  # sämsta i högre division
+        lower_ranked = list(reversed(_level_rankings(lower_divs, table_snapshot)))
+        upper_ranked = _level_rankings(upper_divs, table_snapshot)
 
-        # Ta bort kandidater från nuvarande listor
-        upper.clubs = [c for c in upper.clubs if c not in down_candidates]
-        lower.clubs = [c for c in lower.clubs if c not in up_candidates]
+        n_up = min(rules.promote, len(lower_ranked))
+        n_down = min(rules.relegate, len(upper_ranked))
+        move = min(n_up, n_down)
+        if move <= 0:
+            continue
 
-        # Lägg till i nya divisioner
-        for c in up_candidates:
-            upper.clubs.append(c)
-        for c in down_candidates:
-            lower.clubs.append(c)
+        up_candidates = lower_ranked[:move]
+        down_candidates = upper_ranked[:move]
+
+        for club, div, *_ in up_candidates:
+            if club in div.clubs:
+                div.clubs.remove(club)
+        for club, div, *_ in down_candidates:
+            if club in div.clubs:
+                div.clubs.remove(club)
+
+        for club, _src_div, *_ in up_candidates:
+            target = min(upper_divs, key=lambda d: (len(d.clubs), d.name))
+            target.clubs.append(club)
+        for club, _src_div, *_ in down_candidates:
+            target = min(lower_divs, key=lambda d: (len(d.clubs), d.name))
+            target.clubs.append(club)
 
 
 def end_season(gs) -> List[PlayerProgress]:
@@ -322,22 +413,25 @@ def end_season(gs) -> List[PlayerProgress]:
     Kör säsongsavslut:
       1) Spelarutveckling baserad på form, speltid, ålder och traits (max ±2 bars).
       2) Tillämpa upp-/nedflyttning mellan divisioner enligt LeagueRules (promote/relegate).
-      3) Bygg nytt ligaschema för nästa säsong.
-      4) Nollställ ligaräknare och tabellsnapshot; töm cupläget.
-      5) Returnera PlayerProgress-lista (används för säsongsrapporten i CLI).
+      3) Uppdatera historik och troféer.
+      4) Arkivera säsongsstatistik, uppdatera karriärtotaler och nollställ säsongsräknare.
+      5) Bygg nytt ligaschema för nästa säsong.
+      6) Återställ ligaräknare/tabellsnapshot och töm cupläget.
+      7) Returnera PlayerProgress-lista (används för säsongsrapporten i CLI).
     Obs: Karriärstatistik (player_stats/club_stats/match_log) lämnas intakt.
     """
+    gs.ensure_containers()
+    season_no = int(getattr(gs, "season", 1))
     results: List[PlayerProgress] = []
-
-    # (Valfritt) om vi senare lagrar kapten per klubb kan den hämtas här.
-    # Nu: None → liten kaptenbonus används inte.
-    captain_by_club: Dict[str, int | None] = {}
+    progress_by_player: Dict[int, PlayerProgress] = {}
+    retirements: List[tuple[Club, Player, int]] = []
 
     # 1) Spelarutveckling
     for div in gs.league.divisions:
         for club in div.clubs:
-            cap = captain_by_club.get(club.name)
-            for p in club.players:
+            cap = getattr(club, "captain_id", None)
+            for p in list(club.players):
+                res: PlayerProgress | None = None
                 try:
                     res = _progress_player(
                         p,
@@ -346,22 +440,165 @@ def end_season(gs) -> List[PlayerProgress]:
                         table_snapshot=gs.table_snapshot,
                         captain_id=cap,
                     )
-                    results.append(res)
                 except Exception:
-                    # Felskydd så en trasig post inte stoppar allt
-                    continue
+                    # Felskydd så en trasig post inte stoppar allt men åldra spelaren ändå
+                    res = None
+
+                if res is not None:
+                    progress = res
+                else:
+                    progress = PlayerProgress(
+                        player_id=p.id,
+                        name=f"{getattr(p, 'first_name', '')} {getattr(p, 'last_name', '')}".strip(),
+                        club=club.name,
+                        age=int(getattr(p, "age", 24)),
+                        minutes=0,
+                        play_ratio=0.0,
+                        form_season_before=float(getattr(p, "form_season", 10.0)),
+                        form_now_before=int(getattr(p, "form_now", 10)),
+                        bars_before=int(getattr(p, "skill_open", 5)),
+                        hidden_before=int(getattr(p, "skill_hidden", 50)),
+                        bars_delta=0,
+                        hidden_after=int(getattr(p, "skill_hidden", 50)),
+                        bars_after=int(getattr(p, "skill_open", 5)),
+                        note="oförändrad",
+                    )
+
+                results.append(progress)
+                progress_by_player[p.id] = progress
+
+                new_age = int(getattr(p, "age", 24)) + 1
+                setattr(p, "age", new_age)
+                if new_age >= RETIREMENT_AGE:
+                    retirements.append((club, p, new_age))
+                    progress = progress_by_player.get(p.id)
+                    if progress is not None:
+                        note = "pensionerar sig"
+                        if progress.note:
+                            note = f"{progress.note}; {note}"
+                        progress.note = note
+
+    # Ta bort pensionerade spelare efter progressionen men före tabellhantering
+    if retirements:
+        retired_ids = {player.id for _club, player, _age in retirements}
+        for club, player, _age in retirements:
+            club.players = [p for p in club.players if getattr(p, "id", None) != player.id]
+            if getattr(club, "preferred_lineup", None):
+                club.preferred_lineup = [
+                    pid for pid in club.preferred_lineup if pid != player.id
+                ]
+            if getattr(club, "bench_order", None):
+                club.bench_order = [pid for pid in club.bench_order if pid != player.id]
+            if getattr(club, "substitution_plan", None):
+                club.substitution_plan = [
+                    rule
+                    for rule in club.substitution_plan
+                    if getattr(rule, "player_in", None) != player.id
+                    and getattr(rule, "player_out", None) != player.id
+                ]
+
+        listings = []
+        for listing in getattr(gs, "transfer_list", []) or []:
+            if listing.player_id and listing.player_id in retired_ids:
+                continue
+            listings.append(listing)
+        gs.transfer_list = listings
 
     # 2) Upp-/nedflyttning (måste ske INNAN nytt schema byggs)
     _apply_promotion_relegation(gs.league, gs.table_snapshot, gs.league.rules)
 
-    # 3) Ny säsong + nytt schema
+    # 3) Historik + troféer
+    history = getattr(gs, "history", None)
+    if history is None or not isinstance(history, HistoryStore):
+        history = HistoryStore()
+        gs.history = history
+
+    cup_labels = _cup_result_labels(gs)
+
+    for div in gs.league.divisions:
+        standings = _division_standings(div, gs.table_snapshot)
+        for position, (club, *_rest) in enumerate(standings, start=1):
+            cup_label = cup_labels.get(club.name)
+            record = SeasonRecord(
+                season=gs.season,
+                league_position=position,
+                cup_result=cup_label,
+            )
+            history.add_record(club.name, record)
+
+            trophies = getattr(club, "trophies", None)
+            if trophies is None:
+                club.trophies = []
+                trophies = club.trophies
+            if position == 1:
+                if int(getattr(div, "level", 1)) == 1:
+                    trophies.append(f"🏆 {gs.league.name} säsong {gs.season}")
+                else:
+                    trophies.append(f"🥇 {div.name} säsong {gs.season}")
+
+    # 4) Statistik – arkivera säsong och uppdatera karriärer
+    player_snapshot_map = player_stats_from_dict_map(
+        player_stats_to_dict_map(getattr(gs, "player_stats", {}) or {})
+    )
+    club_snapshot_map = club_stats_from_dict_map(
+        club_stats_to_dict_map(getattr(gs, "club_stats", {}) or {})
+    )
+
+    if player_snapshot_map:
+        player_history = getattr(gs, "player_stats_history", None)
+        if not isinstance(player_history, dict):
+            player_history = {}
+            gs.player_stats_history = player_history
+        player_history[season_no] = player_snapshot_map
+
+    if club_snapshot_map:
+        club_history_map = getattr(gs, "club_stats_history", None)
+        if not isinstance(club_history_map, dict):
+            club_history_map = {}
+            gs.club_stats_history = club_history_map
+        club_history_map[season_no] = club_snapshot_map
+
+    player_career = getattr(gs, "player_career_stats", None)
+    if not isinstance(player_career, dict):
+        player_career = {}
+        gs.player_career_stats = player_career
+    for pid, stats in player_snapshot_map.items():
+        appearances = int(getattr(stats, "appearances", 0))
+        if appearances <= 0:
+            continue
+        career_obj = player_career.get(pid)
+        if career_obj is None:
+            career_obj = PlayerCareerStats(player_id=stats.player_id, club_name=stats.club_name)
+            player_career[pid] = career_obj
+        else:
+            setattr(career_obj, "club_name", stats.club_name)
+        if hasattr(career_obj, "seasons"):
+            career_obj.seasons += 1
+
+    club_career = getattr(gs, "club_career_stats", None)
+    if not isinstance(club_career, dict):
+        club_career = {}
+        gs.club_career_stats = club_career
+    for club_name, stats in club_snapshot_map.items():
+        career_obj = club_career.get(club_name)
+        if career_obj is None:
+            career_obj = ClubCareerStats(club_name=club_name)
+            club_career[club_name] = career_obj
+        if hasattr(career_obj, "seasons") and int(getattr(stats, "played", 0)) > 0:
+            career_obj.seasons += 1
+
+    gs.player_stats = {}
+    gs.club_stats = {}
+
+    # 5) Ny säsong + nytt schema
     gs.season += 1
     gs.fixtures_by_division = _build_new_league_schedule(gs.league)
+    roll_new_junior_offers(gs)
 
-    # 4) Nollställ inför ny säsong
+    # 6) Nollställ inför ny säsong
     gs.current_round = 1
     gs.table_snapshot = {}
     gs.cup_state = None  # ny cup startas separat nästa säsong
 
-    # 5) Returnera progressionen för rapport
+    # 7) Returnera progressionen för rapport
     return results

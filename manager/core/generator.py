@@ -7,12 +7,16 @@ from pathlib import Path
 from typing import List, Sequence
 
 from .club import Club
+from .economy import calculate_player_value
 from .league import Division, League, LeagueRules
 from .player import Player, Position, Trait
 
 # Rotmapp (två nivåer upp från denna fil)
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "data" / "names"
+GRAPHICS_ROOT = ROOT / "data" / "graphics"
+EMBLEM_DIR = GRAPHICS_ROOT / "emblems"
+KIT_DIR = GRAPHICS_ROOT / "kits"
 
 
 def _load_csv_column(path: Path, column: str) -> List[str]:
@@ -39,14 +43,39 @@ TEAM_NAMES = (
 )
 
 
+def _list_asset_files(path: Path) -> List[Path]:
+    if not path.exists() or not path.is_dir():
+        return []
+    return sorted(p for p in path.iterdir() if p.is_file())
+
+
+EMBLEM_FILES = _list_asset_files(EMBLEM_DIR)
+KIT_FILES = _list_asset_files(KIT_DIR)
+
+
+def _pick_asset(files: List[Path], index: int) -> str | None:
+    if not files:
+        return None
+    asset = files[index % len(files)]
+    try:
+        return str(asset.relative_to(ROOT))
+    except ValueError:
+        return str(asset)
+
+
 def _rand_age() -> int:
-    # 18–28 vanligast, 16–34 normalt, 35+ ovanligt
+    """Returnera en spelålder mellan 16 och 50 med fallande sannolikhet."""
+
     r = random.random()
-    if r < 0.65:
-        return random.randint(18, 28)
-    if r < 0.90:
-        return random.randint(16, 34)
-    return random.randint(35, 40)
+    if r < 0.55:
+        return random.randint(18, 27)
+    if r < 0.80:
+        return random.randint(16, 32)
+    if r < 0.93:
+        return random.randint(33, 37)
+    if r < 0.985:
+        return random.randint(38, 43)
+    return random.randint(44, 50)
 
 
 def _rand_skill_open() -> int:
@@ -84,7 +113,8 @@ def _biased_shirt_number(position: Position, taken: set[int]) -> int:
 def _gen_player(next_id: int, position: Position, taken_numbers: set[int]) -> Player:
     first = random.choice(FIRST_NAMES) if FIRST_NAMES else f"First{next_id}"
     last = random.choice(LAST_NAMES) if LAST_NAMES else f"Last{next_id}"
-    return Player(
+    hidden = random.randint(1, 99)
+    player = Player(
         id=next_id,
         first_name=first,
         last_name=last,
@@ -92,14 +122,25 @@ def _gen_player(next_id: int, position: Position, taken_numbers: set[int]) -> Pl
         position=position,
         number=_biased_shirt_number(position, taken_numbers),
         skill_open=_rand_skill_open(),
-        skill_xp=random.randint(1, 99),
+        skill_hidden=hidden,
+        skill_xp=hidden,
         form_now=random.randint(8, 12),
         form_season=10,
         traits=_rand_traits(),
     )
+    player.value_sek = calculate_player_value(player)
+    return player
 
 
-def generate_club(name: str, *, squad_size: int = 21, start_id: int = 1) -> Club:
+def generate_club(
+    name: str,
+    *,
+    squad_size: int = 21,
+    start_id: int = 1,
+    emblem: str | None = None,
+    kit: str | None = None,
+    club_id: str | None = None,
+) -> Club:
     # Fördelning för 21 spelare
     layout = [
         (Position.GK, 2),
@@ -114,7 +155,16 @@ def generate_club(name: str, *, squad_size: int = 21, start_id: int = 1) -> Club
         for _ in range(count):
             players.append(_gen_player(nid, pos, taken_numbers))
             nid += 1
-    return Club(name=name, players=players, cash_sek=0)
+    club = Club(name=name, players=players, cash_sek=0)
+    club.club_id = club_id
+    if emblem is not None:
+        club.emblem_path = emblem
+    if kit is not None:
+        club.kit_path = kit
+    club.stadium_name = f"{name} Arena"
+    club.manager_name = "AI Coach"
+    club.colors = {"home": None, "away": None}
+    return club
 
 
 def _unique_team_names(n: int) -> List[str]:
@@ -131,14 +181,51 @@ def _unique_team_names(n: int) -> List[str]:
     return out
 
 
+def _division_name(level: int, index: int, total_at_level: int) -> str:
+    if total_at_level <= 1:
+        return f"Division {level}"
+    # A, B, C ... efter nivånumret. Efter Z börjar vi numrera.
+    if index < 26:
+        suffix = chr(ord("A") + index)
+        return f"Division {level}{suffix}"
+    return f"Division {level}-{index + 1}"
+
+
 def generate_league(name: str, rules: LeagueRules) -> League:
     league = League(name=name, rules=rules, divisions=[])
-    for lvl in range(1, rules.levels + 1):
-        div_name = f"Division {lvl}"
-        clubs: List[Club] = []
-        for team_name in _unique_team_names(rules.teams_per_div):
-            clubs.append(generate_club(team_name))
-        league.divisions.append(Division(name=div_name, level=lvl, clubs=clubs))
+    layout = list(getattr(rules, "divisions_per_level", []) or [])
+    if len(layout) != rules.levels:
+        # säkerhetsnät om äldre regler saknar layout → beräkna via helpern igen
+        from .league import _normalise_division_layout
+
+        layout = _normalise_division_layout(layout, rules.levels, rules.format)
+
+    total_divisions = sum(layout)
+    total_clubs = total_divisions * rules.teams_per_div
+    team_names = _unique_team_names(total_clubs)
+    name_index = 0
+
+    asset_index = 0
+    club_counter = 1
+    for level, count in enumerate(layout, start=1):
+        for div_idx in range(count):
+            div_name = _division_name(level, div_idx, count)
+            clubs: List[Club] = []
+            for _ in range(rules.teams_per_div):
+                club_name = team_names[name_index]
+                name_index += 1
+                clubs.append(
+                    generate_club(
+                        club_name,
+                        emblem=_pick_asset(EMBLEM_FILES, asset_index),
+                        kit=_pick_asset(KIT_FILES, asset_index),
+                        club_id=f"t-{club_counter:04d}",
+                    )
+                )
+                clubs[-1].club_id = clubs[-1].club_id or f"t-{club_counter:04d}"
+                asset_index += 1
+                club_counter += 1
+            league.divisions.append(Division(name=div_name, level=level, clubs=clubs))
     return league
 
 

@@ -1,7 +1,17 @@
 # Gör det lättare att importera i resten av projektet
-from .club import Club
+from .club import Club, SubstitutionRule
 from .cup import Cup, CupMatch, CupRules, generate_cup_bracket
-from .cup_state import CupState, advance_cup_round, create_cup_state, finish_cup
+from .cup_state import (
+    CupState,
+    advance_cup_round,
+    build_cup_bracket,
+    competition_round_best_xi,
+    create_cup_state,
+    cup_match_records_by_round,
+    cup_round_best_xi,
+    finish_cup,
+    match_records_by_competition,
+)
 from .fixtures import Match, round_robin
 from .generator import generate_club, generate_league, to_preview_dict
 from .history import HistoryStore, SeasonRecord
@@ -45,6 +55,7 @@ __all__ = [
     "Position",
     "Trait",
     "Club",
+    "SubstitutionRule",
     "League",
     "Division",
     "LeagueRules",
@@ -97,6 +108,11 @@ __all__ = [
     "create_cup_state",
     "advance_cup_round",
     "finish_cup",
+    "build_cup_bracket",
+    "match_records_by_competition",
+    "cup_match_records_by_round",
+    "competition_round_best_xi",
+    "cup_round_best_xi",
     "build_timeline",
     "format_feed",
     "format_match_report",

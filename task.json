@@ -1,0 +1,226 @@
+[
+  {
+    "id": "league_rules_structure",
+    "description": "Samordna ligaregler med upp- och nedflyttning samt divisionstrukturer",
+    "status": "done",
+    "updated_at": "2025-09-22T19:55:33Z",
+    "completed_at": "2025-09-22T19:55:33Z"
+  },
+  {
+    "id": "cup_bracket_views",
+    "description": "Gör cupen divisionsoberoende och visa bracket/bästa elvor i CLI",
+    "status": "done",
+    "updated_at": "2025-09-22T19:59:47Z",
+    "completed_at": "2025-09-22T19:59:47Z"
+  },
+  {
+    "id": "league_views_cli",
+    "description": "Exponera ligatabell, spelschema och rundans elva i CLI",
+    "status": "done",
+    "updated_at": "2025-09-22T20:02:43Z",
+    "completed_at": "2025-09-22T20:02:43Z"
+  },
+  {
+    "id": "club_pages",
+    "description": "Skapa lagsidor med emblem, form och statistik",
+    "status": "done",
+    "updated_at": "2025-09-22T21:20:00Z",
+    "completed_at": "2025-09-22T21:20:00Z"
+  },
+  {
+    "id": "season_history_trophies",
+    "description": "Spara säsongshistorik och troféer samt uppdatera formhistorik",
+    "status": "done",
+    "updated_at": "2025-09-22T20:40:57Z",
+    "completed_at": "2025-09-22T20:40:57Z"
+  },
+  {
+    "id": "club_captain_feature",
+    "description": "Inför lagkapten med bonusar och CLI-stöd",
+    "status": "done",
+    "updated_at": "2025-09-22T20:43:11Z",
+    "completed_at": "2025-09-22T20:43:11Z"
+  },
+  {
+    "id": "lineup_match_planning",
+    "description": "Inför startelva, byten och matchplan med CLI-stöd",
+    "status": "done",
+    "updated_at": "2025-09-22T20:51:20Z",
+    "completed_at": "2025-09-22T20:51:20Z"
+  },
+  {
+    "id": "referee_skill_effects",
+    "description": "Knyt domarskicklighet till kort, offsider och straffar samt visa profil i CLI",
+    "status": "done",
+    "updated_at": "2025-09-22T20:52:42Z",
+    "completed_at": "2025-09-22T20:52:42Z"
+  },
+  {
+    "id": "economy_cli_polish",
+    "description": "Färdigställ ekonomi- och transferkommandon i CLI inklusive sparning",
+    "status": "done",
+    "updated_at": "2025-09-22T21:45:00Z",
+    "completed_at": "2025-09-22T21:45:00Z"
+  },
+  {
+    "id": "bot_signings_fix",
+    "description": "Säkerställ att bottarnas transferlogik hanterar flera listningar utan att hoppa över",
+    "status": "done",
+    "updated_at": "2025-09-22T21:46:00Z",
+    "completed_at": "2025-09-22T21:46:00Z"
+  },
+  {
+    "id": "transfer_migration_support",
+    "description": "Utöka serialisering och GameState ensure_containers för nya ekonomiobjekt",
+    "status": "done",
+    "updated_at": "2025-09-22T21:47:00Z",
+    "completed_at": "2025-09-22T21:47:00Z"
+  },
+  {
+    "id": "economy_transfer_tests",
+    "description": "Lägg till tester för kaptenbonus, byten, domareffekter och ekonomi/transfers",
+    "status": "done",
+    "updated_at": "2025-09-22T21:48:00Z",
+    "completed_at": "2025-09-22T21:48:00Z"
+  },
+  {
+    "id": "sign_player_message_fix",
+    "description": "Förbättra utdata för sign-player så att traits/värde rapporteras",
+    "status": "done",
+    "updated_at": "2025-09-22T21:49:00Z",
+    "completed_at": "2025-09-22T21:49:00Z"
+  },
+  {
+    "id": "economy_cli_parser",
+    "description": "Registrera ekonomi-, transfer- och fuskkommandon i CLI-parsningen",
+    "status": "done",
+    "updated_at": "2025-09-22T21:50:00Z",
+    "completed_at": "2025-09-22T21:50:00Z"
+  },
+  {
+    "id": "player_market_values",
+    "description": "Beräkna och exponera spelarnas marknadsvärden i generator och vyer",
+    "status": "done",
+    "updated_at": "2025-09-22T22:10:00Z",
+    "completed_at": "2025-09-22T22:10:00Z"
+  },
+  {
+    "id": "season_auto_junior_offers",
+    "description": "Automatisera juniorerbjudanden för alla klubbar vid ny säsongsstart",
+    "status": "done",
+    "updated_at": "2025-09-22T22:35:00Z",
+    "completed_at": "2025-09-22T22:35:00Z"
+  },
+  {
+    "id": "transfer_direct_bids",
+    "description": "Inför direktbud med klubbens kontext för att acceptera eller neka transfers",
+    "status": "done",
+    "updated_at": "2025-09-22T22:35:00Z",
+    "completed_at": "2025-09-22T22:35:00Z"
+  },
+  {
+    "id": "match_week_finances",
+    "description": "Knyt sponsorbidrag och botköp till ligaomgångar när matcher spelas",
+    "status": "done",
+    "updated_at": "2025-09-22T22:35:00Z",
+    "completed_at": "2025-09-22T22:35:00Z"
+  },
+  {
+    "id": "age_progression_retirement",
+    "description": "Inför åldersökning varje säsong och pensionera spelare som passerar åldersgränsen",
+    "status": "done",
+    "updated_at": "2025-09-22T23:10:00Z",
+    "completed_at": "2025-09-22T23:10:00Z"
+  },
+  {
+    "id": "squad_size_limits",
+    "description": "Respektera min- och maxstorlek samt positionskrav när trupper fylls eller tunnas ut",
+    "status": "done",
+    "updated_at": "2025-09-22T23:11:00Z",
+    "completed_at": "2025-09-22T23:11:00Z"
+  },
+  {
+    "id": "match_view_lineups",
+    "description": "Visa laguppställningar, händelseikoner och lagdelsbetyg i matchvyn",
+    "status": "done",
+    "updated_at": "2025-09-22T23:12:00Z",
+    "completed_at": "2025-09-22T23:12:00Z"
+  },
+  {
+    "id": "tactic_dark_arts",
+    "description": "Inför tjuvknep-inställning i taktik, matchmotor och livefeed",
+    "status": "done",
+    "updated_at": "2025-09-23T11:06:26Z",
+    "completed_at": "2025-09-23T11:06:26Z"
+  },
+  {
+    "id": "player_points_clean_sheets",
+    "description": "Utöka spelarsiffror med poäng och målvakternas hållna nollor",
+    "status": "done",
+    "updated_at": "2025-09-23T11:06:26Z",
+    "completed_at": "2025-09-23T11:06:26Z"
+  },
+  {
+    "id": "competition_stats_possession",
+    "description": "Bygg liga- och cupstatistikflikar med bollinnehav och avslutsdata",
+    "status": "done",
+    "updated_at": "2025-09-23T11:06:26Z",
+    "completed_at": "2025-09-23T11:06:26Z"
+  },
+  {
+    "id": "season_career_stats_split",
+    "description": "Separera säsongs- och karriärstatistik samt uppdatera vyer",
+    "status": "done",
+    "updated_at": "2025-09-23T12:15:00Z",
+    "completed_at": "2025-09-23T12:15:00Z"
+  },
+  {
+    "id": "json_contract_api",
+    "description": "Normalisera GameState till JSON-kontrakt och skapa API-tjänster",
+    "status": "done",
+    "updated_at": "2025-09-23T12:30:00Z",
+    "completed_at": "2025-09-23T12:30:00Z"
+  },
+  {
+    "id": "json_cli_commands",
+    "description": "Bygg nytt CLI med JSON-kommandon för Loveable",
+    "status": "done",
+    "updated_at": "2025-09-23T12:30:00Z",
+    "completed_at": "2025-09-23T12:30:00Z"
+  },
+  {
+    "id": "cli_readme_docs",
+    "description": "Dokumentera CLI-kommandon och exempel",
+    "status": "done",
+    "updated_at": "2025-09-23T12:30:00Z",
+    "completed_at": "2025-09-23T12:30:00Z"
+  },
+  {
+    "id": "loveable_tui_integration",
+    "description": "Dokumentera steg 3: Loveable ska skapa desktop/TUI-klient mot services-lagret",
+    "status": "done",
+    "updated_at": "2025-09-23T19:49:29Z",
+    "completed_at": "2025-09-23T19:49:29Z"
+  },
+  {
+    "id": "loveable_prompt_docs",
+    "description": "Förbered prompt- och dokumentationspaket för Loveables UI-generering (steg 4)",
+    "status": "done",
+    "updated_at": "2025-09-23T19:49:29Z",
+    "completed_at": "2025-09-23T19:49:29Z"
+  },
+  {
+    "id": "feature_flags_mock_mode",
+    "description": "Inför feature flags och mock-läge i services-lagret",
+    "status": "done",
+    "updated_at": "2025-09-24T10:05:00Z",
+    "completed_at": "2025-09-24T10:05:00Z"
+  },
+  {
+    "id": "service_domain_hooks",
+    "description": "Exponera transactions/apply-API så Loveable kan återanvända domänlogiken",
+    "status": "done",
+    "updated_at": "2025-09-24T10:05:00Z",
+    "completed_at": "2025-09-24T10:05:00Z"
+  }
+]

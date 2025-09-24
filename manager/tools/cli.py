@@ -1,785 +1,485 @@
 from __future__ import annotations
 
 import argparse
-import time
+import json
+import sys
 from pathlib import Path
+from typing import Any, Dict, Optional
 
-from manager.core import (
-    LeagueRules,
-    SeasonConfig,
-    build_league_schedule,
-    generate_league,
-    play_round,
-)
-from manager.core.cup import CupRules
-from manager.core.cup_state import advance_cup_round, create_cup_state
-from manager.core.history import HistoryStore
-from manager.core.livefeed import format_feed, format_match_report
-from manager.core.season import Aggressiveness, Tactic
-from manager.core.season_progression import end_season
-from manager.core.standings import apply_result_to_table as apply_to_table
-from manager.core.state import GameState
-from manager.core.stats import update_stats_from_result
-from manager.core.training import advance_week, list_training, start_form_training
-
-# ---------------------------
-# Hjälpare
-# ---------------------------
+from manager.api import CareerManager, GameService, ServiceContext, ServiceError
 
 
-def ensure_loaded(path: Path) -> GameState:
-    if not path.exists():
-        raise SystemExit(f"Sparfilen finns inte: {path}")
-    return GameState.load(str(path))
+def _parse_json_payload(args: argparse.Namespace) -> Dict[str, Any]:
+    if getattr(args, "data", None):
+        return json.loads(args.data)
+    if not sys.stdin.isatty():
+        raw = sys.stdin.read().strip()
+        if raw:
+            return json.loads(raw)
+    return {}
 
 
-def _update_table_snapshot(gs: GameState, results) -> None:
-    snap = gs.table_snapshot or {}
-    for res in results:
-        tmp = {}
-        apply_to_table(tmp, res)
-        for _, row in tmp.items():
-            key = row.club.name
-            r = snap.get(
-                key,
-                {"mp": 0, "w": 0, "d": 0, "losses": 0, "gf": 0, "ga": 0, "pts": 0},
-            )
-            r["mp"] += row.mp
-            r["w"] += row.w
-            r["d"] += row.d
-            r["losses"] += row.losses
-            r["gf"] += row.gf
-            r["ga"] += row.ga
-            r["pts"] += row.pts
-            snap[key] = r
-    gs.table_snapshot = snap
-
-
-def _make_cfg(args) -> SeasonConfig:
-    cfg = SeasonConfig()
-    th = (
-        float(args.tempo_home)
-        if getattr(args, "tempo_home", None) is not None
-        else cfg.home_tactic.tempo
-    )
-    ta = (
-        float(args.tempo_away)
-        if getattr(args, "tempo_away", None) is not None
-        else cfg.away_tactic.tempo
-    )
-    cfg.home_tactic = Tactic(attacking=True, tempo=th)
-    cfg.away_tactic = Tactic(defending=True, tempo=ta)
-    return cfg
-
-
-def _play_round_common(gs: GameState, target_round: int, cfg: SeasonConfig):
-    div = gs.league.divisions[0]
-    fixtures = gs.fixtures_by_division[div.name]
-    return play_round(fixtures, target_round, cfg), cfg
-
-
-def _find_club(gs: GameState, name: str):
-    for div in gs.league.divisions:
-        for c in div.clubs:
-            if c.name.lower() == name.lower():
-                return c
-    return None
-
-
-def _print_tactic(c) -> None:
-    t = c.tactic
-    a = c.aggressiveness
-    print(
-        f"Taktik för {c.name}:\n"
-        f"  attacking={t.attacking}  defending={t.defending}  offside_trap={t.offside_trap}\n"
-        f"  tempo={t.tempo:.2f}\n"
-        f"Aggressivitet: {a.name}"
-    )
-
-
-def _max_league_round(gs: GameState) -> int:
-    """Högsta rondnumret i nuvarande ligaschema (för första divisionen)."""
-    div = gs.league.divisions[0]
-    rounds = [m.round for m in gs.fixtures_by_division.get(div.name, [])]
-    return max(rounds) if rounds else 1
-
-
-# ---------------------------
-# CLI-kommandon
-# ---------------------------
-
-
-def cmd_new(args: argparse.Namespace) -> None:
-    path = Path(args.file)
-    if path.exists() and not args.force:
-        raise SystemExit(
-            f"Filen {path} finns redan. Använd --force för att skriva över."
-        )
-
-    rules = LeagueRules(
-        format="rak",
-        teams_per_div=args.teams,
-        levels=1,
-        double_round=not args.single_round,
-    )
-    league = generate_league(args.name, rules)
-    fixtures = build_league_schedule(league)
-
-    gs = GameState(
-        season=1,
-        league=league,
-        fixtures_by_division=fixtures,
-        current_round=1,
-        history=HistoryStore(),
-        cup_state=None,
-    )
-    gs.ensure_containers()
-
-    path.parent.mkdir(parents=True, exist_ok=True)
-    gs.save(str(path))
-    print(
-        f"Ny karriär skapad: {path}  (Liga: {league.name}, Div: {league.divisions[0].name})"
-    )
-
-
-def cmd_status(args: argparse.Namespace) -> None:
-    gs = ensure_loaded(Path(args.file))
-    div = gs.league.divisions[0]
-    print(f"Säsong: {gs.season}")
-    print(f"Liga: {gs.league.name}  Division: {div.name}  Klubbar: {len(div.clubs)}")
-    print(f"Nästa ligaomgång: {gs.current_round}")
-    print(f"Matchlogg: {len(gs.match_log or [])} matcher")
-    print(
-        f"Spelare med stats: {len(gs.player_stats or {})}  Lag med stats: {len(gs.club_stats or {})}"
-    )
-    if gs.cup_state:
-        print(
-            f"Cup: pågår | kvar lag: {len(gs.cup_state.current_clubs)} "
-            f"| klar: {gs.cup_state.finished} "
-            f"| vinnare: {getattr(gs.cup_state.winner, 'name', None)}"
-        )
+def _print_json(data: Any, pretty: bool = True) -> None:
+    if pretty:
+        json.dump(data, sys.stdout, ensure_ascii=False, indent=2)
     else:
-        print("Cup: ej startad")
-    if gs.training_orders:
-        print(
-            f"Träningsordrar: {len(gs.training_orders)} (kör 'training-status' för detaljer)"
-        )
+        json.dump(data, sys.stdout, ensure_ascii=False)
+    sys.stdout.write("\n")
 
 
-def cmd_play_round(args: argparse.Namespace) -> None:
-    gs = ensure_loaded(Path(args.file))
-    gs.ensure_containers()
-
-    cfg = _make_cfg(args)
-    target_round = gs.current_round
-
-    # --- Steg 10.3: Spärra sista ligaomgången om cupen inte är klar
-    if gs.cup_state and not gs.cup_state.finished:
-        if target_round >= _max_league_round(gs):
-            print("Cupen måste avslutas innan sista ligaomgången spelas.")
-            print(
-                "Kör 'start-cup' (om ej startad) och 'play-cup-round' eller 'watch --cup' tills cupen är klar."
-            )
-            return
-
-    results, _cfg = _play_round_common(gs, target_round, cfg)
-
-    for res in results:
-        mr = update_stats_from_result(
-            res,
-            competition="league",
-            round_no=target_round,
-            player_stats=gs.player_stats,
-            club_stats=gs.club_stats,
-        )
-        gs.match_log.append(mr)
-    _update_table_snapshot(gs, results)
-
-    gs.current_round = target_round + 1
-    gs.save(args.file)
-    print(
-        f"Spelade ligaomgång {target_round}: {len(results)} matcher. Sparat → {args.file}"
-    )
+def _build_context(args: argparse.Namespace) -> ServiceContext:
+    saves_dir = Path(getattr(args, "saves", "saves"))
+    file_path = Path(args.file) if getattr(args, "file", None) else None
+    return ServiceContext.from_paths(saves_dir, file_path)
 
 
-def cmd_watch(args: argparse.Namespace) -> None:
-    gs = ensure_loaded(Path(args.file))
-    gs.ensure_containers()
-    delay = float(args.slow) if args.slow else None
-
-    cfg = _make_cfg(args)
-
-    if args.cup:
-        if not gs.cup_state:
-            print("Ingen cup är startad. Kör: start-cup")
-            return
-
-        results = advance_cup_round(
-            gs.cup_state,
-            referee=cfg.referee,
-            home_tactic=cfg.home_tactic,
-            away_tactic=cfg.away_tactic,
-            home_aggr=cfg.home_aggr,
-            away_aggr=cfg.away_aggr,
-        )
-
-        print(f"=== Cuprunda ({len(results)} matcher) ===")
-        for i, res in enumerate(results, start=1):
-            print(f"\n### Cupmatch {i}")
-            print(format_feed(res))
-            print()
-            print(format_match_report(res))
-            if delay:
-                time.sleep(delay)
-
-        round_index = (
-            max(
-                (mr.round for mr in (gs.match_log or []) if mr.competition == "cup"),
-                default=0,
-            )
-            + 1
-        )
-        for res in results:
-            mr = update_stats_from_result(
-                res,
-                competition="cup",
-                round_no=round_index,
-                player_stats=gs.player_stats,
-                club_stats=gs.club_stats,
-            )
-            gs.match_log.append(mr)
-
-        gs.save(args.file)
-        print(
-            f"\nCuprunda klar. Sparat → {args.file}. "
-            f"Kvar lag: {len(gs.cup_state.current_clubs)} | Klar: {gs.cup_state.finished}"
-        )
-        if gs.cup_state.finished and gs.cup_state.winner:
-            print(f"Cupvinnare: {gs.cup_state.winner.name}")
-
-    else:
-        # --- Steg 10.3: Spärra sista ligaomgången om cupen inte är klar
-        if gs.cup_state and not gs.cup_state.finished:
-            if gs.current_round >= _max_league_round(gs):
-                print("Cupen måste avslutas innan sista ligaomgången spelas.")
-                print(
-                    "Kör 'start-cup' (om ej startad) och 'play-cup-round' eller 'watch --cup' tills cupen är klar."
-                )
-                return
-
-        target_round = gs.current_round
-        results, _cfg = _play_round_common(gs, target_round, cfg)
-
-        print(f"=== Omgång {target_round} ({len(results)} matcher) ===")
-        for i, res in enumerate(results, start=1):
-            print(f"\n### Match {i}")
-            print(format_feed(res))
-            print()
-            print(format_match_report(res))
-            if delay:
-                time.sleep(delay)
-
-        for res in results:
-            mr = update_stats_from_result(
-                res,
-                competition="league",
-                round_no=target_round,
-                player_stats=gs.player_stats,
-                club_stats=gs.club_stats,
-            )
-            gs.match_log.append(mr)
-        _update_table_snapshot(gs, results)
-
-        gs.current_round = target_round + 1
-        gs.save(args.file)
-        print(
-            f"\nOmgång {target_round} klar. Sparat → {args.file}. Nästa omgång: {gs.current_round}"
-        )
+def cmd_career_list(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    manager = CareerManager(ctx)
+    result = manager.list_careers()
+    _print_json(result)
 
 
-def cmd_start_cup(args: argparse.Namespace) -> None:
-    gs = ensure_loaded(Path(args.file))
-    if gs.cup_state and not gs.cup_state.finished:
-        print("Cup finns redan och pågår.")
+def cmd_game_new(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    payload = _parse_json_payload(args)
+    result = service.create(payload)
+    _print_json(result)
+
+
+def cmd_game_dump(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    contract = service.dump()
+    _print_json(contract)
+
+
+def cmd_game_save(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    result = service.save_as(args.name)
+    _print_json(result)
+
+
+def cmd_game_load(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    contract = service.load_career(args.career)
+    _print_json(contract)
+
+
+def cmd_options_set(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    payload = _parse_json_payload(args)
+    result = service.update_options(payload)
+    _print_json(result)
+
+
+def cmd_table_get(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    contract = service.dump()
+    standings = contract.get("standings", {})
+    scope = getattr(args, "scope", "total")
+    _print_json(standings.get(scope, []))
+
+
+def cmd_fixtures_list(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    contract = service.dump()
+    fixtures = contract.get("fixtures", [])
+    data = []
+    for fixture in fixtures:
+        if args.type and args.type != "all" and fixture.get("competition") != args.type:
+            continue
+        if args.round and fixture.get("round") != args.round:
+            continue
+        data.append(fixture)
+    _print_json(data)
+
+
+def cmd_match_get(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    details = service.get_match_details(args.id)
+    _print_json(details)
+
+
+def cmd_match_set_result(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    payload = _parse_json_payload(args)
+    result = service.set_match_result(args.id, payload)
+    _print_json(result)
+
+
+def cmd_match_simulate(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    result = service.simulate_match(args.id, getattr(args, "mode", "quick"))
+    _print_json(result)
+
+
+def cmd_team_get(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    contract = service.dump()
+    teams = contract.get("teams", [])
+    team = next((t for t in teams if t.get("id") == args.id), None)
+    if not team:
+        raise ServiceError(f"Lag '{args.id}' hittades inte.")
+    team_data = dict(team)
+    team_data["squad"] = contract.get("squads", {}).get(args.id, [])
+    team_data["history"] = contract.get("history", {}).get(args.id, {})
+    _print_json(team_data)
+
+
+def cmd_squad_get(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    contract = service.dump()
+    squad = contract.get("squads", {}).get(args.team, [])
+    _print_json(squad)
+
+
+def cmd_player_get(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    contract = service.dump()
+    player = next((p for p in contract.get("players", []) if p.get("id") == args.id), None)
+    if not player:
+        raise ServiceError(f"Spelare '{args.id}' hittades inte.")
+    stats = [row for row in contract.get("stats", {}).get("players_current", []) if row.get("player_id") == args.id]
+    data = dict(player)
+    data["stats"] = stats
+    _print_json(data)
+
+
+def cmd_stats_get(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    contract = service.dump()
+    data = contract.get("stats", {}).get(args.scope)
+    _print_json(data)
+
+
+def cmd_youth_get(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    contract = service.dump()
+    _print_json(contract.get("youth", {}))
+
+
+def cmd_youth_set_preference(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    result = service.set_youth_preference(args.preference)
+    _print_json(result)
+
+
+def cmd_transfers_market(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    contract = service.dump()
+    listings = contract.get("transfers", {}).get("market", [])
+    if not args.affordable:
+        _print_json(listings)
         return
-
-    div = gs.league.divisions[0]
-    gs.cup_state = create_cup_state(
-        div.clubs[:],
-        CupRules(
-            two_legged=not args.single_leg, final_two_legged=args.final_two_legged
-        ),
-    )
-    gs.save(args.file)
-    print(f"Cup startad: {len(gs.cup_state.current_clubs)} lag i spel.")
+    economy = contract.get("economy", {})
+    balance = economy.get("balance")
+    if balance is None:
+        _print_json(listings)
+        return
+    filtered = [item for item in listings if item.get("price", 0) <= balance]
+    _print_json(filtered)
 
 
-def cmd_play_cup_round(args: argparse.Namespace) -> None:
-    gs = ensure_loaded(Path(args.file))
-    gs.ensure_containers()
-    if not gs.cup_state:
-        raise SystemExit("Ingen cup är startad. Kör: start-cup")
-
-    cfg = _make_cfg(args)
-    rnd = advance_cup_round(
-        gs.cup_state,
-        referee=cfg.referee,
-        home_tactic=cfg.home_tactic,
-        away_tactic=cfg.away_tactic,
-        home_aggr=cfg.home_aggr,
-        away_aggr=cfg.away_aggr,
-    )
-
-    round_index = (
-        max(
-            (mr.round for mr in (gs.match_log or []) if mr.competition == "cup"),
-            default=0,
-        )
-        + 1
-    )
-    for res in rnd:
-        mr = update_stats_from_result(
-            res,
-            competition="cup",
-            round_no=round_index,
-            player_stats=gs.player_stats,
-            club_stats=gs.club_stats,
-        )
-        gs.match_log.append(mr)
-
-    gs.save(args.file)
-    print(
-        f"Spelade {len(rnd)} cupmatcher. Kvar: {len(gs.cup_state.current_clubs)} lag. "
-        f"Klar: {gs.cup_state.finished}."
-    )
-    if gs.cup_state.finished and gs.cup_state.winner:
-        print(f"Cupvinnare: {gs.cup_state.winner.name}")
+def cmd_transfers_buy(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    result = service.buy_from_market(args.club, args.index)
+    _print_json(result)
 
 
-# ---------------------------
-# Topplistor & matchlogg
-# ---------------------------
+def cmd_transfers_bid(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    payload = _parse_json_payload(args)
+    result = service.submit_transfer_bid(payload)
+    _print_json(result)
 
 
-def _top_players(gs: GameState, by: str, limit: int) -> None:
-    gs.ensure_containers()
-    stats = list(gs.player_stats.values())
+def cmd_economy_get(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    contract = service.dump()
+    _print_json(contract.get("economy", {}))
 
-    def key_rating(s):
-        return (s.rating_avg, s.goals, s.assists)
 
-    def key_goals(s):
-        return (s.goals, s.assists, s.rating_avg)
+def cmd_economy_sponsor(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    result = service.sponsor_activity(args.club, args.amount)
+    _print_json(result)
 
-    def key_assists(s):
-        return (s.assists, s.goals, s.rating_avg)
 
-    def key_yellows(s):
-        return (s.yellows, s.reds)
+def cmd_mail_list(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    contract = service.dump()
+    _print_json(contract.get("mail", []))
 
-    def key_reds(s):
-        return (s.reds, s.yellows)
 
-    if by == "rating":
-        key = key_rating
-    elif by == "goals":
-        key = key_goals
-    elif by == "assists":
-        key = key_assists
-    elif by == "yellows":
-        key = key_yellows
-    elif by == "reds":
-        key = key_reds
+def cmd_mail_read(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    result = service.mark_mail_read(args.id)
+    _print_json(result)
+
+
+def cmd_cup_get(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    contract = service.dump()
+    cups = contract.get("cups", {}).get("by_id", {})
+    if args.id:
+        data = cups.get(args.id)
+        if not data:
+            raise ServiceError(f"Cup '{args.id}' hittades inte.")
+        _print_json(data)
+        return
+    if cups:
+        _print_json(next(iter(cups.values())))
     else:
-        raise SystemExit(f"Okänt fält för players: {by}")
+        _print_json({})
 
-    stats.sort(key=key, reverse=True)
-    print(f"TOP PLAYERS by {by} (limit {limit})")
-    print(
-        f"{'#':>2}  {'PlayerID':>7}  {'Club':<18}  {'App':>3} {'Min':>4}  {'G':>2} {'A':>2}  {'Y':>2} {'R':>2}  {'Rt':>4}"
+
+def cmd_season_start(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    result = service.start_season()
+    _print_json(result)
+
+
+def cmd_season_end(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    result = service.end_season()
+    _print_json(result)
+
+
+def cmd_calendar_next_week(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    result = service.next_week()
+    _print_json(result)
+
+
+def cmd_tactics_set(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    payload = _parse_json_payload(args)
+    result = service.set_tactics(args.team, payload)
+    _print_json(result)
+
+
+def cmd_youth_accept(args: argparse.Namespace) -> None:
+    ctx = _build_context(args)
+    service = GameService(ctx)
+    result = service.accept_junior(args.club, args.index)
+    _print_json(result)
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description="Managerspelet JSON CLI")
+    parser.add_argument("--file", help="Sökväg till sparfil")
+    parser.add_argument("--saves", default="saves", help="Sökväg till katalog med sparfiler")
+    parser.add_argument("--data", help="JSON-data för muterande kommandon")
+
+    sub = parser.add_subparsers(dest="command", required=True)
+
+    # career
+    career = sub.add_parser("career")
+    career_sub = career.add_subparsers(dest="action", required=True)
+    career_list = career_sub.add_parser("list")
+    career_list.set_defaults(func=cmd_career_list)
+
+    # game
+    game = sub.add_parser("game")
+    game_sub = game.add_subparsers(dest="action", required=True)
+    game_new = game_sub.add_parser("new")
+    game_new.set_defaults(func=cmd_game_new)
+    game_dump = game_sub.add_parser("dump")
+    game_dump.set_defaults(func=cmd_game_dump)
+    game_save = game_sub.add_parser("save")
+    game_save.add_argument("--name", required=True)
+    game_save.set_defaults(func=cmd_game_save)
+    game_load = game_sub.add_parser("load")
+    game_load.add_argument("--career", required=True)
+    game_load.set_defaults(func=cmd_game_load)
+
+    # options
+    options = sub.add_parser("options")
+    options_sub = options.add_subparsers(dest="action", required=True)
+    options_set = options_sub.add_parser("set")
+    options_set.set_defaults(func=cmd_options_set)
+
+    # table
+    table = sub.add_parser("table")
+    table_sub = table.add_subparsers(dest="action", required=True)
+    table_get = table_sub.add_parser("get")
+    table_get.add_argument("--scope", choices=["total", "home", "away"], default="total")
+    table_get.set_defaults(func=cmd_table_get)
+
+    # fixtures
+    fixtures = sub.add_parser("fixtures")
+    fixtures_sub = fixtures.add_subparsers(dest="action", required=True)
+    fixtures_list = fixtures_sub.add_parser("list")
+    fixtures_list.add_argument("--type", choices=["league", "cup", "all"], default=None)
+    fixtures_list.add_argument("--round", type=int)
+    fixtures_list.set_defaults(func=cmd_fixtures_list)
+
+    # match
+    match = sub.add_parser("match")
+    match_sub = match.add_subparsers(dest="action", required=True)
+    match_get = match_sub.add_parser("get")
+    match_get.add_argument("--id", required=True)
+    match_get.set_defaults(func=cmd_match_get)
+    match_set = match_sub.add_parser("set-result")
+    match_set.add_argument("--id", required=True)
+    match_set.set_defaults(func=cmd_match_set_result)
+    match_sim = match_sub.add_parser("simulate")
+    match_sim.add_argument("--id", required=True)
+    match_sim.add_argument("--mode", choices=["quick", "viewer"], default="quick")
+    match_sim.set_defaults(func=cmd_match_simulate)
+
+    # team
+    team = sub.add_parser("team")
+    team_sub = team.add_subparsers(dest="action", required=True)
+    team_get = team_sub.add_parser("get")
+    team_get.add_argument("--id", required=True)
+    team_get.set_defaults(func=cmd_team_get)
+
+    # squad
+    squad = sub.add_parser("squad")
+    squad_sub = squad.add_subparsers(dest="action", required=True)
+    squad_get = squad_sub.add_parser("get")
+    squad_get.add_argument("--team", required=True)
+    squad_get.set_defaults(func=cmd_squad_get)
+
+    # player
+    player = sub.add_parser("player")
+    player_sub = player.add_subparsers(dest="action", required=True)
+    player_get = player_sub.add_parser("get")
+    player_get.add_argument("--id", required=True)
+    player_get.set_defaults(func=cmd_player_get)
+
+    # stats
+    stats = sub.add_parser("stats")
+    stats_sub = stats.add_subparsers(dest="action", required=True)
+    stats_get = stats_sub.add_parser("get")
+    stats_get.add_argument(
+        "--scope",
+        choices=["players_current", "players_all", "club_current", "club_all", "leaders", "best_eleven"],
+        required=True,
     )
-    for i, s in enumerate(stats[:limit], start=1):
-        print(
-            f"{i:>2}  {s.player_id:>7}  {s.club_name:<18}  "
-            f"{s.appearances:>3} {s.minutes:>4}  {s.goals:>2} {s.assists:>2}  "
-            f"{s.yellows:>2} {s.reds:>2}  {s.rating_avg:>4.1f}"
-        )
+    stats_get.set_defaults(func=cmd_stats_get)
+
+    # youth
+    youth = sub.add_parser("youth")
+    youth_sub = youth.add_subparsers(dest="action", required=True)
+    youth_get = youth_sub.add_parser("get")
+    youth_get.set_defaults(func=cmd_youth_get)
+    youth_set = youth_sub.add_parser("set-preference")
+    youth_set.add_argument("--preference", choices=["GK", "DF", "MF", "FW"], required=True)
+    youth_set.set_defaults(func=cmd_youth_set_preference)
+    youth_accept = youth_sub.add_parser("accept")
+    youth_accept.add_argument("--club", required=True)
+    youth_accept.add_argument("--index", type=int, required=True)
+    youth_accept.set_defaults(func=cmd_youth_accept)
+
+    # transfers
+    transfers = sub.add_parser("transfers")
+    transfers_sub = transfers.add_subparsers(dest="action", required=True)
+    transfers_market = transfers_sub.add_parser("market")
+    transfers_market.add_argument("--affordable", action="store_true")
+    transfers_market.set_defaults(func=cmd_transfers_market)
+    transfers_buy = transfers_sub.add_parser("buy")
+    transfers_buy.add_argument("--club", required=True)
+    transfers_buy.add_argument("--index", type=int, required=True)
+    transfers_buy.set_defaults(func=cmd_transfers_buy)
+    transfers_bid = transfers_sub.add_parser("bid")
+    transfers_bid.set_defaults(func=cmd_transfers_bid)
+
+    # economy
+    economy = sub.add_parser("economy")
+    economy_sub = economy.add_subparsers(dest="action", required=True)
+    economy_get = economy_sub.add_parser("get")
+    economy_get.set_defaults(func=cmd_economy_get)
+    economy_sponsor = economy_sub.add_parser("sponsor")
+    economy_sponsor.add_argument("--club", required=True)
+    economy_sponsor.add_argument("--amount", type=int, default=1_000_000)
+    economy_sponsor.set_defaults(func=cmd_economy_sponsor)
+
+    # mail
+    mail = sub.add_parser("mail")
+    mail_sub = mail.add_subparsers(dest="action", required=True)
+    mail_list = mail_sub.add_parser("list")
+    mail_list.set_defaults(func=cmd_mail_list)
+    mail_read = mail_sub.add_parser("read")
+    mail_read.add_argument("--id", required=True)
+    mail_read.set_defaults(func=cmd_mail_read)
+
+    # cup
+    cup = sub.add_parser("cup")
+    cup_sub = cup.add_subparsers(dest="action", required=True)
+    cup_get = cup_sub.add_parser("get")
+    cup_get.add_argument("--id")
+    cup_get.set_defaults(func=cmd_cup_get)
+
+    # season
+    season = sub.add_parser("season")
+    season_sub = season.add_subparsers(dest="action", required=True)
+    season_start = season_sub.add_parser("start")
+    season_start.set_defaults(func=cmd_season_start)
+    season_end = season_sub.add_parser("end")
+    season_end.set_defaults(func=cmd_season_end)
+
+    # calendar
+    calendar = sub.add_parser("calendar")
+    calendar_sub = calendar.add_subparsers(dest="action", required=True)
+    calendar_next = calendar_sub.add_parser("next-week")
+    calendar_next.set_defaults(func=cmd_calendar_next_week)
+
+    # tactics
+    tactics = sub.add_parser("tactics")
+    tactics_sub = tactics.add_subparsers(dest="action", required=True)
+    tactics_set = tactics_sub.add_parser("set")
+    tactics_set.add_argument("--team", required=True)
+    tactics_set.set_defaults(func=cmd_tactics_set)
+
+    return parser
 
 
-def _top_clubs(gs: GameState, by: str, limit: int) -> None:
-    gs.ensure_containers()
-    stats = list(gs.club_stats.values())
-
-    def key_points(c):
-        return (c.points, c.goals_for - c.goals_against, c.goals_for)
-
-    def key_gf(c):
-        return (c.goals_for,)
-
-    def key_ga(c):
-        return (-c.goals_against,)
-
-    def key_cs(c):
-        return (c.clean_sheets,)
-
-    def key_yellows(c):
-        return (c.yellows,)
-
-    def key_reds(c):
-        return (c.reds,)
-
-    if by == "points":
-        key = key_points
-    elif by == "gf":
-        key = key_gf
-    elif by == "ga":
-        key = key_ga
-    elif by == "clean_sheets":
-        key = key_cs
-    elif by == "yellows":
-        key = key_yellows
-    elif by == "reds":
-        key = key_reds
-    else:
-        raise SystemExit(f"Okänt fält för clubs: {by}")
-
-    stats.sort(key=key, reverse=True)
-    print(f"TOP CLUBS by {by} (limit {limit})")
-    print(
-        f"{'#':>2}  {'Club':<20} {'P':>3} {'W':>3} {'D':>3} {'L':>3}  {'GF':>3} {'GA':>3} {'CS':>3}  {'Y':>3} {'R':>3}  {'Pts':>3}"
-    )
-    for i, c in enumerate(stats[:limit], start=1):
-        print(
-            f"{i:>2}  {c.club_name:<20} {c.played:>3} {c.wins:>3} {c.draws:>3} "
-            f"{c.losses:>3}  {c.goals_for:>3} {c.goals_against:>3} {c.clean_sheets:>3}  "
-            f"{c.yellows:>3} {c.reds:>3}  {c.points:>3}"
-        )
-
-
-def _show_match_log(gs: GameState, limit: int) -> None:
-    gs.ensure_containers()
-    log = gs.match_log[-limit:] if limit > 0 else gs.match_log
-    print(f"LAST {len(log)} MATCHES")
-    for i, mr in enumerate(log, start=max(1, len(gs.match_log or []) - len(log) + 1)):
-        tag = "L" if mr.competition == "league" else "C"
-        print(
-            f"{i:>3} [{tag}] R{mr.round:<2}  {mr.home} {mr.home_goals}-{mr.away_goals} {mr.away}"
-        )
-
-
-# ---------------------------
-# Taktik per klubb
-# ---------------------------
-
-
-def cmd_tactic_show(args):
-    gs = ensure_loaded(Path(args.file))
-    club = _find_club(gs, args.club)
-    if not club:
-        raise SystemExit(f"Hittade ingen klubb med namn: {args.club}")
-    _print_tactic(club)
-
-
-def cmd_tactic_set(args):
-    gs = ensure_loaded(Path(args.file))
-    gs.ensure_containers()
-    club = _find_club(gs, args.club)
-    if not club:
-        raise SystemExit(f"Hittade ingen klubb med namn: {args.club}")
-
-    if args.attacking is not None:
-        club.tactic.attacking = bool(args.attacking)
-        if club.tactic.attacking and args.defending is None:
-            club.tactic.defending = False
-    if args.defending is not None:
-        club.tactic.defending = bool(args.defending)
-        if club.tactic.defending and args.attacking is None:
-            club.tactic.attacking = False
-    if args.offside_trap is not None:
-        club.tactic.offside_trap = bool(args.offside_trap)
-    if args.tempo is not None:
-        club.tactic.tempo = float(args.tempo)
-
-    if args.aggr is not None:
-        name = args.aggr.capitalize()
-        if name not in ("Aggressiv", "Medel", "Lugn"):
-            raise SystemExit("Ogiltig aggressivitet. Använd: Aggressiv | Medel | Lugn")
-        club.aggressiveness = Aggressiveness(name)
-
-    gs.save(args.file)
-    print("Uppdaterad taktik:")
-    _print_tactic(club)
-
-
-# ---------------------------
-# Training (Steg 9.3)
-# ---------------------------
-
-
-def cmd_training_start(args):
-    gs = ensure_loaded(Path(args.file))
-    gs.ensure_containers()
+def main(argv: Optional[list[str]] = None) -> int:
+    parser = build_parser()
+    args = parser.parse_args(argv)
     try:
-        order = start_form_training(gs, args.club, args.player)
-    except ValueError as e:
-        raise SystemExit(str(e))
-    gs.save(args.file)
-    print(
-        f"Startade formträning: order #{order.id} för spelare {order.player_id} i {order.club_name} (200 000 kr)."
-    )
-
-
-def cmd_training_status(args):
-    gs = ensure_loaded(Path(args.file))
-    rows = list_training(gs)
-    if not rows:
-        print("Inga träningsordrar.")
-        return
-    print("Aktiva & avslutade träningsordrar:")
-    for o in rows:
-        print(
-            f"#{o.id:>3}  {o.club_name:<18}  pid={o.player_id:<6}  weeks_left={o.weeks_left}  status={o.status}  {o.note}"
-        )
-
-
-def cmd_advance_week(args):
-    gs = ensure_loaded(Path(args.file))
-    gs.ensure_containers()
-    logs = advance_week(gs)
-    gs.save(args.file)
-    if not logs:
-        print("Veckan passerade. Inga formboostar den här gången.")
-        return
-    print("Veckan passerade – resultat:")
-    for line in logs:
-        print(" -", line)
-
-
-# ---------------------------
-# End Season (Steg 9.4)
-# ---------------------------
-
-
-def cmd_end_season(args):
-    gs = ensure_loaded(Path(args.file))
-    gs.ensure_containers()
-
-    results = end_season(gs)
-
-    # Rapport
-    report_path = Path(args.report or "saves/season_report.txt")
-    report_path.parent.mkdir(parents=True, exist_ok=True)
-
-    # Gruppera per klubb
-    by_club: dict[str, list] = {}
-    for r in results:
-        by_club.setdefault(r.club, []).append(r)
-
-    club_names = sorted(by_club.keys(), key=lambda s: s.lower())
-    for club in club_names:
-        by_club[club].sort(
-            key=lambda r: (r.bars_delta, r.bars_after, r.name), reverse=True
-        )
-
-    with report_path.open("w", encoding="utf-8") as f:
-        f.write(f"SÄSONGSRAPPORT – Slut på säsong {gs.season - 1}\n")
-        f.write("=" * 72 + "\n\n")
-        f.write(
-            "Kolumner:  Namn  (Ålder)  Minuter  Form_säs  Bars before→after  (Δ)  Not\n\n"
-        )
-
-        total_up = total_down = 0
-
-        for club in club_names:
-            rows = by_club[club]
-            ups = sum(1 for r in rows if r.bars_delta > 0)
-            downs = sum(1 for r in rows if r.bars_delta < 0)
-            total_up += ups
-            total_down += downs
-
-            f.write(f"{club}\n")
-            f.write("-" * len(club) + "\n")
-
-            for r in rows:
-                pr = int(round(r.play_ratio * 100))
-                delta = f"{r.bars_delta:+d}"
-                f.write(
-                    f"  {r.name:<22}  ({r.age:>2})  "
-                    f"min {r.minutes:>4} ({pr:>3}%)  "
-                    f"form_säs {r.form_season_before:>4.1f}  "
-                    f"bars {r.bars_before:>2}→{r.bars_after:>2}  ({delta:>+3})  "
-                    f"{r.note}\n"
-                )
-            f.write(f"  └─ Summering: förbättrades: {ups}, försämrades: {downs}\n\n")
-
-        f.write("-" * 72 + "\n")
-        f.write(f"TOTALT – förbättrades: {total_up}, försämrades: {total_down}\n")
-
-    gs.save(args.file)
-    print(f"Säsong avslutad. Ny säsong: {gs.season}. Rapport sparad → {report_path}")
-    print("Tips: kör 'status' och 'watch' för att se nya omgång 1.")
-
-
-# ---------------------------
-# Parser
-# ---------------------------
-
-
-def main() -> None:
-    p = argparse.ArgumentParser(prog="manager-cli", description="Managerspelet CLI")
-    p.add_argument(
-        "--file", "-f", default="saves/career.json", help="Sökväg till sparfilen (JSON)"
-    )
-    sub = p.add_subparsers(dest="cmd", required=True)
-
-    p_new = sub.add_parser("new", help="Skapa ny karriär")
-    p_new.add_argument("--name", default="KarriärLiga")
-    p_new.add_argument("--teams", type=int, default=8)
-    p_new.add_argument(
-        "--single-round", action="store_true", help="Spela bara enkelmöten i ligan"
-    )
-    p_new.add_argument("--force", action="store_true", help="Skriv över befintlig fil")
-    p_new.set_defaults(func=cmd_new)
-
-    p_status = sub.add_parser("status", help="Visa save-status")
-    p_status.set_defaults(func=cmd_status)
-
-    def add_tempo_args(sp: argparse.ArgumentParser):
-        sp.add_argument(
-            "--tempo-home",
-            type=float,
-            default=None,
-            help="Tempo för hemmalag (t.ex. 0.9, 1.0, 1.2)",
-        )
-        sp.add_argument(
-            "--tempo-away",
-            type=float,
-            default=None,
-            help="Tempo för bortalag (t.ex. 0.9, 1.0, 1.2)",
-        )
-
-    p_round = sub.add_parser("play-round", help="Spela exakt en ligaomgång och spara")
-    add_tempo_args(p_round)
-    p_round.set_defaults(func=cmd_play_round)
-
-    p_watch = sub.add_parser(
-        "watch",
-        help="Spela nästa ligaomgång (default) eller cuprunda (--cup) med livefeed",
-    )
-    p_watch.add_argument(
-        "--cup", action="store_true", help="Titta på cuprunda istället för ligaomgång"
-    )
-    p_watch.add_argument(
-        "--slow",
-        nargs="?",
-        default=None,
-        help="Sekunders paus mellan matcher (valfritt)",
-    )
-    add_tempo_args(p_watch)
-    p_watch.set_defaults(func=cmd_watch)
-
-    p_start_cup = sub.add_parser(
-        "start-cup", help="Starta cupen i den aktuella säsongen"
-    )
-    p_start_cup.add_argument(
-        "--single-leg",
-        action="store_true",
-        help="Gör cupen enkelmöten (final styrs separat)",
-    )
-    p_start_cup.add_argument(
-        "--final-two-legged",
-        action="store_true",
-        help="Gör även finalen dubbelmöte (default: enkel)",
-    )
-    p_start_cup.set_defaults(func=cmd_start_cup)
-
-    p_cup_round = sub.add_parser(
-        "play-cup-round", help="Spela exakt en cuprunda och spara (utan livefeed)"
-    )
-    add_tempo_args(p_cup_round)
-    p_cup_round.set_defaults(func=cmd_play_cup_round)
-
-    p_top_p = sub.add_parser("top-players", help="Visa topplista för spelare")
-    p_top_p.add_argument(
-        "--by",
-        choices=["goals", "assists", "rating", "yellows", "reds"],
-        default="goals",
-    )
-    p_top_p.add_argument("--limit", type=int, default=10)
-    p_top_p.set_defaults(
-        func=lambda a: _top_players(ensure_loaded(Path(a.file)), a.by, a.limit)
-    )
-
-    p_top_c = sub.add_parser("top-clubs", help="Visa topplista för klubbar")
-    p_top_c.add_argument(
-        "--by",
-        choices=["points", "gf", "ga", "clean_sheets", "yellows", "reds"],
-        default="points",
-    )
-    p_top_c.add_argument("--limit", type=int, default=10)
-    p_top_c.set_defaults(
-        func=lambda a: _top_clubs(ensure_loaded(Path(a.file)), a.by, a.limit)
-    )
-
-    p_mlog = sub.add_parser("match-log", help="Visa senaste matcher ur sparfilen")
-    p_mlog.add_argument(
-        "--limit", type=int, default=20, help="Hur många matcher att visa (0=alla)"
-    )
-    p_mlog.set_defaults(
-        func=lambda a: _show_match_log(ensure_loaded(Path(a.file)), a.limit)
-    )
-
-    p_tshow = sub.add_parser("tactic-show", help="Visa taktik för en klubb")
-    p_tshow.add_argument("club", help="Klubbnamn exakt som i spelet")
-    p_tshow.set_defaults(func=cmd_tactic_show)
-
-    p_tset = sub.add_parser(
-        "tactic-set", help="Ändra taktik/aggressivitet för en klubb"
-    )
-    p_tset.add_argument("club", help="Klubbnamn exakt som i spelet")
-    p_tset.add_argument(
-        "--attacking", type=int, choices=[0, 1], default=None, help="1 eller 0"
-    )
-    p_tset.add_argument(
-        "--defending", type=int, choices=[0, 1], default=None, help="1 eller 0"
-    )
-    p_tset.add_argument(
-        "--offside-trap", type=int, choices=[0, 1], default=None, help="1 eller 0"
-    )
-    p_tset.add_argument("--tempo", type=float, default=None, help="t.ex. 0.9, 1.0, 1.2")
-    p_tset.add_argument(
-        "--aggr", type=str, default=None, help="Aggressiv | Medel | Lugn"
-    )
-    p_tset.set_defaults(func=cmd_tactic_set)
-
-    # --- Training-kommandon ---
-    p_tstart = sub.add_parser(
-        "training-start", help="Starta formträning (1 vecka, 200k) för en spelare"
-    )
-    p_tstart.add_argument("--club", required=True, help="Klubbnamn")
-    p_tstart.add_argument("--player", type=int, required=True, help="Spelar-ID")
-    p_tstart.set_defaults(func=cmd_training_start)
-
-    p_tstatus = sub.add_parser(
-        "training-status", help="Visa status för alla träningsordrar"
-    )
-    p_tstatus.set_defaults(func=cmd_training_status)
-
-    p_advw = sub.add_parser("advance-week", help="Processa en vecka (formträning m.m.)")
-    p_advw.set_defaults(func=cmd_advance_week)
-
-    # --- End Season ---
-    p_end = sub.add_parser(
-        "end-season", help="Avsluta säsongen: spelarförändringar, ny säsong & rapport"
-    )
-    p_end.add_argument(
-        "--report", default="saves/season_report.txt", help="Sökväg för rapportfilen"
-    )
-    p_end.set_defaults(func=cmd_end_season)
-
-    args = p.parse_args()
-    args.func(args)
+        args.func(args)
+        return 0
+    except ServiceError as exc:
+        _print_json({"ok": False, "error": {"code": "SERVICE_ERROR", "message": str(exc)}})
+        return 1
+    except json.JSONDecodeError as exc:
+        _print_json({"ok": False, "error": {"code": "INVALID_JSON", "message": str(exc)}})
+        return 1
+    except Exception as exc:  # pragma: no cover - unexpected failure
+        _print_json({"ok": False, "error": {"code": "UNEXPECTED_ERROR", "message": str(exc)}})
+        return 1
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

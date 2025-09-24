@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass field
+from dataclasses import dataclass, field
 from typing import Literal
 
 from .fixtures import Match, round_robin
@@ -19,6 +19,7 @@ class Tactic:
     attacking: bool = False
     defending: bool = False
     offside_trap: bool = False
+    dark_arts: bool = False
     tempo: float = 1.0
 
 
@@ -52,16 +53,6 @@ class SeasonConfig:
     )
     home_aggr: Aggressiveness = field(default_factory=lambda: Aggressiveness("Medel"))
     away_aggr: Aggressiveness = field(default_factory=lambda: Aggressiveness("Medel"))
-
-
-@dataclass(slots=True)
-class LeagueRules:
-    format: Literal["pyramid", "rak"] = "rak"
-    teams_per_div: int = 16
-    levels: int = 1
-    double_round: bool = True  # om du har detta fält i ditt projekt
-    promote: int = 0  # <-- NYTT
-    relegate: int = 0
 
 
 # ---------------------------

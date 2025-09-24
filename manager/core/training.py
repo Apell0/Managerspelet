@@ -6,6 +6,7 @@ from typing import List, Tuple
 
 from .club import Club
 from .player import Player
+from .economy import process_weekly_economy
 
 
 @dataclass(slots=True)
@@ -133,4 +134,5 @@ def advance_week(gs) -> List[str]:
             f"{club.name}: {player.first_name} {player.last_name} fick +{boost} form → {new_now} (säsong {season:.1f})"
         )
 
+    logs.extend(process_weekly_economy(gs))
     return logs

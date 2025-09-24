@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Dict, List, Optional
+from dataclasses import asdict, dataclass
+from typing import Any, Dict, List, Optional
 
 
 @dataclass(slots=True)
@@ -32,3 +32,34 @@ class HistoryStore:
 
     def snapshot(self) -> Dict[str, List[SeasonRecord]]:
         return self._store.copy()
+
+    # --- Serialisering -------------------------------------------------
+
+    def to_dict(self) -> Dict[str, List[Dict[str, Any]]]:
+        out: Dict[str, List[Dict[str, Any]]] = {}
+        for club, records in self._store.items():
+            serialised: List[Dict[str, Optional[int]]] = []
+            for record in records:
+                if isinstance(record, SeasonRecord):
+                    serialised.append(asdict(record))
+                elif isinstance(record, dict):
+                    serialised.append(record)
+            out[club] = serialised
+        return out
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, List[Dict[str, Any]]]) -> "HistoryStore":
+        store = cls()
+        for club, records in (data or {}).items():
+            parsed: List[SeasonRecord] = []
+            for record in records or []:
+                if isinstance(record, SeasonRecord):
+                    parsed.append(record)
+                elif isinstance(record, dict):
+                    try:
+                        parsed.append(SeasonRecord(**record))
+                    except TypeError:
+                        continue
+            if parsed:
+                store._store[club] = parsed
+        return store

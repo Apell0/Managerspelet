@@ -35,15 +35,18 @@ class Player:
     position: Position
     number: int
 
-    # Öppet betyg & dold progress (placeholdervärden)
-    skill_open: int = 5  # 1–30
-    skill_xp: int = 50  # 1–99
+    # Öppet betyg (1–30) och dold utvecklingspoäng (1–99)
+    skill_open: int = 5
+    skill_hidden: int = 50
+    # Behåll legacy-fältet för kompatibilitet med äldre sparfiler/tester
+    skill_xp: int = 50  # alias för äldre kodbaser
 
     # Form (placeholdervärden)
     form_now: int = 10  # 1–20
     form_season: int = 10  # 1–20
 
     traits: List[Trait] = field(default_factory=list)
+    value_sek: int = 0
 
     @property
     def full_name(self) -> str:
